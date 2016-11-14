@@ -7,12 +7,15 @@
 
 module.exports = {
   tableName: 'Activity',
+  autoUpdatedAt: false,
+  autoCreatedAt: false,
+  autoPK: false,
   attributes: {
     ActivityID: {
       type: 'integer',
-      autoIncrement: true,
       primaryKey: true,
-      required: true
+      required: true,
+      unique: true
     },
     Theme: {
       type: 'string',
