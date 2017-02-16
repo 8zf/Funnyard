@@ -15,7 +15,8 @@ module.exports = {
       type: 'string',
       primaryKey: true,
       required: true,
-      unique: true
+      unique: true,
+      // autoIncrement: true
     },
     Name: {
       type: 'string'
@@ -30,7 +31,8 @@ module.exports = {
       type: 'integer'
     },
     Credit: {
-      type: 'integer'
+      type: 'integer',
+      defaultsTo: 5
     },
     School: {
       type: 'string'
@@ -39,7 +41,8 @@ module.exports = {
       type: 'string'
     },
     Publishtimes: {
-      type: 'integer'
+      type: 'integer',
+      defaultsTo: 5
     },
     RegTime: {
       type: 'datetime'

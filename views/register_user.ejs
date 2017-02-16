@@ -1,5 +1,152 @@
-this is register user page
 
-<form method="post" action="/register_user">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles/buttons.css">
+  <title>注册成为用户</title>
+  <script type="text/javascript" src="js/regist_user.js"></script>
 
-</form>
+</head>
+
+<body>
+
+<center><h2>注册信息</h2></center>
+<center>
+  <form class="form-group" action="/register_user" method="post" name="myForm" id="myForm" style="max-width: 700px;">
+    <table align="center" class="table table-bordered">
+      <tr>
+        <td align="right"><label for="userid">用户ID：</label></td>
+        <td>
+          <input name="userid" id="userid" type="text" size="20">
+          <p id="userid_">用户ID只能包含汉字与字母数字，3~15个字符</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="email">邮箱(可作为登陆账号)：</label></td>
+        <td>
+          <input name="email" id="email" type="text" size="20">
+          <script type="text/javascript" src="test.js"></script>
+          <button class="btn btn-default" id="sendemail" type="button" onclick="sendEmail()" style="display: none;">
+            发送验证邮件
+          </button>
+          <input type="text" id="validate" size="10" placeholder="输入4位验证码">
+          <button type="button" class="btn btn-default" onclick="validatefunc()">验证</button>
+          <p id="email_">请输入合法邮箱</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="password">登陆密码：</label></td>
+        <td><input name="password" id="password" type="password" size="20">
+          <p id="password_">密码可包含字母数字和其他不包含 [];:'\"\\|/ 的符号，6~18个字符</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="re_password">密码确认：</label></td>
+        <td><input name="re_password" id="re_password" type="password" size="20"></td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="phone_num">电话号码：</label></td>
+        <td><input name="phone_num" id="phone_num" type="text" size="20"></td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="name">姓名：</label></td>
+        <td>
+          <input name="name" id="name" type="text" size="20">
+          <p id="name_">请输入纯中文或纯英文，英文可包括空格2~15个字符</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="school">学校：</label></td>
+        <td>
+          <select name="school" id="school" style="max-width: 200px" class="form-control">
+            <option value="11">选择学校</option>
+            <option value="15">复旦大学</option>
+            <option value="16">同济大学</option>
+            <option value="17">上海交通大学</option>
+            <option value="18">华东师范大学</option>
+            <option value="68">华东理工大学</option>
+            <option value="69">东华大学</option>
+            <option value="70">上海中医药大学</option>
+            <option value="71">上海外国语大学</option>
+            <option value="72">上海财经大学</option>
+            <option value="111">上海大学</option>
+            <option value="118">中国人民解放军第二军医大学</option>
+            <option value="120">上海交通大学医学院</option>
+            <option value="237">上海理工大学</option>
+            <option value="238">上海电力学院</option>
+            <option value="239">上海水产大学</option>
+            <option value="240">上海师范大学</option>
+            <option value="241">上海对外经贸大学</option>
+            <option value="242">华东政法大学</option>
+            <option value="243">上海体育学院</option>
+            <option value="244">上海音乐学院</option>
+            <option value="245">上海戏剧学院</option>
+            <option value="480">上海工程技术大学</option>
+            <option value="549">上海政法学院</option>
+            <option value="612">上海第二工业大学</option>
+            <option value="617">上海市广播电视大学</option>
+            <option value="652">上海海事大学</option>
+            <option value="653">上海商学院</option>
+            <option value="709">上海金融学院</option>
+            <option value="748">上海公安高等专科学校</option>
+            <option value="831">上海出版印刷高等专科学校</option>
+            <option value="845">上海杉达学院</option>
+            <option value="857">上海应用技术学院</option>
+            <option value="887">上海建桥学院</option>
+            <option value="944">上海外国语大学贤达经济人文学</option>
+            <option value="962">上海师范大学天华学院</option>
+            <option value="983">同济大学同科学院</option>
+            <option value="1125">上海建峰职业技术学院</option>
+            <option value="1126">上海科学技术职业学院</option>
+            <option value="1127">上海海事职业技术学院</option>
+            <option value="1128">上海电子信息职业技术学院</option>
+            <option value="1129">上海民航职业技术学院</option>
+            <option value="1130">上海城市管理职业技术学院</option>
+            <option value="1131">上海行健职业学院</option>
+            <option value="1132">上海农林职业技术学院</option>
+            <option value="1595">上海新侨职业技术学院</option>
+            <option value="1596">上海东海职业技术学院</option>
+            <option value="1597">上海立达职业技术学院</option>
+            <option value="1598">上海民远职业技术学院</option>
+            <option value="1599">上海欧华职业技术学院</option>
+            <option value="1600">上海邦德职业技术学院</option>
+            <option value="1601">上海震旦职业学院</option>
+            <option value="1602">上海中侨职业技术学院</option>
+            <option value="1603">上海中华职业技术学院</option>
+            <option value="2013">上海健康医学院</option>
+            <option value="2014">上海旅游高等专科学校</option>
+            <option value="2015">上海工艺美术职业学院</option>
+            <option value="2016">上海工会管理职业学院</option>
+            <option value="2017">上海体育职业学院</option>
+            <option value="2087">上海海洋大学</option>
+            <option value="2088">上海海关学院</option>
+            <option value="2202">上海电影艺术职业学院</option>
+            <option value="2203">上海工商外国语职业学院</option>
+            <option value="2204">上海托普信息技术职业学院</option>
+            <option value="2247">上海济光职业技术学院</option>
+            <option value="2370">上海思博职业技术学院</option>
+            <option value="2395">上海立信会计学院</option>
+            <option value="2396">上海电机学院</option>
+          </select>
+        </td>
+      </tr>
+
+      <!--        <tr>-->
+      <!--            <td align="right"><label for="portrait"></label>上传头像(可选)：</td>-->
+      <!--            <td><input name="portrait" id="portrait" type="file" /></td>-->
+      <!--        </tr>-->
+    </table>
+    <center>
+      <input type="submit" id="submitinfo" class="btn btn-default" value="提交" onClick="check_data()">　
+      <input type="reset" class="btn btn-default" value="重新填写">
+    </center>
+  </form>
+</center>
+<script type="text/javascript">immediately();</script>
+</body>

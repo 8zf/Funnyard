@@ -57,13 +57,13 @@ module.exports = {
       {
         //authenticated
         req.session.authenticated = true;
-        console.log(req.session.authenticated);
+        req.session.userid = result[0].UserID;
+        // console.log(req.session.authenticated);
         return res.redirect('/');
       }
       else {
         return res.view('wrong', {message: "wrong password"});
       }
-      return res.send(JSON.stringify(result));
     });
   },
   success : function(req,res){
