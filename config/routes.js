@@ -35,8 +35,11 @@ module.exports.routes = {
   '/': {
     view: 'homepage'
   },
-  
-  'get /test': 'HomeController.getInfo'
+
+  'get /test': 'HomeController.getInfo',
+  'get /test/getSession': 'HomeController.getSession',
+  'get /login': 'LoginController.default',
+  'post /login': 'LoginController.validate'
 
   /***************************************************************************
   *                                                                          *
