@@ -6,6 +6,8 @@
  */
 
 module.exports = {
-	
+	publish: function (req, res) {
+    return res.view('publish');
+  }
 };
 
