@@ -37,14 +37,16 @@ module.exports.routes = {
   },
 
   'get /test': 'HomeController.getInfo',
+
   'get /login': 'LoginController.default',
   'post /login': 'LoginController.validate',
-  'get /register_user': {
-    view: 'register_user'
-  },
+
+  'get /register_user': 'RegisterController.default',
   'post /register_user': 'RegisterController.addUser',
-  'get /publish': 'PublisherController.publish',
-  'post /verify_phone': 'RegisterController.verifyPhone'
+  'get /sendSMS': 'RegisterController.sendSMS',
+
+  'get /publish': 'PublisherController.publish'
+
 
   /***************************************************************************
   *                                                                          *

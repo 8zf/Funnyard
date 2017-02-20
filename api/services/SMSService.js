@@ -10,14 +10,15 @@ module.exports = {
       sms_param: {"verify_code": options.code},
       rec_num: options.rec_num,
       sms_template_code: 'SMS_46545011'
-    }, function (error, response) {
-      if (!error) {
-        // console.log(response);
+    }, function (response) {
+      if (!response) {
+        console.log('no response');
         return true;
       }
       else {
-        console.log(error);
-        return error;
+        console.log('response: ');
+        console.log(response);
+        return response;
       }
     });
   }

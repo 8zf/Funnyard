@@ -1,15 +1,6 @@
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="styles/buttons.css">
-  <title>注册成为用户</title>
   <script type="text/javascript" src="js/regist_user.js"></script>
-
-</head>
-
 <body>
-
 <center><h2>注册信息</h2></center>
 <center>
   <form class="form-group" action="/register_user" method="post" name="myForm" id="myForm" style="max-width: 700px;">
@@ -22,7 +13,7 @@
         </td>
       </tr>
 
-      //改为使用手机号码验证
+      <!--改为使用手机号码验证-->
       <!--<tr>-->
         <!--<td align="right"><label for="email">邮箱(可作为登陆账号)：</label></td>-->
         <!--<td>-->
@@ -54,7 +45,7 @@
         <td>
           <input name="phone_num" id="phone_num" type="number" size="20">
           <button type="button" class="btn btn-default" onclick="sendSMS()">发送短信</button>
-          <input type="number" id="verify_code" size="10" placeholder="输入4位验证码">
+          <input type="number" id="verify_code" name="verify_code" size="10" placeholder="输入4位验证码">
           <!--<button type="button" class="btn btn-default" onclick="verifyPhone()">验证</button>-->
         </td>
       </tr>

@@ -22,6 +22,7 @@ function check_data() {
   }
   document.myForm.submit();
 }
+
 function immediately() {
   var userid = document.getElementById("userid");
   var password = document.getElementById("password");
@@ -149,13 +150,13 @@ function sendSMS() {
   }
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      alert('邮件发送成功,请打开邮箱验证');
+      alert('短信发送成功');
       return true;
     }
   };
-  var address = document.getElementById('email').value;
+  var phone_num = document.getElementById('phone_num').value;
   //alert(address);
-  xmlhttp.open("GET", "sendemail.php?address=" + address, true);
+  xmlhttp.open("GET", "sendSMS?phone_num=" + phone_num, true);
   xmlhttp.send();
 }
 

@@ -46,7 +46,7 @@ module.exports.connections = {
     user: 'root', //optional
     password: 'zhzhang', //optional
     database: 'Funnyard' //optional
-  },
+  }
 
   /***************************************************************************
   *                                                                          *
@@ -56,14 +56,14 @@ module.exports.connections = {
   * Run: npm install sails-mongo                                             *
   *                                                                          *
   ***************************************************************************/
-  Mongodb: {
-    adapter: 'sails-mongo',
-    host: 'localhost',
-    port: 27017,
-    // user: 'zhang', //optional
-    // password: 'zhzhang', //optional
-    database: 'funnyard' //optional
-  }
+  // Mongodb: {
+  //   adapter: 'sails-mongo',
+  //   host: 'localhost',
+  //   port: 27017,
+  //   // user: 'zhang', //optional
+  //   // password: 'zhzhang', //optional
+  //   database: 'funnyard' //optional
+  // }
 
   /***************************************************************************
   *                                                                          *
