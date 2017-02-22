@@ -6,9 +6,21 @@
  */
 
 module.exports = {
-
+  tableName: "VerifyPhone",
+  autoUpdatedAt: false,
+  autoCreatedAt: false,
+  autoPK: false,
   attributes: {
-
+    PhoneNum: {
+      primaryKey: true,
+      type: 'integer'
+    },
+    VerifyCode: {
+      type: 'integer'
+    },
+    ExpireAt: {
+      type: 'integer'
+    },
   }
 };
 

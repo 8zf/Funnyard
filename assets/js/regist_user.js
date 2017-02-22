@@ -20,6 +20,9 @@ function check_data() {
     alert("请填写姓名");
     return false;
   }
+
+
+
   document.myForm.submit();
 }
 

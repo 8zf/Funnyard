@@ -37,13 +37,18 @@
         <button type="submit" class="btn btn-default">搜索活动</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
+        <% if (req.session && req.session.userid) { %>
         <li>
-          <% if (req.session && req.session.userid) { %>
           <a href="/userinfo">你好，UserID： <%= req.session.userid %></a>
-          <% } else { %>
-          <a href="/login">请登录</a>
-          <% } %>
         </li>
+        <% } else { %>
+        <li>
+          <a href="/login">登录</a>
+        </li>
+        <li>
+          <a href="/register">注册</a>
+        </li>
+        <% } %>
         <!--<li><a href="#">Link</a></li>-->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>

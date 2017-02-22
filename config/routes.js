@@ -41,11 +41,15 @@ module.exports.routes = {
   'get /login': 'LoginController.default',
   'post /login': 'LoginController.validate',
 
-  'get /register_user': 'RegisterController.default',
+  /********* REGISTER *********/
+  'get /register': 'RegisterController.default',
+  'get /register_user': 'RegisterController.registerUser',
   'post /register_user': 'RegisterController.addUser',
   'get /sendSMS': 'RegisterController.sendSMS',
+  'get /register_publisher': 'RegisterController.registerPublisher',
 
-  'get /publish': 'PublisherController.publish'
+  'get /publish': 'PublisherController.publish',
+  '/ueditor/ue': 'PublisherController.ueditor'
 
 
   /***************************************************************************

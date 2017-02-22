@@ -13,21 +13,6 @@
         </td>
       </tr>
 
-      <!--改为使用手机号码验证-->
-      <!--<tr>-->
-        <!--<td align="right"><label for="email">邮箱(可作为登陆账号)：</label></td>-->
-        <!--<td>-->
-          <!--<input name="email" id="email" type="text" size="20">-->
-          <!--<script type="text/javascript" src="test.js"></script>-->
-          <!--<button class="btn btn-default" id="sendemail" type="button" onclick="sendEmail()" style="display: none;">-->
-            <!--发送验证邮件-->
-          <!--</button>-->
-          <!--<input type="text" id="validate" size="10" placeholder="输入4位验证码">-->
-          <!--<button type="button" class="btn btn-default" onclick="validatefunc()">验证</button>-->
-          <!--<p id="email_">请输入合法邮箱</p>-->
-        <!--</td>-->
-      <!--</tr>-->
-
       <tr>
         <td align="right"><label for="password">登陆密码：</label></td>
         <td><input name="password" id="password" type="password" size="20">
@@ -45,7 +30,7 @@
         <td>
           <input name="phone_num" id="phone_num" type="number" size="20">
           <button type="button" class="btn btn-default" onclick="sendSMS()">发送短信</button>
-          <input type="number" id="verify_code" name="verify_code" size="10" placeholder="输入4位验证码">
+          <input type="number" id="verify_code" name="verify_code" size="10" placeholder="输入6位验证码">
           <!--<button type="button" class="btn btn-default" onclick="verifyPhone()">验证</button>-->
         </td>
       </tr>
@@ -133,7 +118,7 @@
           </select>
         </td>
       </tr>
-
+      <!--暂时不提-->
       <!--        <tr>-->
       <!--            <td align="right"><label for="portrait"></label>上传头像(可选)：</td>-->
       <!--            <td><input name="portrait" id="portrait" type="file" /></td>-->
