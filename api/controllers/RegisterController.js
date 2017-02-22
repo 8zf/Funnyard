@@ -32,9 +32,17 @@ module.exports = {
 
   addUser: function (req, res) {
     console.log(req.param('verify_code'));
-    console.log(req.session.verify_code);
+    // console.log(req.session.verify_code);
     VerifyPhone.find({PhoneNum: req.param('phone_num')}).exec(function (err, record) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
       console.log(record);
+      console.log(record[0].VerifyCode);
+      console.log(req.param('verify_code'));
+      console.log(new Date().getTime());
+      console.log(parseInt(record[0].ExpireAt));
       if (record[0].VerifyCode == req.param('verify_code') && (new Date().getTime()) < parseInt(record[0].ExpireAt)) {
         //verified successfully
         var new_record = {
@@ -47,6 +55,7 @@ module.exports = {
           Nickname: req.param('userid'),
           RegTime: new Date().toLocaleString()
         };
+        console.log(new_record);
         User.create(new_record).exec(function (err, record) {
           if (err) {
             console.log(err);
@@ -61,8 +70,6 @@ module.exports = {
         return res.send("code wrong or time out");
       }
     });
-    return res.send("register success");
-
   },
 
   addPublisher: function (req, res) {
@@ -74,7 +81,6 @@ module.exports = {
     var verify_code = Math.random().toString().substring(2, 8);
 
     SMSService.sendVerifyCode({code: verify_code, rec_num: rec_num}, function (result) {
-      console.log(result);
       if (result.alibaba_aliqin_fc_sms_num_send_response) {
         if (result.alibaba_aliqin_fc_sms_num_send_response.result.err_code == '0')
           result = true;
@@ -86,23 +92,25 @@ module.exports = {
         var new_record = {
           PhoneNum: rec_num,
           VerifyCode: verify_code,
-          ExpireAt: new Date(new Date().getTime() + 1 * 60000).getTime()
+          ExpireAt: new Date(new Date().getTime() + 10 * 60000).getTime()
         };
+        // console.log(new_record);
         VerifyPhone.create(new_record).exec(function (err, record) {
           if (err) {
             console.log(err);
             return res.send(err)
           }
-          console.log('new record created: ');
+          console.log('new verify phone record created: ');
           // console.log(record);
           // return res.send('add user successfully' + JSON.stringify(record));
         });
         // req.session.verify_code = verify_code;
-        console.log("验证码：" + verify_code);
+        // console.log("验证码：" + verify_code);
         return res.send("success");
       }
       else {
         console.log('短信发送失败');
+        console.log(result);
         return res.send(result);
       }
     });

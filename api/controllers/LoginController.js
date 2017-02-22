@@ -53,7 +53,7 @@ module.exports = {
       if (result.length == 0) {
         return res.view('wrong', {message: "no such user found"});
       }
-      if (result[0].PassWd == req.param("PassWd"))
+      if (result[0].PassWd == EncryptionService.genSHA1(req.param("PassWd")))
       {
         //authenticated
         req.session.authenticated = true;

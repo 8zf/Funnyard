@@ -16,15 +16,11 @@ module.exports = {
       primaryKey: true,
       required: true,
       unique: true,
-      // autoIncrement: true
     },
     Name: {
       type: 'string'
     },
     PassWd: {
-      type: 'string'
-    },
-    Email: {
       type: 'string'
     },
     PhoneNum: {
@@ -40,10 +36,6 @@ module.exports = {
     Nickname: {
       type: 'string'
     },
-    Publishtimes: {
-      type: 'integer',
-      defaultsTo: 5
-    },
     RegTime: {
       type: 'datetime'
     },
@@ -56,7 +48,7 @@ module.exports = {
     Age: {
       type: 'integer'
     },
-    Prfile: {
+    Profile: {
       type: 'string'
     }
   }
