@@ -33,7 +33,7 @@ module.exports = {
       sms_template_code: 'SMS_46545011'
     }, callback);
     // function (response) {
-    //   if (!response) {
+    //   if (!reregisponse) {
     //     console.log('no response');
     //     return true;
     //   }

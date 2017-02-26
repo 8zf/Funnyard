@@ -18,34 +18,8 @@ module.exports = {
     });
   },
 
-  login: function (req, res) {
-    User.find({name: req.param("Name")}).exec(function (err, result) {
-      if (err) {
-        return res.send("error occured: " + err);
-      }
-      if (result.length == 0) {
-        return res.send("no such user found");
-      }
-      if (result[0].PassWd == req.param("PassWd"))
-      {
-        //authenticated
-        var uuid = uuidV4();
-        //send session to client
-        res.cookie("session_id", uuid, {maxAge: 120000, httpOnly: true});
-        //store session in server side
-
-
-        return res.send("cookie set: " + uuid);
-      }
-      else {
-        res.send("wrong password")
-      }
-      return res.send(JSON.stringify(result));
-    })
-  },
-
   validate : function(req,res){
-    User.find({name: req.param("Name")}).exec(function (err, result) {
+    User.find({or: [{Nickname: req.param('Name')}, {PhoneNum: req.param('Name')}]}).exec(function (err, result) {
       if (err) {
         return res.view('wrong', {message: "error occured: " + err});
       }

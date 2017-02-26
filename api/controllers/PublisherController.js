@@ -10,9 +10,10 @@ const ueditor = require("ueditor");
 
 module.exports = {
   publish: function (req, res) {
-    return res.view('publish');
+    return res.view('publisher/publish');
   },
   ueditor: ueditor('/home/zhang/Desktop/funnyard-on-sails/funnyard/assets', function (req, res, next) {
+
     console.log(req.param("action"));
     // ueditor 客户发起上传图片请求
     if (req.param("action") === 'uploadimage') {

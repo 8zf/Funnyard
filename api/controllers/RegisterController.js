@@ -38,11 +38,11 @@ module.exports = {
         console.log(err);
         return res.send(err);
       }
-      console.log(record);
-      console.log(record[0].VerifyCode);
-      console.log(req.param('verify_code'));
-      console.log(new Date().getTime());
-      console.log(parseInt(record[0].ExpireAt));
+      // console.log(record);
+      // console.log(record[0].VerifyCode);
+      // console.log(req.param('verify_code'));
+      // console.log(new Date().getTime());
+      // console.log(parseInt(record[0].ExpireAt));
       if (record[0].VerifyCode == req.param('verify_code') && (new Date().getTime()) < parseInt(record[0].ExpireAt)) {
         //verified successfully
         var new_record = {
@@ -63,11 +63,12 @@ module.exports = {
           }
           console.log('new record created: ');
           // console.log(record);
-          return res.send('add user successfully' + JSON.stringify(record));
+          return res.redirect("/login");
+          // return res.send('add user successfully' + JSON.stringify(record));
         });
       }
       else {
-        return res.send("code wrong or time out");
+        return res.send("验证码错误或已失效");
       }
     });
   },
@@ -94,18 +95,37 @@ module.exports = {
           VerifyCode: verify_code,
           ExpireAt: new Date(new Date().getTime() + 10 * 60000).getTime()
         };
-        // console.log(new_record);
-        VerifyPhone.create(new_record).exec(function (err, record) {
-          if (err) {
-            console.log(err);
-            return res.send(err)
+        console.log(new_record);
+        VerifyPhone.find({PhoneNum: rec_num}).exec(function (err, record1) {
+          if (err)
+          {
+            return res.send(err);
           }
-          console.log('new verify phone record created: ');
-          // console.log(record);
-          // return res.send('add user successfully' + JSON.stringify(record));
+          if (record1.length == 0)
+          {
+            //未找到
+            console.log('未找到');
+            VerifyPhone.create(new_record).exec(function (err, record2) {
+              if (err) {
+                console.log(err);
+                return res.send(err)
+              }
+              console.log('new verify phone record created: ');
+            });
+          }
+          else {
+            //找到
+            console.log('找到');
+            VerifyPhone.update({PhoneNum: record1[0].PhoneNum}, {VerifyCode: verify_code, ExpireAt: new Date(new Date().getTime() + 10 * 60000).getTime()})
+              .exec(function (err, record3) {
+              if (err) {
+                console.log(err);
+                return res.send(err)
+              }
+              console.log('update verify code');
+            });
+          }
         });
-        // req.session.verify_code = verify_code;
-        // console.log("验证码：" + verify_code);
         return res.send("success");
       }
       else {
