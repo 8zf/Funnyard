@@ -18,7 +18,7 @@ module.exports = {
     });
   },
 
-  validate : function(req,res){
+  validate: function(req,res){
     User.find({or: [{Nickname: req.param('Name')}, {PhoneNum: req.param('Name')}]}).exec(function (err, result) {
       if (err) {
         return res.view('wrong', {message: "error occured: " + err});
@@ -40,6 +40,13 @@ module.exports = {
       }
     });
   },
+
+  logout: function (req, res) {
+    req.session.authenticated = false;
+    req.session.userid = '';
+    return res.redirect('/login');
+  },
+
   success : function(req,res){
     return res.view('success', {layout : false});
   },

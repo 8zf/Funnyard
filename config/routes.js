@@ -38,9 +38,10 @@ module.exports.routes = {
 
   'get /test': 'HomeController.getInfo',
 
-  /********* LOGIN *********/
+  /********* LOGIN/OUT *********/
   'get /login': 'LoginController.default',
   'post /login': 'LoginController.validate',
+  'get /logout': 'LoginController.logout',
 
   /********* REGISTER *********/
   'get /register': 'RegisterController.default',
