@@ -61,7 +61,7 @@ module.exports = {
           }
           console.log('new record created: ');
           // console.log(record);
-          return res.redirect("/login");
+          return res.redirect("/user_login");
           // return res.send('add user successfully' + JSON.stringify(record));
         });
       }
@@ -119,6 +119,7 @@ module.exports = {
             var new_record = {
               PublisherID: uuidV4(),
               Email: email,
+              NickName: userid,
               PassWd: EncryptionService.genSHA1(password),
               Department: name,
               PhoneNum: phone_num
@@ -142,7 +143,7 @@ module.exports = {
                   });
                 }
                 //注册成功，重定向
-                return res.redirect('/login');
+                return res.redirect('/publisher_login');
               });
             });
           }

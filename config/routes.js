@@ -39,8 +39,10 @@ module.exports.routes = {
   'get /test': 'HomeController.getInfo',
 
   /********* LOGIN/OUT *********/
-  'get /login': 'LoginController.default',
-  'post /login': 'LoginController.validate',
+  'get /user_login': 'LoginController.userDefault',
+  'get /publisher_login': 'LoginController.publisherDefault',
+  'post /user_login': 'LoginController.validateUser',
+  'post /publisher_login': 'LoginController.validatePublisher',
   'get /logout': 'LoginController.logout',
 
   /********* REGISTER *********/

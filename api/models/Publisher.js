@@ -12,8 +12,13 @@ module.exports = {
   autoPK: false,
   attributes: {
     PublisherID: {
-      type: 'integer',
+      type: 'string',
       primaryKey: true,
+      required: true,
+      unique: true
+    },
+    NickName: {
+      type: 'string',
       required: true,
       unique: true
     },

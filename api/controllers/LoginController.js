@@ -6,20 +6,45 @@
  */
 
 module.exports = {
-  default: function (req, res) {
-    res.view("login", {
+  userDefault: function (req, res) {
+    res.view("user_login", {
       title: "登录趣往"
     });
   },
 
-  addUser: function (req, res) {
-    res.view("register_user", {
-      title: "注册成为用户"
+  publisherDefault: function (req, res) {
+    res.view("publisher_login", {
+      title: "登录趣往"
     });
   },
 
-  validate: function(req,res){
+  validateUser:function (req, res) {
     User.find({or: [{Nickname: req.param('Name')}, {PhoneNum: req.param('Name')}]}).exec(function (err, result) {
+      if (err) {
+        return res.view('wrong', {message: "error occured: " + err});
+      }
+
+      if (result.length == 0) {
+        return res.view('wrong', {message: "no such user found"});
+      }
+
+      if (result[0].PassWd == EncryptionService.genSHA1(req.param("PassWd")))
+      {
+        //authenticated
+        req.session.authenticated = true;
+        req.session.userid = result[0].UserID;
+        req.session.role = "user";
+        // console.log(req.session.authenticated);
+        return res.redirect('/');
+      }
+      else {
+        return res.view('wrong', {message: "wrong password"});
+      }
+    });
+  },
+
+  validatePublisher: function (req, res) {
+    Publisher.find({or: [{Nickname: req.param('Name')}, {PhoneNum: req.param('Name')}]}).exec(function (err, result) {
       if (err) {
         return res.view('wrong', {message: "error occured: " + err});
       }
@@ -31,7 +56,8 @@ module.exports = {
       {
         //authenticated
         req.session.authenticated = true;
-        req.session.userid = result[0].UserID;
+        req.session.userid = result[0].PublisherID;
+        req.session.role = "publisher";
         // console.log(req.session.authenticated);
         return res.redirect('/');
       }
