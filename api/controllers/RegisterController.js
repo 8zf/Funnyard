@@ -87,10 +87,12 @@ module.exports = {
         return res.send(err);
       }
       if (records1.length == 0) {
+        console.log('注册码无效');
         return res.send('注册码无效');
       }
       if (records1[0].IsUsable == 0)
       {
+        console.log('注册码已被使用');
         return res.send('注册码已被使用');
       }
       //注册码正确
@@ -99,6 +101,7 @@ module.exports = {
           return res.send(err)
         }
         if (records2.length > 0) {
+          console.log('手机号码已被注册');
           return res.send("手机号码已被注册");
         }
         VerifyPhone.find({PhoneNum: phone_num}).exec(function (err, records3) {
@@ -107,9 +110,11 @@ module.exports = {
           }
           if (records3.length == 0)
           {
+            console.log('验证码错误');
             return res.send("验证码错误");
           }
           if (records3[0].VerifyCode == verify_code && (new Date().getTime()) < parseInt(records3[0].ExpireAt)) {
+            console.log('正确，可以录入，将注册码改为已使用');
             //正确，可以录入，将注册码改为已使用
             var new_record = {
               PublisherID: uuidV4(),
@@ -125,10 +130,14 @@ module.exports = {
               PublisherCode.update({Code: publisher_code}, {IsUsable: 0, PublisherID: new_record.PublisherID}).exec(function (err, record5) {
                 if (err) {
                   //回滚？
+                  console.log("修改注册码出错");
+                  console.log(err);
                   Publisher.destroy(record4).exec(function (err, record) {
                     if (err) {
+                      console.log('回滚失败');
                       return res.send("回滚失败");
                     }
+                    console.log('操作回滚成功，注册失败');
                     return res.send("操作回滚成功，注册失败");
                   });
                 }
@@ -138,6 +147,7 @@ module.exports = {
             });
           }
           else {
+            console.log('验证码错误');
             return res.send("验证码错误");
           }
 
@@ -149,9 +159,16 @@ module.exports = {
   sendSMS: function (req, res) {
     var rec_num = parseInt(req.param("phone_num"));
     var verify_code = Math.random().toString().substring(2, 8);
-
+    var type = req.param("type");
+    var target = {};
+    if (type == "user") {
+      target = User;
+    }
+    else if(type = "publisher") {
+      target = Publisher;
+    }
     //确认手机号是否被注册
-    User.find({PhoneNum: rec_num}).exec(function (err, records) {
+    target.find({PhoneNum: rec_num}).exec(function (err, records) {
       if (err) {
         return res.send(err);
       }
@@ -180,7 +197,7 @@ module.exports = {
             }
             if (record1.length == 0) {
               //未找到
-              console.log('未找到');
+              console.log('未找到对应号码的验证码');
               VerifyPhone.create(new_record).exec(function (err, record2) {
                 if (err) {
                   console.log(err);
@@ -191,7 +208,7 @@ module.exports = {
             }
             else {
               //找到
-              console.log('找到');
+              console.log('找到对应号码的验证码');
               VerifyPhone.update({PhoneNum: record1[0].PhoneNum}, {
                 VerifyCode: verify_code,
                 ExpireAt: new Date(new Date().getTime() + 10 * 60000).getTime()

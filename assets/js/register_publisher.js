@@ -53,7 +53,7 @@ function immediately() {
       userid_text = userid.value;
       if (!expr1.test(userid_text)) {
         document.getElementById("userid_").style.display = 'inline';
-        document.getElementById("userid_").innerHTML = "<p style='color: red;'>用户ID只能包含汉字与字母数字，3~15个字符</p>";
+        document.getElementById("userid_").innerHTML = "<p style='color: red;'>ID只能包含汉字与字母数字，3~15个字符</p>";
         document.getElementById("submitinfo").style.display = 'none';
       }
       else {
@@ -151,13 +151,13 @@ function sendSMS() {
   }
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      alert('短信发送成功');
+      alert(xmlhttp.responseText);
       return true;
     }
   };
   var phone_num = document.getElementById('phone_num').value;
   //alert(address);
-  xmlhttp.open("GET", "sendSMS?phone_num=" + phone_num, true);
+  xmlhttp.open("GET", "sendSMS?phone_num=" + phone_num + "&type=publisher", true);
   xmlhttp.send();
 }
 

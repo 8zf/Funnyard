@@ -30,20 +30,20 @@ function immediately() {
   var userid = document.getElementById("userid");
   var password = document.getElementById("password");
   var name = document.getElementById("name");
-  var email = document.getElementById("email");
+  // var email = document.getElementById("email");
   var phone_num = document.getElementById("phone_num");
   if ("\v" == "v") {
     userid.onpropertychange = webChange1;
     password.onpropertychange = webChange2();
     name.onpropertychange = webChange3();
-    email.onpropertychange = webChange4();
+    // email.onpropertychange = webChange4();
     phone_num.onpropertychange = webChange5();
   }
   else {
     userid.addEventListener("input", webChange1, false);
     password.addEventListener("input", webChange2, false);
     name.addEventListener("input", webChange3, false);
-    email.addEventListener("input", webChange4, false);
+    // email.addEventListener("input", webChange4, false);
     phone_num.addEventListener("input", webChange5(), false);
   }
   function webChange1() {
@@ -153,13 +153,13 @@ function sendSMS() {
   }
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      alert('短信发送成功');
+      alert(xmlhttp.responseText);
       return true;
     }
   };
   var phone_num = document.getElementById('phone_num').value;
   //alert(address);
-  xmlhttp.open("GET", "sendSMS?phone_num=" + phone_num, true);
+  xmlhttp.open("GET", "sendSMS?phone_num=" + phone_num + "&type=user", true);
   xmlhttp.send();
 }
 

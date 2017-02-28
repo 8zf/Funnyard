@@ -12,6 +12,9 @@ module.exports = {
   autoPK: false,
   attributes: {
     Code: {
+      primaryKey: true,
+      required: true,
+      unique: true,
       type: 'string'
     },
     IsUsable: {
