@@ -49,7 +49,7 @@ module.exports = {
 
   success : function(req,res){
     return res.view('success', {layout : false});
-  },
+  }
 
 };
 
