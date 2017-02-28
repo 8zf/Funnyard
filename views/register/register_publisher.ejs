@@ -1,0 +1,78 @@
+<script type="text/javascript" src="js/regist_user.js"></script>
+<body>
+<center><h2>注册信息</h2></center>
+<center>
+  <form class="form-group" action="/register_publisher" method="post" name="myForm" id="myForm" style="max-width: 700px;">
+    <table align="center" class="table table-bordered">
+      <tr>
+        <td align="right"><label for="userid">发布者ID(用于登录)：</label></td>
+        <td>
+          <input name="userid" id="userid" type="text" size="20">
+          <p id="userid_">发布者ID只能包含汉字与字母数字，3~15个字符</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="password">登陆密码：</label></td>
+        <td><input name="password" id="password" type="password" size="20">
+          <p id="password_">密码可包含字母数字和其他不包含 [];:'\"\\|/ 的符号，6~18个字符</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="re_password">密码确认：</label></td>
+        <td><input name="re_password" id="re_password" type="password" size="20"></td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="phone_num">手机号码(用于登录)：</label></td>
+        <td>
+          <input name="phone_num" id="phone_num" type="number" size="20">
+          <button type="button" class="btn btn-default" onclick="sendSMS()">发送短信</button>
+          <input type="number" id="verify_code" name="verify_code" size="10" placeholder="输入6位验证码">
+          <!--<button type="button" class="btn btn-default" onclick="verifyPhone()">验证</button>-->
+        </td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="email">邮箱(可作为登陆账号)：</label></td>
+        <td>
+          <input name="email" id="email" type="text" size="20">
+          <!--<button class="btn btn-default" id="sendemail" type="button" onclick="sendEmail()" style="display: none;">发送验证邮件</button>-->
+          <!--<input type="text" id="validate" size="10" placeholder="输入4位验证码">-->
+          <!--<button type="button" class="btn btn-default" onclick="validatefunc()">验证</button>-->
+          <p id="email_">请输入合法邮箱</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="publisher_code">注册码：</label></td>
+        <td>
+          <input name="publisher_code" id="publisher_code" type="text" size="25">
+          <!--<p id="name_">请输入纯中文或纯英文，英文可包括空格2~15个字符</p>-->
+        </td>
+      </tr>
+
+      <tr>
+        <td align="right"><label for="name">社团名：</label></td>
+        <td>
+          <input name="name" id="name" type="text" size="20">
+          <p id="name_">请输入纯中文或纯英文，英文可包括空格2~15个字符</p>
+        </td>
+      </tr>
+
+
+      <!--暂时不提-->
+      <!--        <tr>-->
+      <!--            <td align="right"><label for="portrait"></label>上传头像(可选)：</td>-->
+      <!--            <td><input name="portrait" id="portrait" type="file" /></td>-->
+      <!--        </tr>-->
+    </table>
+    <center>
+      <input type="button" id="submitinfo" class="btn btn-default" value="提交" onClick="check_data()">　
+      <input type="reset" class="btn btn-default" value="重新填写">
+    </center>
+  </form>
+</center>
+<script type="text/javascript">immediately();</script>
+</body>

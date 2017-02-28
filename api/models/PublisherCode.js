@@ -1,21 +1,23 @@
 /**
- * Test.js
+ * PublisherCode.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
-
+  tableName: 'PublisherCode',
+  autoUpdatedAt: false,
+  autoCreatedAt: false,
+  autoPK: false,
   attributes: {
-    name: {
-      primaryKey: true,
+    Code: {
       type: 'string'
     },
-    age: {
-      type:'string'
+    IsUsable: {
+      type: 'integer'
     },
-    sex: {
+    PublisherID: {
       type: 'string'
     }
   }

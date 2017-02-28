@@ -49,6 +49,8 @@ module.exports.routes = {
   'post /register_user': 'RegisterController.addUser',
   'get /sendSMS': 'RegisterController.sendSMS',
   'get /register_publisher': 'RegisterController.registerPublisher',
+  'post /register_publisher': 'RegisterController.addPublisher',
+
 
   'get /publish': 'PublisherController.publish',
   '/ueditor/ue': 'PublisherController.ueditor'
