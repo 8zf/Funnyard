@@ -1,10 +1,16 @@
 
 module.exports = {
-  getInfo: function (req, res) {
-    // Publisher.find().exec(function (err, record) {
-    //   return res.send(JSON.stringify(record));
-    // });
-    // console.log('In homecontroller, userid: ' + res.UserID);
-    return res.view('homepage');
+
+  testUpload: function (req, res) {
+    req.file('avatar').upload({
+      dirname: require('path').resolve(sails.config.appPath, 'assets/images')
+    },function (err, uploadedFiles) {
+      if (err) return res.negotiate(err);
+      return res.json({
+        message: uploadedFiles.length + ' file(s) uploaded successfully!',
+        file_info: uploadedFiles
+      });
+    });
   }
+
 };

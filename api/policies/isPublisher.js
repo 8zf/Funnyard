@@ -11,6 +11,6 @@ module.exports = function(req, res, next) {
 
   // User is not allowed
   // (default res.forbidden() behavior can be overridden in `config/403.js`)
-  return res.redirect('/login');
+  return res.redirect('/publisher_login');
   // return res.forbidden('请先登录');
 };

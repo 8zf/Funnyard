@@ -15597,7 +15597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var UI = __webpack_require__(2);
 
 	/**
-	 * store.js
+	 * qiniuStoreService.js
 	 * @see https://github.com/marcuswestin/store.js
 	 * @license https://github.com/marcuswestin/store.js/blob/master/LICENSE
 	 */

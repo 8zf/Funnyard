@@ -7,11 +7,105 @@
 
 const path = require('path');
 const ueditor = require("ueditor");
+const ueditor_options = ueditorQiniuConfigService.options;
+const randomstring = require("randomstring");
+const moment = require('moment');
 
 module.exports = {
   publish: function (req, res) {
     return res.view('publisher/publish');
   },
+
+  getQiniu: function (req, res, next) {
+    // return res.send('???');
+    var params = req.query;
+
+    var action = params['action'];
+    console.log(action);
+    if (action == 'config') {
+      res.send(ueditor_options.ueditorConfig);
+    }
+    else if (action == 'listimage' || action == 'listfile') {
+      var start = parseInt(params['start'] || 0);
+      var size = parseInt(params['size'] || 10);
+
+      var storeParams = {
+        prefix: action == 'listimage' ? 'image/' : 'file/',
+        start: start,
+        limit: size
+      };
+
+      storeqiniuStoreServioce.listQiniu(storeParams, function (err, ret) {
+        res.send(ret);
+        return next();
+      })
+
+    } else {
+      res.send();
+    }
+
+    return next();
+  },
+
+  postQiniu: function (req, res, next) {
+    var params = req.query;
+
+    var action = params['action'];
+
+    var key = '/' + moment().format('YYYYMMDD') + '/' + (+new Date()) + randomstring.generate(6);
+
+    switch (action) {
+      case 'uploadvideo':
+        key = 'video' + key;
+        break;
+      case 'uploadfile':
+        key = 'file' + key;
+        break;
+      default:
+        key = 'image' + key;
+        break;
+    }
+
+    var storeParams = {};
+
+    if (action == 'uploadimage' || action == 'uploadvideo' || action == 'uploadfile') {
+      req.file('upfile').upload({dirname: require('path').resolve(sails.config.appPath, 'assets/images/temp')}, function (err, uploadedFiles) {
+        if (err) return res.send(err);
+        // console.log(uploadedFiles[0]);
+        if (action == 'uploadfile') {
+          key += '/' + uploadedFiles[0].filename;
+        }
+        storeParams = {
+          key: key,
+          filePath: uploadedFiles[0].fd,
+          fileName: uploadedFiles[0].filename
+        };
+        qiniuStoreService.fileToQiniu(storeParams, function (err, ret) {
+          return res.send(ret);
+          // return next();
+        });
+      });
+    }
+    else if (action == 'uploadscrawl') {
+      //这里不能用
+      var data = params['upfile'];
+      if (!data) {
+        res.send();
+        return next();
+      }
+
+      storeParams = {
+        key: key,
+        data: new Buffer(data, 'base64')
+      };
+
+      storeqiniuStoreServioce.dataToQiniu(storeParams, function (err, ret) {
+        res.send(ret);
+        return next();
+      })
+    }
+  },
+
   ueditor: ueditor('/home/zhang/Desktop/funnyard-on-sails/funnyard/assets', function (req, res, next) {
 
     console.log(req.param("action"));

@@ -36,10 +36,10 @@ module.exports.policies = {
   ***************************************************************************/
 
   HomeController: {
-    '*': ['sessionAuth']
+    // '*': ['sessionAuth']
   },
   PublisherController: {
-    'publish': ['isPublisher']
+    // 'publish': ['isPublisher']
   }
 	// RabbitController: {
 

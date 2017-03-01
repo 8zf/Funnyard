@@ -36,7 +36,9 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'get /test': 'HomeController.getInfo',
+  'get /test': {
+    view: 'test_upload'
+  },
 
   /********* LOGIN/OUT *********/
   'get /user_login': 'LoginController.userDefault',
@@ -53,10 +55,15 @@ module.exports.routes = {
   'get /register_publisher': 'RegisterController.registerPublisher',
   'post /register_publisher': 'RegisterController.addPublisher',
 
+  /********* UEditor *********/
+  'get /ueditor/qiniu': 'PublisherController.getQiniu',
+  'post /ueditor/qiniu': 'PublisherController.postQiniu',
 
   'get /publish': 'PublisherController.publish',
-  '/ueditor/ue': 'PublisherController.ueditor'
+  '/ueditor/ue': 'PublisherController.ueditor',
 
+  /********* TEST *********/
+  'post /test': 'HomeController.testUpload'
 
   /***************************************************************************
   *                                                                          *

@@ -36,7 +36,7 @@ module.exports.http = {
       'session',
       'myRequestLogger',
       'bodyParser',
-      'bodyParser2',
+      // 'bodyParser2',
       'handleBodyParserError',
       'compress',
       'methodOverride',
@@ -76,8 +76,8 @@ module.exports.http = {
      *                                                                          *
      ***************************************************************************/
 
-    bodyParser: require('body-parser').urlencoded({extended: true}),
-    bodyParser2: require('body-parser').json()
+    bodyParser: require('skipper')({strict: true})
+    // bodyParser2: require('body-parser').json()
 
   },
 
