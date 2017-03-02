@@ -12,7 +12,7 @@ module.exports = {
   autoPK: false,
   attributes: {
     ActivityID: {
-      type: 'integer',
+      type: 'string',
       primaryKey: true,
       required: true,
       unique: true
@@ -36,6 +36,12 @@ module.exports = {
     },
     EndTime: {
       type: 'datetime'
+    },
+    HoldTimeStamp: {
+      type: 'integer'
+    },
+    EndTimeStamp: {
+      type: 'integer'
     },
     MaxNum: {
       type: 'integer'

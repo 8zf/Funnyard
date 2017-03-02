@@ -6,7 +6,7 @@ exports.options = {
   qiniuAccessKey: '31ULV4j3DA9p76IcvH3ZC3PrIgqXIh3EX8VMpvmD',
   qiniuSecretKey: 'n_aGzUV1G3XdCXLc2abMD62IKS9ZDvKf7fFr_Mtt',
   qiniuBucket: 'funnyard',
-  qiniuBucketUrl: 'http://olpydw9kt.bkt.clouddn.com/',
+  qiniuBucketUrl: 'http://image.funnyard.com/',
 
   ueditorConfig: {
     /* 上传图片配置项 */

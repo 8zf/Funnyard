@@ -42,25 +42,30 @@ module.exports.routes = {
 
   /********* LOGIN/OUT *********/
   'get /user_login': 'LoginController.userDefault',
-  'get /publisher_login': 'LoginController.publisherDefault',
   'post /user_login': 'LoginController.validateUser',
+
+  'get /publisher_login': 'LoginController.publisherDefault',
   'post /publisher_login': 'LoginController.validatePublisher',
+
   'get /logout': 'LoginController.logout',
 
   /********* REGISTER *********/
   'get /register': 'RegisterController.default',
-  'get /register_user': 'RegisterController.registerUser',
-  'post /register_user': 'RegisterController.addUser',
+
   'get /sendSMS': 'RegisterController.sendSMS',
-  'get /register_publisher': 'RegisterController.registerPublisher',
-  'post /register_publisher': 'RegisterController.addPublisher',
+
+  'get /register_user': 'UserController.register',
+  'post /register_user': 'UserController.add',
+
+  'get /register_publisher': 'PublisherController.register',
+  'post /register_publisher': 'PublisherController.add',
 
   /********* UEditor *********/
-  'get /ueditor/qiniu': 'PublisherController.getQiniu',
-  'post /ueditor/qiniu': 'PublisherController.postQiniu',
+  'get /ueditor/qiniu': 'PublishController.getQiniu',
+  'post /ueditor/qiniu': 'PublishController.postQiniu',
 
-  'get /publish': 'PublisherController.publish',
-  '/ueditor/ue': 'PublisherController.ueditor',
+  'get /publish': 'PublishController.publish',
+  // '/ueditor/ue': 'PublisherController.ueditor',
 
   /********* TEST *********/
   'post /test': 'HomeController.testUpload'
