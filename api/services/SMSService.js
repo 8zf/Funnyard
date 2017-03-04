@@ -1,7 +1,6 @@
 // var App = require('co-alidayu');
 var App = require('alidayu-node');
 var app = new App('23632391', '390ec7ef515d368c940e3e2b996ae82f');
-var co = require('co');
 
 module.exports = {
   sendVerifyCode: function (options, callback) {
