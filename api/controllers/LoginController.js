@@ -58,6 +58,7 @@ module.exports = {
         req.session.authenticated = true;
         req.session.userid = result[0].PublisherID;
         req.session.role = "publisher";
+        req.session.info = result[0];
         // console.log(req.session.authenticated);
         return res.redirect('/');
       }

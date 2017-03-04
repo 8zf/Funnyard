@@ -25,6 +25,81 @@ function check_data() {
 
   document.myForm.submit();
 }
+function webChange1() {
+  var userid_text;
+  var expr1 = new RegExp("^[\u4E00-\u9FA5\uF900-\uFA2Da-zA-Z0-9]{3,15}$");
+  if (userid.value) {
+    userid_text = userid.value;
+    if (!expr1.test(userid_text)) {
+      document.getElementById("userid_").style.display = 'inline';
+      document.getElementById("userid_").innerHTML = "<p style='color: red;'>用户ID只能包含汉字与字母数字，3~15个字符</p>";
+      document.getElementById("submitinfo").style.display = 'none';
+    }
+    else {
+      document.getElementById("userid_").style.display = 'none';
+      document.getElementById("submitinfo").style.display = 'inline';
+    }
+  }
+}
+
+function webChange2() {
+  var password_text;
+  var expr2 = new RegExp("^[a-zA-Z0-9,.*&^%$#@!~<>?{}+-=]{6,18}$");
+  if (password.value) {
+    password_text = password.value;
+    if (!expr2.test(password_text)) {
+      document.getElementById("password_").style.display = 'inline';
+      document.getElementById("password_").innerHTML = "<p style='color: red;'>密码可包含字母数字和其他不包含 [];:'\"\\|/ 的符号，6~18个字符</p>";
+      document.getElementById("submitinfo").style.display = 'none';
+    }
+    else {
+      document.getElementById("password_").style.display = 'none';
+      document.getElementById("submitinfo").style.display = 'inline';
+    }
+  }
+}
+
+function webChange3() {
+  var name_text;
+  var expr31 = new RegExp("^[\u4E00-\u9FA5\uF900-\uFA2D]{2,5}$");
+  var expr32 = new RegExp("^[a-zA-Z ]{2,15}$");
+  if (name.value) {
+    name_text = name.value;
+    if (expr31.test(name_text) || expr32.test(name_text)) {
+      document.getElementById("name_").style.display = 'none';
+      document.getElementById("submitinfo").style.display = 'inline';
+    }
+    else {
+      document.getElementById("name_").style.display = 'inline';
+      document.getElementById("name_").innerHTML = "<p style='color: red;'>请输入纯中文或纯英文，中文2~5个字符，英文可包括空格2~15个字符</p>";
+      document.getElementById("submitinfo").style.display = 'none';
+    }
+  }
+}
+
+function webChange4() {
+  var email_text;
+  var expr4 = new RegExp("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
+  if (email.value) {
+    email_text = email.value;
+    //测试未通过
+    if (!expr4.test(email_text)) {
+      document.getElementById("email_").style.display = 'inline';
+      document.getElementById("sendemail").style.display = 'none';
+      document.getElementById("email_").innerHTML = "<p style='color: red;'>请输入合法邮箱</p>";
+      document.getElementById("submitinfo").style.display = 'none';
+    }
+    else {
+      document.getElementById("email_").style.display = 'none';
+      document.getElementById("sendemail").style.display = 'inline';
+      document.getElementById("submitinfo").style.display = 'inline';
+    }
+  }
+}
+
+function webChange5() {
+
+}
 
 function immediately() {
   var userid = document.getElementById("userid");
@@ -45,81 +120,6 @@ function immediately() {
     name.addEventListener("input", webChange3, false);
     // email.addEventListener("input", webChange4, false);
     phone_num.addEventListener("input", webChange5(), false);
-  }
-  function webChange1() {
-    var userid_text;
-    var expr1 = new RegExp("^[\u4E00-\u9FA5\uF900-\uFA2Da-zA-Z0-9]{3,15}$");
-    if (userid.value) {
-      userid_text = userid.value;
-      if (!expr1.test(userid_text)) {
-        document.getElementById("userid_").style.display = 'inline';
-        document.getElementById("userid_").innerHTML = "<p style='color: red;'>用户ID只能包含汉字与字母数字，3~15个字符</p>";
-        document.getElementById("submitinfo").style.display = 'none';
-      }
-      else {
-        document.getElementById("userid_").style.display = 'none';
-        document.getElementById("submitinfo").style.display = 'inline';
-      }
-    }
-  }
-
-  function webChange2() {
-    var password_text;
-    var expr2 = new RegExp("^[a-zA-Z0-9,.*&^%$#@!~<>?{}+-=]{6,18}$");
-    if (password.value) {
-      password_text = password.value;
-      if (!expr2.test(password_text)) {
-        document.getElementById("password_").style.display = 'inline';
-        document.getElementById("password_").innerHTML = "<p style='color: red;'>密码可包含字母数字和其他不包含 [];:'\"\\|/ 的符号，6~18个字符</p>";
-        document.getElementById("submitinfo").style.display = 'none';
-      }
-      else {
-        document.getElementById("password_").style.display = 'none';
-        document.getElementById("submitinfo").style.display = 'inline';
-      }
-    }
-  }
-
-  function webChange3() {
-    var name_text;
-    var expr31 = new RegExp("^[\u4E00-\u9FA5\uF900-\uFA2D]{2,5}$");
-    var expr32 = new RegExp("^[a-zA-Z ]{2,15}$");
-    if (name.value) {
-      name_text = name.value;
-      if (expr31.test(name_text) || expr32.test(name_text)) {
-        document.getElementById("name_").style.display = 'none';
-        document.getElementById("submitinfo").style.display = 'inline';
-      }
-      else {
-        document.getElementById("name_").style.display = 'inline';
-        document.getElementById("name_").innerHTML = "<p style='color: red;'>请输入纯中文或纯英文，中文2~5个字符，英文可包括空格2~15个字符</p>";
-        document.getElementById("submitinfo").style.display = 'none';
-      }
-    }
-  }
-
-  function webChange4() {
-    var email_text;
-    var expr4 = new RegExp("^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$");
-    if (email.value) {
-      email_text = email.value;
-      //测试未通过
-      if (!expr4.test(email_text)) {
-        document.getElementById("email_").style.display = 'inline';
-        document.getElementById("sendemail").style.display = 'none';
-        document.getElementById("email_").innerHTML = "<p style='color: red;'>请输入合法邮箱</p>";
-        document.getElementById("submitinfo").style.display = 'none';
-      }
-      else {
-        document.getElementById("email_").style.display = 'none';
-        document.getElementById("sendemail").style.display = 'inline';
-        document.getElementById("submitinfo").style.display = 'inline';
-      }
-    }
-  }
-
-  function webChange5() {
-
   }
 }
 

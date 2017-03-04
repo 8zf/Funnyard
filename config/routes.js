@@ -60,12 +60,13 @@ module.exports.routes = {
   'get /register_publisher': 'PublisherController.register',
   'post /register_publisher': 'PublisherController.add',
 
+  /********* ACTIVITY *********/
+  'get /publish': 'PublishController.publish',
+  'post /publish': 'ActivityController.add',
+
   /********* UEditor *********/
   'get /ueditor/qiniu': 'PublishController.getQiniu',
   'post /ueditor/qiniu': 'PublishController.postQiniu',
-
-  'get /publish': 'PublishController.publish',
-  // '/ueditor/ue': 'PublisherController.ueditor',
 
   /********* TEST *********/
   'post /test': 'HomeController.testUpload'

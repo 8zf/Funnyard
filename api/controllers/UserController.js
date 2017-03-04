@@ -1,4 +1,5 @@
 const path = require('path');
+const uuidV4 = require('uuid/v4');
 
 module.exports = {
 
@@ -53,5 +54,13 @@ module.exports = {
       }
     });
   }
+
+  // getProfile: function (req, res) {
+  //
+  // },
+  //
+  // getAssociatedActivities: function (req, res) {
+  //
+  // }
 };
 

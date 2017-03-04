@@ -7,7 +7,16 @@ const moment = require('moment');
 module.exports = {
 
   publish: function (req, res) {
-    return res.view('publisher/publish');
+    Keyword.find().exec(function (err, records) {
+      if (err) {
+        console.log(err);
+        return res.send(err);
+      }
+      return res.view('publisher/publish', {
+        keywords: records
+      });
+    });
+
   },
 
   getQiniu: function (req, res, next) {
@@ -32,7 +41,7 @@ module.exports = {
       storeqiniuStoreServioce.listQiniu(storeParams, function (err, ret) {
         res.send(ret);
         return next();
-      })
+      });
 
     } else {
       res.send();

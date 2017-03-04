@@ -57,6 +57,14 @@ module.exports = {
     Description: {
       type: 'string'
     }
+  },
+  
+  getProfile: function (option, callback) {
+    
+  },
+  
+  getActivities: function (option, callback) {
+    
   }
 };
 

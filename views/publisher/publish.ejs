@@ -1,5 +1,4 @@
 <script type="text/javascript" src="http://api.tianditu.com/js/maps.js"></script>
-<script type="text/javascript" src="js/publish.js"></script>
 <script type="text/javascript" src="ueditor/ueditor.config.js"></script>
 <script type="text/javascript" src="ueditor/ueditor.all.js"></script>
 <script type="text/javascript"></script>
@@ -28,16 +27,18 @@
       markerTool.close();
       marker.enableEdit();
       isexit = true;
+      var location = marker.getLngLat();
+//      document.getElementById('content').value = content_;
+      document.getElementById('locationlng').value = location.getLng();
+      document.getElementById('locationlat').value = location.getLat();
     }
     else {
     }
   }
 </script>
-
+<script type="text/javascript" src="js/publish.js"></script>
 
 <body onload="onLoad()">
-<h2 style="color: red;">还没有添加输入检测脚本，请暂时自行校验输入</h2>
-
 
 <form class="form-inline" id="activity_info" name="activity_info" action="/publish" method="post">
   <div class="form-group">
@@ -46,23 +47,23 @@
   </div>
   <br/>
 
+  <!--<div class="form-group">-->
+    <!--<label for="department">部门名称(不需要)</label>-->
+    <!--<input id="department" name="department" class="form-control" type="text">-->
+  <!--</div>-->
+  <!--<br/>-->
+
   <div class="form-group">
-    <label for="department">部门名称</label>
-    <input id="department" name="department" class="form-control" type="text">
+    <label for="hold_time">举办时间</label>
+    <input id="hold_date" name="hold_date" class="form-control" type="date">
+    <input id="hold_time" name="hold_time" class="form-control" type="time">
   </div>
   <br/>
 
   <div class="form-group">
-    <label for="holdtime">举办时间</label>
-    <input id="holddate" name="holddate" class="form-control" type="date">
-    <input id="holdtime" name="holdtime" class="form-control" type="time">
-  </div>
-  <br/>
-
-  <div class="form-group">
-    <label for="endtime">结束时间</label>
-    <input id="enddate" name="enddate" class="form-control" type="date">
-    <input id="endtime" name="endtime" class="form-control" type="time">
+    <label for="hold_dateend_time">结束时间</label>
+    <input id="end_date" name="end_date" class="form-control" type="date">
+    <input id="end_time" name="end_time" class="form-control" type="time">
   </div>
   <br/>
 
@@ -73,8 +74,8 @@
   <br/>
 
   <div class="form-group">
-    <label for="maxnum">人数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-    <input id="maxnum" name="maxnum" class="form-control" type="number">
+    <label for="maxnum">活动人数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <input id="maxnum" name="maxnum" class="form-control" type="number" min="2">
   </div>
   <br/>
 
@@ -85,10 +86,10 @@
   <br/>
   <p>
     在下面的地图上标注出地点,可拖拽调整。
-    <button class="btn btn-default" type="button" onclick="markerTool.open();markerTool.open();">标注</button>
+    <button class="btn btn-default" type="button" onclick="markerTool.open();">标注</button>
   </p>
-  <input type="hidden" name="locationlng" id="locationlng">
-  <input type="hidden" name="locationlat" id="locationlat">
+  <input type="" name="locationlng" id="locationlng">
+  <input type="" name="locationlat" id="locationlat">
   <div id="mapDiv" style="width:400px; height:300px; border:1px solid #000;"></div>
 
   <!--    <div >-->
@@ -104,22 +105,13 @@
 
   </div>
 
-  <button class="btn btn-default" type="button" onclick="submit_activity()">
+  <button class="btn btn-default" type="button" onclick="check_data()">
     提交
   </button>
 
   <!-- 实例化编辑器 -->
   <script type="text/javascript">
     var ue = UE.getEditor('container', {});
-    function submit_activity() {
-      var content_ = ue.getContent();
-      var location = marker.getLngLat();
-      document.getElementById('content').value = content_;
-      document.getElementById('locationlng').value = location.getLng();
-      document.getElementById('locationlat').value = location.getLat();
-//            alert(location.getLng()+', '+location.getLat());
-      document.getElementById('activity_info').submit();
-    }
   </script>
 </form>
 <br/><br/><br/><br/><br/><br/>

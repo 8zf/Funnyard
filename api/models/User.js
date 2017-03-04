@@ -50,7 +50,21 @@ module.exports = {
     },
     Profile: {
       type: 'string'
+    },
+    Icon: {
+      type: 'string'
     }
+  },
+  getProfile: function (option, callback) {
+
+  },
+
+  getAssociatedActivity: function (option, callback) {
+
+  },
+
+  findWithSameNameAsPerson: function (opts, cb) {
+    
   }
 };
 

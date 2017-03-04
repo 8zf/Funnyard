@@ -7,7 +7,7 @@
 
 const path = require('path');
 // const ueditor = require("ueditor");
-const ueditor_options = ueditorQiniuConfigService.options;
+// const ueditor_options = ueditorQiniuConfigService.options;
 const randomstring = require("randomstring");
 const moment = require('moment');
 
@@ -104,6 +104,14 @@ module.exports = {
       });
     });
   }
+
+  // getProfile: function (req, res) {
+  //
+  // },
+  //
+  // getPublishedActivities: function (req, res) {
+  //
+  // }
 
   // publish: function (req, res) {
   //   return res.view('publisher/publish');

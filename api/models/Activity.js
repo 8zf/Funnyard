@@ -7,8 +7,8 @@
 
 module.exports = {
   tableName: 'Activity',
-  autoUpdatedAt: false,
-  autoCreatedAt: false,
+  autoUpdatedAt: true,
+  autoCreatedAt: true,
   autoPK: false,
   attributes: {
     ActivityID: {
@@ -21,10 +21,10 @@ module.exports = {
       type: 'string',
       size: 120
     },
-    ALocationLng: {
+    LocationLng: {
       type: 'float'
     },
-    ALocationLat: {
+    LocationLat: {
       type: 'float'
     },
     Location: {
@@ -57,7 +57,7 @@ module.exports = {
       type: 'string'
     },
     PublisherID: {
-      type: 'integer'
+      type: 'string'
     },
     Category: {
       type: 'string',
