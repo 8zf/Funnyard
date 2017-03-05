@@ -40,6 +40,9 @@ module.exports.policies = {
   },
   PublisherController: {
     // 'publish': ['isPublisher']
+  },
+  ParticipateController: {
+    '*': ['isUser']
   }
 	// RabbitController: {
 

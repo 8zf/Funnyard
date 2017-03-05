@@ -1,0 +1,47 @@
+<%- activity.Content %>
+PublisherID: <%= activity.PublisherID %><br/>
+参与人数：<span id="now_num"><%= activity.NowNum %></span> / <%= activity.MaxNum %>
+<input type="hidden" name="aid" id="aid" value="<%= activity.ActivityID %>">
+<button onclick="participate()" id="participate">
+    报名参加
+</button>
+<button onclick="quit()" id="quit">
+    取消报名
+</button>
+<script>
+  function participate() {
+    var aid = $("#aid").attr("value");
+    $.get('/participate?aid=' + aid, function (data, status) {
+      console.log("data:");
+      console.log(data);
+      console.log("status: " + status);
+      if (data == '报名成功') {
+        $("#now_num").html(parseInt($("#now_num").html()) + 1);
+        $("#participate").html("报名成功");
+        $("#participate").click(function () { });
+//        alert("参与成功");
+      }
+      else {
+        $("#participate").html(data);
+        alert(data);
+      }
+    });
+  }
+
+  function quit() {
+    var aid = $("#aid").attr("value");
+    $.get('/quit?aid=' + aid, function (data, status) {
+      console.log("data:");
+      console.log(data);
+      console.log("status: " + status);
+      if (data == '取消成功') {
+        $("#quit").html("取消成功");
+        $("#now_num").html(parseInt($("#now_num").html()) - 1);
+        $("#quit").click(function () { })
+      }
+      else {
+        $("#quit").html("未能取消");
+      }
+    });
+  }
+</script>

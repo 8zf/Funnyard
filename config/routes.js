@@ -36,9 +36,7 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'get /test': {
-    view: 'test_upload'
-  },
+  'get /test': 'ParticipateController.default',
 
   /********* LOGIN/OUT *********/
   'get /user_login': 'LoginController.userDefault',
@@ -63,6 +61,9 @@ module.exports.routes = {
   /********* ACTIVITY *********/
   'get /publish': 'PublishController.publish',
   'post /publish': 'ActivityController.add',
+  'get /activity/:aid': 'ActivityController.show',
+  'get /participate': 'ParticipateController.participate',
+  'get /quit': 'ParticipateController.quit',
 
   /********* UEditor *********/
   'get /ueditor/qiniu': 'PublishController.getQiniu',

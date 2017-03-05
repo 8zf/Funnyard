@@ -7,8 +7,8 @@
 
 module.exports = {
   tableName: 'User',
-  autoUpdatedAt: false,
-  autoCreatedAt: false,
+  autoUpdatedAt: true,
+  autoCreatedAt: true,
   autoPK: false,
   attributes: {
     UserID: {
@@ -53,6 +53,10 @@ module.exports = {
     },
     Icon: {
       type: 'string'
+    },
+    Participate: {
+      collection: 'activity',
+      via: 'Participant'
     }
   },
   getProfile: function (option, callback) {

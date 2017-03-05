@@ -7,8 +7,8 @@
 
 module.exports = {
   tableName: 'PublisherCode',
-  autoUpdatedAt: false,
-  autoCreatedAt: false,
+  autoUpdatedAt: true,
+  autoCreatedAt: true,
   autoPK: false,
   attributes: {
     Code: {

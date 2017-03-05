@@ -19,7 +19,6 @@ module.exports = {
     },
     Theme: {
       type: 'string',
-      size: 120
     },
     LocationLng: {
       type: 'float'
@@ -37,14 +36,19 @@ module.exports = {
     EndTime: {
       type: 'datetime'
     },
-    HoldTimeStamp: {
-      type: 'integer'
-    },
-    EndTimeStamp: {
-      type: 'integer'
-    },
+    // HoldTimeStamp: {
+    //   type: 'integer'
+    // },
+    // EndTimeStamp: {
+    //   type: 'integer'
+    // },
     MaxNum: {
       type: 'integer'
+    },
+    NowNum: {
+      type: 'integer',
+      type: 'integer',
+      defaultsTo: 0
     },
     PublishTime: {
       type: 'datetime'
@@ -53,8 +57,9 @@ module.exports = {
       type: 'string',
       size: 50
     },
-    Description: {
-      type: 'string'
+    Content: {
+      type: 'string',
+      size: 100000
     },
     PublisherID: {
       type: 'string'
@@ -63,18 +68,15 @@ module.exports = {
       type: 'string',
       size: 20
     },
-    Pubgroup: {
+    PubGroup: {
       type: 'string',
       size: 120
     },
-    Acnow: {
+    State: {
       type: 'string',
       size: 20
     },
-    NowNum: {
-      type: 'integer'
-    },
-    Applyway: {
+    ApplyWay: {
       type: 'string',
       size: 20
     },
@@ -82,9 +84,13 @@ module.exports = {
       type: 'string',
       size: 120
     },
-    Applyfile: {
+    ApplyFile: {
       type: 'string',
       size: 6
+    },
+    Participant: {
+      collection: 'User',
+      via: 'Participate'
     }
   }
 };

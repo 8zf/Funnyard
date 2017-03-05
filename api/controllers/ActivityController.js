@@ -29,15 +29,11 @@ module.exports = {
       PublisherID: req.session.info.PublisherID,
       HoldTime: req.param('hold_date') + " " + req.param('hold_time'),
       EndTime: req.param('end_date') + " " + req.param('end_time'),
-      // Hold_date: req.param('hold_date'),
-      // Hold_time: req.param('hold_time'),
-      // End_date: req.param('end_date'),
-      // End_time: req.param('end_time'),
-      Keyword: req.param('keyword'),
-      Maxnum: req.param('maxnum'),
+      Keywords: req.param('keyword'),
+      MaxNum: req.param('maxnum'),
       Location: req.param('location'),
-      Locationlng: req.param('locationlng'),
-      Locationlat: req.param('locationlat'),
+      LocationLng: req.param('locationlng'),
+      LocationLat: req.param('locationlat'),
       Content: req.param('content')
     };
     console.log(new_record);
@@ -49,6 +45,17 @@ module.exports = {
         return res.send(err);
       }
       return res.send(record);
+    });
+  },
+
+  show: function (req, res) {
+    Activity.findOne({ActivityID: req.param('aid')}).exec(function (err, record) {
+      if (err) {
+        return res.send(err);
+      }
+      return res.view('activity/activity', {
+        activity: record
+      });
     });
   }
 };
