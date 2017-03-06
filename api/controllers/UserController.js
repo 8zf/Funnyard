@@ -1,5 +1,6 @@
 const path = require('path');
 const uuidV4 = require('uuid/v4');
+const qiniu = require('qiniu');
 
 module.exports = {
 
@@ -54,6 +55,8 @@ module.exports = {
       }
     });
   }
+
+
 
   // getProfile: function (req, res) {
   //

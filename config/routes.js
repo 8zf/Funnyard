@@ -36,7 +36,9 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'get /test': 'ParticipateController.default',
+  'get /test': {
+    view: 'test_upload'
+  },
 
   /********* LOGIN/OUT *********/
   'get /user_login': 'LoginController.userDefault',
@@ -68,6 +70,9 @@ module.exports.routes = {
   /********* UEditor *********/
   'get /ueditor/qiniu': 'PublishController.getQiniu',
   'post /ueditor/qiniu': 'PublishController.postQiniu',
+
+  /********* FILE_TO_QINIU *********/
+  'post /file': 'FileController.default',
 
   /********* TEST *********/
   'post /test': 'HomeController.testUpload'
