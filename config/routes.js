@@ -72,7 +72,7 @@ module.exports.routes = {
   'post /ueditor/qiniu': 'PublishController.postQiniu',
 
   /********* FILE_TO_QINIU *********/
-  'post /file': 'FileController.default',
+  'post /upload_icon': 'FileController.uploadIcon',
 
   /********* TEST *********/
   'post /test': 'HomeController.testUpload'

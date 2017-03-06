@@ -43,6 +43,9 @@ module.exports.policies = {
   },
   ParticipateController: {
     '*': ['isUser']
+  },
+  FileController: {
+    'uploadIcon': ['sessionAuth']
   }
 	// RabbitController: {
 

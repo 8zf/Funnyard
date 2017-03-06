@@ -32,7 +32,11 @@ function uploadFile(uptoken, key, localFile, callback) {
 }
 
 module.exports = {
-  default: function (req, res) {
+  uploadIcon: function (req, res) {
+    var width = req.param("width");
+    var height = req.param("height");
+    var x_offset = req.param("x-offset");
+    var y_offset = req.param("y-offset");
     req.file('icon').upload({dirname: filedir, saveAs: key}, function (err, uploadedFiles) {
       console.log(uploadedFiles[0].filename);
       // return res.send("see..");
@@ -40,7 +44,24 @@ module.exports = {
       uploadFile(token, key, path.join(filedir, key), function (err, ret) {
         if(!err) {
           // 上传成功， 处理返回值
-          console.log(ret.hash, ret.key, ret.persistentId);
+          console.log("上传成功");
+          console.log(ret);
+          var role = (req.session.role == 'user' ? User: Publisher);
+          role.findOne(req.session.userid).exec(function (err, record) {
+            if (err) {
+              console.log(err);
+              return res.send(err);
+            }
+            record.Icon = 'image.funnyard.com/' + ret.key + '?imageMogr2/crop/!' + width + 'x' + height + 'a' + x_offset + 'a' + y_offset;
+            record.save(function (err) {
+              if (err)
+              {
+                console.log(err);
+                return res.send(err);
+              }
+              return res.send("头像修改成功");
+            });
+          });
           return res.send("上传成功");
         } else {
           // 上传失败， 处理返回代码
