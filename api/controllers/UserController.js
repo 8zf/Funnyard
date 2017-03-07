@@ -26,6 +26,9 @@ module.exports = {
       // console.log(req.param('verify_code'));
       // console.log(new Date().getTime());
       // console.log(parseInt(record[0].ExpireAt));
+      if (record.length == 0) {
+        return res.send("验证码未发送");
+      }
       if (record[0].VerifyCode == req.param('verify_code') && (new Date().getTime()) < parseInt(record[0].ExpireAt)) {
         //verified successfully
         var new_record = {
@@ -38,6 +41,7 @@ module.exports = {
           Nickname: req.param('userid'),
           RegTime: new Date().toLocaleString()
         };
+        console.log("new user");
         console.log(new_record);
         User.create(new_record).exec(function (err, record) {
           if (err) {
@@ -54,6 +58,10 @@ module.exports = {
         return res.send("验证码错误或已失效");
       }
     });
+  },
+  
+  update: function (req, res) {
+    
   }
 
 

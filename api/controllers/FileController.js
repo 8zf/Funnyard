@@ -33,6 +33,7 @@ function uploadFile(uptoken, key, localFile, callback) {
 
 module.exports = {
   uploadIcon: function (req, res) {
+    //截取头像的属性值
     var width = req.param("width");
     var height = req.param("height");
     var x_offset = req.param("x-offset");
