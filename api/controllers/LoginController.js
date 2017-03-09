@@ -34,6 +34,7 @@ module.exports = {
         req.session.authenticated = true;
         req.session.userid = result[0].UserID;
         req.session.role = "user";
+        req.session.name = result[0].Name;
         // console.log(req.session.authenticated);
         return res.redirect('/');
       }

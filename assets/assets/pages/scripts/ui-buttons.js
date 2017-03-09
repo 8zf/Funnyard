@@ -24,7 +24,7 @@ var UIButtons = function () {
                     }, 200 );
                 }
             } );
-    }
+    };
 
     return {
         //main function to initiate the module

@@ -1,6 +1,6 @@
 <script type="text/javascript" src="http://api.tianditu.com/js/maps.js"></script>
 <script type="text/javascript">
-  var map,zoom = 16;
+  var map, zoom = 16;
   var customerWinInfo;
   var lng = new Array();
   var lat = new Array();
@@ -8,22 +8,21 @@
   var marker = new Array();
   var result;
 
-  function onLoad()
-  {
+  function onLoad() {
     //初始化地图对象
-    map=new TMap("mapDiv");
+    map = new TMap("mapDiv");
     //设置显示地图的中心点和级别
-    map.centerAndZoom(new TLngLat(121.49722, 31.28532),zoom);
+    map.centerAndZoom(new TLngLat(121.49722, 31.28532), zoom);
     //允许鼠标双击放大地图
     map.enableHandleMouseScroll();
     var config_scale = {
-      type:"TMAP_NAVIGATION_CONTROL_LARGE",	//缩放平移的显示类型
-      anchor:"TMAP_ANCHOR_TOP_LEFT",			//缩放平移控件显示的位置
-      offset:[0,0],							//缩放平移控件的偏移值
-      showZoomInfo:true						//是否显示级别提示信息，true表示显示，false表示隐藏。
+      type: "TMAP_NAVIGATION_CONTROL_LARGE",	//缩放平移的显示类型
+      anchor: "TMAP_ANCHOR_TOP_LEFT",			//缩放平移控件显示的位置
+      offset: [0, 0],							//缩放平移控件的偏移值
+      showZoomInfo: true						//是否显示级别提示信息，true表示显示，false表示隐藏。
     };
     //创建缩放平移控件对象
-    var control=new TNavigationControl(config_scale);
+    var control = new TNavigationControl(config_scale);
     //添加缩放平移控件
     map.addControl(control);
     //创建地图类型控件对象
@@ -42,117 +41,49 @@
     map.addControl(choose_school);
   }
 
-
-//  $.get('/activity',function(data)
-//  {
-//    var obj = jQuery.parseJSON(data);
-//    var i = 1;
-//
-//    while(obj[i] != undefined)
-//    {
-//      var temp = obj[i];
-//      acid[i] = temp['ActivityID'];
-//      lng[i] = temp['ALocationLng'];
-//      lat[i] = temp['ALocationLat'];
-//      if(i <= 4)
-//      {
-//        var onclickbtn = "window.location.href='showactivity.php?id="+acid[i]+"'";
-//        $("#slide_left").after(
-////                        "<div class=\"container table-bordered\" style=\"width: 350px; height: 150px;\">"
-//          "<button class='btn btn-default' onclick="+onclickbtn+" type='button' style=\"width: 350px; height: 150px;\">"
-//
-//          +"<div align='left'>"
-//          +"主题："+"<br/>"
-//          +temp['Theme'].slice(0,25)+"<br/>"
-//          +"举办时间："+"<br/>"
-//          +temp['HoldTime']+"<br/>"
-//          +"活动地点:"+"<br/>"
-//          +temp['Location'].slice(0,25)+"<br/>"
-//          +"</button>");
-//        +"</div>"
-//
-////                        +temp['Description']
-////                        +"</div>");
-//      }
-//
-//      marker[i] = new TMarker(new TLngLat(lng[i], lat[i]));
-//      map.addOverLay(marker[i]);      //添加标记
-//      marker[i].getObject().setAttribute('id', i.toString());
-//
-//      //给每个标记绑定函数
-//      $("#"+i.toString()).on('click', function () {
-//        var id = $(this).attr('id');
-//        //向服务器发送请求
-//        $.post('getactivityinfo.php', {'request': acid[id].toString()}, function (data)
-//        {
-//          result = jQuery.parseJSON(jQuery.parseJSON(data));
-//        });
-//        var qwe = result;
-////                    alert(result[0]['Theme']);
-//        var temp2 = new TMarker(new TLngLat(lng[id], lat[id]));
-//        var infowin =
-//          "<div class='container' id = \""+id.toString()+"_\" style=\"max-width: 200px;\">"
-//          +result[0]['Theme'].slice(0,20)+"...<br/>"
-//          +result[0]['Location'].slice(0,20)+"<br/>"
-//          +result[0]['HoldTime']+"<br/>"
-//          +"<a href=\"showactivity.php?id="+acid[id]+"\">了解更多...</a>"
-//          +"<button class='btn btn-xs' type='button' onclick='$(this).parent().remove()'>关闭</button>"
-//          +"</div>";
-//        var config = {
-//          offset:new TPixel(0,0),
-//          position:new TLngLat(lng[id], lat[id])
-//        };
-//        customerWinInfo=new TLabel(config);
-//        customerWinInfo.setTitle('');
-//        customerWinInfo.setLabel(infowin);
-//        customerWinInfo.getObject().style.zIndex = 10000+id;
-//        map.addOverLay(customerWinInfo);
-//      });
-//
-//      i++;
-//    }
-//  },"json");
-
-
 </script>
 
 <div style="margin: 7px;">
-  <a class="btn btn-default">社团</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-default">学术</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-default">招聘</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-default">活动</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-default">校外</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-default">志愿者</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a class="btn btn-link" href="showactivity.php">活动总览>></a>
+    <a class="btn btn-default">社团</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-default">学术</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-default">招聘</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-default">活动</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-default">校外</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-default">志愿者</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-link" href="showactivity.php">活动总览>></a>
 </div>
 
-<div align="center"><table>
-    <tr>
-      <td><div id="mapDiv" style="width:800px; height:600px; "></div></td>
-      <td><div class="btn-group-vertical" role="group">
-          <div id="slide_left"></div>
-        </div></td>
-    </tr>
-  </table></div>
+<div align="center">
+    <table>
+        <tr>
+            <td>
+                <div id="mapDiv" style="width:800px; height:600px;"></div>
+            </td>
+            <td>
+                <div class="btn-group-vertical" role="group">
+                    <div id="slide_left"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
 
 <div class="container table-bordered" id="choose_school" style="width: auto; background-color: ">
-  <label for="choose_school">定位所在学校</label><br/>
-  <select name="school" id="school">
-    <option value="121.50993,31.30461">复旦大学</option>
-    <option value="121.49667,31.28573">同济大学四平路校区</option>
-    <option value="121.21048,31.28751">同济大学嘉定校区</option>
-    <option value="121.43212,31.02775">上海交通大学闵行校区</option>
-    <option value="121.42814,31.20073">上海交通大学徐汇校区</option>
-    <option value="121.38817,31.31815">上海大学宝山校区</option>
-    <!--        <option value=""></option>-->
-    <!--        <option value=""></option>-->
-    <!--        <option value=""></option>-->
-    <!--        <option value=""></option>-->
-    <!--        <option value=""></option>-->
-    <!--        <option value=""></option>-->
-    <!--        <option value=""></option>-->
-
-  </select><br/>
-  <button type="button" class="btn btn-xs" onclick="var loc = new TLngLat(document.getElementById('school').value.slice(0,8), document.getElementById('school').value.slice(10,18));map.panTo(loc);">确定</button>
-
+    <label for="choose_school">定位所在学校</label><br/>
+    <select name="school" id="school">
+        <option value="121.50993,31.30461">复旦大学</option>
+        <option value="121.49667,31.28573">同济大学四平路校区</option>
+        <option value="121.21048,31.28751">同济大学嘉定校区</option>
+        <option value="121.43212,31.02775">上海交通大学闵行校区</option>
+        <option value="121.42814,31.20073">上海交通大学徐汇校区</option>
+        <option value="121.38817,31.31815">上海大学宝山校区</option>
+        <!--        <option value=""></option>-->
+    </select><br/>
+    <button type="button" class="btn btn-xs"
+            onclick="var loc = new TLngLat(document.getElementById('school').value.slice(0,8), document.getElementById('school').value.slice(10,18));map.panTo(loc);">
+        确定
+    </button>
 </div>
+<script>
+    onLoad();
+</script>

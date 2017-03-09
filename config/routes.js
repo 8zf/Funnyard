@@ -37,7 +37,14 @@ module.exports.routes = {
   },
 
   'get /test': {
-    view: 'test_upload'
+    view: 'new/content',
+  },
+
+  'get /test_login' : {
+    view: 'new/login',
+    locals: {
+      layout: false
+    }
   },
 
   /********* LOGIN/OUT *********/

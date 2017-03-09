@@ -13,6 +13,9 @@ module.exports = {
   },
   sendSMS: function (req, res) {
     var rec_num = parseInt(req.param("phone_num"));
+    if (rec_num == "") {
+      return res.send("号码为空");
+    }
     var verify_code = Math.random().toString().substring(2, 8);
     var type = req.param("type");
     var target = {};
