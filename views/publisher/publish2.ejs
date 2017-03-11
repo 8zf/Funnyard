@@ -1,0 +1,119 @@
+<script type="text/javascript" src="http://api.tianditu.com/js/maps.js"></script>
+<script type="text/javascript" src="ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="ueditor/ueditor.all.js"></script>
+<script type="text/javascript"></script>
+<script type="text/javascript">
+  var map, zoom = 16, isexit = false;
+  function onLoad() {
+    //初始化地图对象
+    map = new TMap("mapDiv");
+    //设置显示地图的中心点和级别
+    map.centerAndZoom(new TLngLat(121.4986695687, 31.2801283584), zoom);
+    //允许鼠标双击放大地图
+    map.enableHandleMouseScroll();
+
+    //创建标注工具对象
+    markerTool = new TMarkTool(map);
+    //注册标注的mouseup事件
+    TEvent.addListener(markerTool, "mouseup", mouseup);
+  }
+
+  //鼠标在地图上按下左键时添加一个点标记
+  function mouseup(point) {
+    if (isexit == false) {
+      marker = new TMarker(point);
+      map.addOverLay(marker);
+//                alert(point.getLng() + ', ' + point.getLat());
+      markerTool.close();
+      marker.enableEdit();
+      isexit = true;
+      var location = marker.getLngLat();
+//      document.getElementById('content').value = content_;
+      document.getElementById('locationlng').value = location.getLng();
+      document.getElementById('locationlat').value = location.getLat();
+    }
+    else {
+    }
+  }
+</script>
+<script type="text/javascript" src="js/publish.js"></script>
+
+<body onload="onLoad()">
+
+<form class="form-inline" id="activity_info" name="activity_info" action="/publish" method="post">
+    <div class="form-group">
+        <label for="theme">活动主题</label>
+        <input id="theme" name="theme" class="form-control" type="text">
+    </div>
+    <br/>
+
+    <!--<div class="form-group">-->
+    <!--<label for="department">部门名称(不需要)</label>-->
+    <!--<input id="department" name="department" class="form-control" type="text">-->
+    <!--</div>-->
+    <!--<br/>-->
+
+    <div class="form-group">
+        <label for="hold_time">举办时间</label>
+        <input id="hold_date" name="hold_date" class="form-control" type="date">
+        <input id="hold_time" name="hold_time" class="form-control" type="time">
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <label for="hold_dateend_time">结束时间</label>
+        <input id="end_date" name="end_date" class="form-control" type="date">
+        <input id="end_time" name="end_time" class="form-control" type="time">
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <label for="keyword">关键字&nbsp;&nbsp;&nbsp;</label>
+        <input id="keyword" name="keyword" class="form-control" type="text">
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <label for="maxnum">活动人数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input id="maxnum" name="maxnum" class="form-control" type="number" min="2">
+    </div>
+    <br/>
+
+    <div class="form-group">
+        <label for="location">描述地点</label>
+        <input id="location" name="location" class="form-control" type="text">
+    </div>
+    <br/>
+    <p>
+        在下面的地图上标注出地点,可拖拽调整。
+        <button class="btn btn-default" type="button" onclick="markerTool.open();">标注</button>
+    </p>
+    <input type="" name="locationlng" id="locationlng">
+    <input type="" name="locationlat" id="locationlat">
+    <div id="mapDiv" style="width:400px; height:300px; border:1px solid #000;"></div>
+
+    <!--    <div >-->
+    <!--        <input type="button" value="开 启" onClick="markerTool.open();"/>-->
+    <!--        <input type="button" value="关 闭" onClick="markerTool.close();"/>-->
+    <!--        <input type="button" value="编 辑" onClick="editMarker();"/>-->
+    <!---->
+    <!--    </div>-->
+
+    <input type="hidden" name="content" value="" id="content">
+
+    <div id="container" style="width: 800px; height: 600px;">
+
+    </div>
+
+    <button class="btn btn-default" type="button" onclick="check_data()">
+        提交
+    </button>
+
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+      var ue = UE.getEditor('container', {});
+    </script>
+</form>
+<br/><br/><br/><br/><br/><br/>
+
+</body>
