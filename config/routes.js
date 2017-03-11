@@ -48,23 +48,25 @@ module.exports.routes = {
   },
 
   /********* LOGIN/OUT *********/
-  'get /user_login': 'LoginController.userDefault',
+  'get /login': 'LoginController.default',
+  // 'get /user_login': 'LoginController.userDefault',
   'post /user_login': 'LoginController.validateUser',
 
-  'get /publisher_login': 'LoginController.publisherDefault',
+  // 'get /publisher_login': 'LoginController.publisherDefault',
   'post /publisher_login': 'LoginController.validatePublisher',
 
   'get /logout': 'LoginController.logout',
 
   /********* REGISTER *********/
+  // 'get /register': 'RegisterController.default',
   'get /register': 'RegisterController.default',
 
   'get /sendSMS': 'RegisterController.sendSMS',
 
-  'get /register_user': 'UserController.register',
+  // 'get /register_user': 'UserController.register',
   'post /register_user': 'UserController.add',
 
-  'get /register_publisher': 'PublisherController.register',
+  // 'get /register_publisher': 'PublisherController.register',
   'post /register_publisher': 'PublisherController.add',
 
   /********* ACTIVITY *********/
@@ -73,6 +75,10 @@ module.exports.routes = {
   'get /activity/:aid': 'ActivityController.show',
   'get /participate': 'ParticipateController.participate',
   'get /quit': 'ParticipateController.quit',
+
+  /********* SPACE/CONSOLE *********/
+  'get /space': 'UserController.',
+  'get /console': 'UserController',
 
   /********* UEditor *********/
   'get /ueditor/qiniu': 'PublishController.getQiniu',

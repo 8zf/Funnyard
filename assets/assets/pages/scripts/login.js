@@ -36,7 +36,7 @@ jQuery.validator.addMethod("isPassword", function (value, element, param) {
 
 jQuery.validator.addMethod("isPublisherCode", function (value, element, param) {
   // var length = value.length;
-  var ver = /^[a-zA-Z0-9-]$/;
+  var ver = /^[a-zA-Z0-9,-]{10,100}$/;
   // if (length >18 || length < 6) {
   //   return false;
   // }
@@ -173,33 +173,6 @@ var Login = function () {
 
   var handleRegisterUser = function () {
 
-    // function format(state) {
-    //   if (!state.id) {
-    //     return state.text;
-    //   }
-    //   var $state = $(
-    //     '<span><img src="../assets/global/img/flags/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
-    //   );
-    //
-    //   return $state;
-    // }
-    // if (jQuery().select2 && $('#country_list').size() > 0) {
-    //   $("#country_list").select2({
-    //     placeholder: '<i class="fa fa-map-marker"></i>&nbsp;Select a Country',
-    //     templateResult: format,
-    //     templateSelection: format,
-    //     width: 'auto',
-    //     escapeMarkup: function (m) {
-    //       return m;
-    //     }
-    //   });
-    //
-    //
-    //   $('#country_list').change(function () {
-    //     $('.register-form').validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
-    //   });
-    // }
-
     $('.register-user-form').validate({
       errorElement: 'span', //default input error message container
       errorClass: 'help-block', // default input error message class
@@ -278,6 +251,7 @@ var Login = function () {
   };
 
   var handleRegisterPublisher = function () {
+
     $('.register-publisher-form').validate({
       errorElement: 'span', //default input error message container
       errorClass: 'help-block', // default input error message class
@@ -297,7 +271,7 @@ var Login = function () {
           isPassword: true
         },
         repassword: {
-          equalTo: "#register_user_password"
+          equalTo: "#register_publisher_password"
         },
         phone_num: {
           number: true,
@@ -406,18 +380,31 @@ var options = {
   "hideMethod": "fadeOut"
 };
 
+jQuery('.register-user-form').hide();
+jQuery('.register-publisher-form').hide();
+
 jQuery(document).ready(function () {
   Login.init();
-  jQuery('.register-user-form').hide();
-  jQuery('.register-publisher-form').hide();
-
-
   // $('.verify-user-btn').click(handleSendSMS(e, "user"));
   $('.verify-user-btn').click(function (e) {
     handleSendSMS(e, this, "user");
   });
   $('.verify-publisher-btn').click(function (e) {
     handleSendSMS(e, this, "publisher");
+  });
+  $('#change-role').click(function (e) {
+    e.preventDefault();
+    //修改action，切换标语，按钮颜色
+    if ($(".login-form").attr("action") == '/user_login') {
+      $(".login-form").attr("action", "/publisher_login");
+      this.innerHTML = "用户登陆";
+      $("#login-btn").removeClass("red").addClass("purple");
+    }
+    else  {
+      $(".login-form").attr("action", "/user_login");
+      this.innerHTML = "发布者登陆";
+      $("#login-btn").removeClass("purple").addClass("red");
+    }
   });
   // $('.verify-publisher-btn').click(handleSendSMS(e, "publisher"));
 });

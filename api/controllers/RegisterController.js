@@ -3,8 +3,9 @@ const uuidV4 = require('uuid/v4');
 module.exports = {
 
   default: function (req, res) {
-    res.view('register/register', {
-      title: "加入趣往"
+    res.view('login', {
+      title: "加入趣往",
+      layout: false
     });
   },
 

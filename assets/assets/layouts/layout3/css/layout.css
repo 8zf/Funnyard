@@ -1665,7 +1665,7 @@ Theme Panel
 }
 
 .page-quick-sidebar-open .page-quick-sidebar-toggler > i:before {
-    content: "" /*rtl:""*/;
+    /*content: "" !*rtl:""*!;*/
 }
 
 /* Quick sidebar wrapper */

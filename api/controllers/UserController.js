@@ -5,8 +5,9 @@ const qiniu = require('qiniu');
 module.exports = {
 
   register: function (req, res) {
-    res.view('register/register_user', {
-      title: "成为用户"
+    res.view('login', {
+      title: "成为用户",
+      layout: false
     });
   },
 
@@ -50,7 +51,7 @@ module.exports = {
           }
           console.log('new record created: ');
           // console.log(record);
-          return res.redirect("/user_login");
+          return res.redirect("/login");
           // return res.send('add user successfully' + JSON.stringify(record));
         });
       }

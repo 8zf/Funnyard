@@ -15,8 +15,9 @@ const uuidV4 = require('uuid/V4');
 module.exports = {
 
   register: function (req, res) {
-    res.view('register/register_publisher', {
-      title: "成为发布者"
+    res.view('login', {
+      title: "成为发布者",
+      layout: false
     });
   },
 
@@ -92,7 +93,7 @@ module.exports = {
                   });
                 }
                 //注册成功，重定向
-                return res.redirect('/publisher_login');
+                return res.redirect('/login');
               });
             });
           }

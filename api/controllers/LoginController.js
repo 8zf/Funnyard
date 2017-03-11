@@ -6,15 +6,25 @@
  */
 
 module.exports = {
+
+  default: function (req, res) {
+    res.view("login", {
+      title: "登录趣往",
+      layout: false
+    });
+  },
+
   userDefault: function (req, res) {
-    res.view("user_login", {
-      title: "登录趣往"
+    res.view("login", {
+      title: "登录趣往",
+      layout: false
     });
   },
 
   publisherDefault: function (req, res) {
-    res.view("publisher_login", {
-      title: "登录趣往"
+    res.view("login", {
+      title: "登录趣往",
+      layout: false
     });
   },
 
