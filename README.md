@@ -26,7 +26,7 @@ ToDoList:
 >参与活动 ajax API ~get<br>
 >get /participate aid<br>
 >get /quit aid<br>
->七牛图片裁剪api：<imageurl>?imageMogr2/crop/!<width>x<height>a<x-offset>a<y-offset>，左上角为原点，通过cropper获取截图信息<br>
+>七牛图片裁剪api：\<imageurl>?imageMogr2/crop/!\<width>x\<height>a\<x-offset>a\<y-offset>，左上角为原点，通过cropper获取截图信息<br>
 >活动评论 ？？？<br>
 >天地图开发<br>
 >弹窗插件 ~get<br>
