@@ -55,8 +55,12 @@ module.exports = {
       type: 'string'
     },
     Participate: {
-      collection: 'activity',
+      collection: 'Activity',
       via: 'Participant'
+    },
+    Like: {
+      collection: 'Publisher',
+      via: 'Follower'
     }
   },
   getProfile: function (option, callback) {

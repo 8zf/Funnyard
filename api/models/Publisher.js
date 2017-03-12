@@ -56,6 +56,10 @@ module.exports = {
     },
     Description: {
       type: 'string'
+    },
+    Follower: {
+      collection: 'User',
+      via: 'Like'
     }
   },
   

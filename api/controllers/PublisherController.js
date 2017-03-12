@@ -10,7 +10,7 @@ const path = require('path');
 // const ueditor_options = ueditorQiniuConfigService.options;
 const randomstring = require("randomstring");
 const moment = require('moment');
-const uuidV4 = require('uuid/V4');
+const uuidV4 = require('uuid/v4');
 
 module.exports = {
 
