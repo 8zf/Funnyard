@@ -21,6 +21,10 @@ module.exports = {
     });
   },
 
+  toConsole: function (req, res) {
+    return res.view("personal/content", {layout: "personal/layout"});
+  },
+
   add: function (req, res) {
     var publisher_code = req.param('publisher_code');
     var userid = req.param('userid');

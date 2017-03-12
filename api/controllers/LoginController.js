@@ -41,10 +41,15 @@ module.exports = {
       if (result[0].PassWd == EncryptionService.genSHA1(req.param("PassWd")))
       {
         //authenticated
+        if (!req.session) {
+          return res.serverError('会话数据库错误');
+        }
         req.session.authenticated = true;
         req.session.userid = result[0].UserID;
         req.session.role = "user";
         req.session.name = result[0].Name;
+        req.session.icon = result[0].Icon;
+        console.log(req.session.icon);
         // console.log(req.session.authenticated);
         return res.redirect('/');
       }

@@ -11,6 +11,10 @@ module.exports = {
     });
   },
 
+  toSpace: function (req, res) {
+    return res.view("personal/content", {layout: "personal/layout"});
+  },
+
   add: function (req, res) {
     //检测验证码是否存在，有则替换，无则创建
     //检测验证码是否正确

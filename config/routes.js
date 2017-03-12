@@ -40,12 +40,14 @@ module.exports.routes = {
     view: 'new/content',
   },
 
-  'get /test_login' : {
-    view: 'new/login',
-    locals: {
-      layout: false
-    }
-  },
+  'post /upload': 'TestController.upload',
+
+  // 'get /test_login' : {
+  //   view: 'new/login',
+  //   locals: {
+  //     layout: false
+  //   }
+  // },
 
   /********* LOGIN/OUT *********/
   'get /login': 'LoginController.default',
@@ -77,8 +79,8 @@ module.exports.routes = {
   'get /quit': 'ParticipateController.quit',
 
   /********* SPACE/CONSOLE *********/
-  'get /space': 'UserController.',
-  'get /console': 'UserController',
+  'get /space': 'UserController.toSpace',
+  'get /console': 'PublisherController.toConsole',
 
   /********* UEditor *********/
   'get /ueditor/qiniu': 'PublishController.getQiniu',
