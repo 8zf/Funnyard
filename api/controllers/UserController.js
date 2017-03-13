@@ -12,7 +12,8 @@ module.exports = {
   },
 
   toSpace: function (req, res) {
-    return res.view("personal/content", {layout: "personal/layout"});
+    // User.findOne({}).exec();
+    return res.view("space");
   },
 
   add: function (req, res) {

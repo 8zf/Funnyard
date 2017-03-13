@@ -36,8 +36,8 @@
     this.$avatarPreview = this.$avatarModal.find('.avatar-preview');
     this.url = this.$avatar.attr('src');
     this.url = this.url.substring(0, (this.url.indexOf('?') === -1 ? this.url.length : this.url.indexOf('?')));
-    console.log("init url");
-    console.log(this.url);
+    // console.log("init url");
+    // console.log(this.url);
     this.$avatarSrc.val(this.url);
     this.init();
   }
@@ -83,8 +83,10 @@
 
     initPreview: function () {
       var url = this.$avatar.attr('src');
-      console.log("avatar source: " + url);
-      this.$avatarPreview.empty().html('<img src="' + url + '">');
+      // console.log("avatar source: " + url);
+      this.$avatarPreview.empty().html('<img src="' + url.substring(0, (url.indexOf('?') === -1 ? url.length : url.indexOf('?'))) + '">');
+      // console.log("src in preview");
+      // console.log(this.$avatarPreview.html());
       this.startCropper();
     },
 
@@ -202,7 +204,7 @@
         this.$img.cropper('replace', this.url);
       } else {
         console.log(" not active");
-        console.log(this.$avatarPreview.selector);
+        // console.log(this.$avatarPreview.selector);
         this.$img = $('<img src="' + this.url + '">');
         this.$avatarWrapper.empty().html(this.$img);
         this.$img.cropper({
@@ -238,7 +240,13 @@
       var url = this.$avatarForm.attr('action'),
         data = new FormData(this.$avatarForm[0]),
         _this = this;
-
+      if (!this.$avatarInput.val()) {
+        data.delete('avatar_file');
+        data.append('have_file', 'false');
+      }
+      else {
+        data.append('have_file', 'true');
+      }
       $.ajax(url, {
         headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         type: 'post',

@@ -48,6 +48,7 @@ module.exports = {
         req.session.userid = result[0].UserID;
         req.session.role = "user";
         req.session.name = result[0].Name;
+        req.session.nickname = result[0].Nickname;
         req.session.icon = result[0].Icon;
         console.log(req.session.icon);
         // console.log(req.session.authenticated);
@@ -60,6 +61,7 @@ module.exports = {
   },
 
   validatePublisher: function (req, res) {
+    console.log('validate publisher');
     Publisher.find({or: [{Nickname: req.param('Name')}, {PhoneNum: req.param('Name')}]}).exec(function (err, result) {
       if (err) {
         return res.view('wrong', {message: "error occured: " + err});
@@ -74,6 +76,8 @@ module.exports = {
         req.session.authenticated = true;
         req.session.userid = result[0].PublisherID;
         req.session.role = "publisher";
+        req.session.department = result[0].Department;
+        req.session.nickname = result[0].Nickname;
         req.session.info = result[0];
         // console.log(req.session.authenticated);
         return res.redirect('/');
@@ -85,8 +89,7 @@ module.exports = {
   },
 
   logout: function (req, res) {
-    req.session.authenticated = false;
-    req.session.userid = '';
+    req.session = null;
     return res.redirect('/login');
   },
 

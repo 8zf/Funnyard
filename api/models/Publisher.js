@@ -59,7 +59,7 @@ module.exports = {
     },
     Follower: {
       collection: 'User',
-      via: 'Like'
+      via: 'Follow'
     }
   },
   

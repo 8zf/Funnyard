@@ -46,6 +46,12 @@ module.exports.policies = {
   },
   FileController: {
     'uploadIcon': ['sessionAuth']
+  },
+  UserController: {
+    '*': ['isUser']
+  },
+  CommentController: {
+    '*': ['sessionAuth']
   }
 	// RabbitController: {
 

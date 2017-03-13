@@ -91,6 +91,10 @@ module.exports = {
     Participant: {
       collection: 'User',
       via: 'Participate'
+    },
+    Features: {
+      collection: 'Keyword',
+      via: 'IsOwnedBy'
     }
   }
 };

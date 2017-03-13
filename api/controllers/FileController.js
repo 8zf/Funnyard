@@ -51,9 +51,11 @@ module.exports = {
 
     //用户还是发布者
     var role = (req.session.role == 'user' ? User: Publisher);
-    console.log('avatar_file: ');
-    console.log(req.file('avatar_file'));
-    if (req.file('avatar_file').isNoop != true) {
+    // console.log('avatar_file: ');
+    // console.log(req.file('avatar_file'));
+    // console.log(req.param('avatar_file'));
+    console.log(req.param('have_file'));
+    if (req.param('have_file') == false) {
       req.file('avatar_file').upload({dirname: filedir, saveAs: key}, function (err, uploadedFiles) {
         if (err) {
           return res.serverError(err);

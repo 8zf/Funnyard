@@ -19,7 +19,7 @@
                     <div class="top-menu">
                         <ul class="nav navbar-nav pull-right">
 
-                            <% if (req.session && req.session.userid && req.session.authenticated) { %>
+                            <% if (req.session && req.session.userid) { %>
 
                             <!-- BEGIN NOTIFICATION DROPDOWN -->
                             <!-- DOC: Apply "dropdown-hoverable" class after "dropdown" and remove data-toggle="dropdown" data-hover="dropdown" data-close-others="true" attributes to enable hover dropdown mode -->
@@ -351,11 +351,7 @@
                             <li class="dropdown dropdown-user dropdown-dark">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
                                    data-hover="dropdown" data-close-others="true">
-                                    <% if (req.session.icon != '') { %>
                                     <img alt="icon" class="img-circle" src="<%= req.session.icon %>">
-                                    <% } else { %>
-                                    <img alt="icon" class="img-circle" src="http://image.funnyard.com/default-icon.jpg">
-                                    <% } %>
                                     <span class="username username-hide-mobile"><%= req.session.nickname %></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
@@ -363,6 +359,27 @@
                                         <a href="/space">
                                             <i class="icon-user"></i> 个人信息 </a>
                                     </li>
+                                    <!--<li>-->
+                                        <!--<a href="app_calendar.html">-->
+                                            <!--<i class="icon-calendar"></i> My Calendar </a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="app_inbox.html">-->
+                                            <!--<i class="icon-envelope-open"></i> My Inbox-->
+                                            <!--<span class="badge badge-danger"> 3 </span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                    <!--<li>-->
+                                        <!--<a href="app_todo_2.html">-->
+                                            <!--<i class="icon-rocket"></i> My Tasks-->
+                                            <!--<span class="badge badge-success"> 7 </span>-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                    <li class="divider"></li>
+                                    <!--<li>-->
+                                        <!--<a href="page_user_lock_1.html">-->
+                                            <!--<i class="icon-lock"></i> Lock Screen </a>-->
+                                    <!--</li>-->
                                     <li>
                                         <a href="/logout">
                                             <i class="icon-key"></i> 退出登录 </a>
@@ -377,8 +394,7 @@
                             <!-- BEGIN QUICK SIDEBAR TOGGLER -->
                             <li class="quick-sidebar-toggler">
                                 <span class="sr-only">Toggle Quick Sidebar</span>
-                                <i class="icon-login" onclick="window.location = '/login'"></i><i
-                                        onclick="window.location = '/login'">登录趣往</i>
+                                <i class="icon-login" onclick="window.location = '/login'"></i><i onclick="window.location = '/login'">Login</i>
                             </li>
                             <!-- END QUICK SIDEBAR TOGGLER -->
 
@@ -415,7 +431,6 @@
                     <!-- DOC: Remove data-hover="dropdown" and data-close-others="true" attributes below to disable the dropdown opening on mouse hover -->
                     <div class="hor-menu  ">
                         <ul class="nav navbar-nav">
-                            <!--主页-->
                             <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
                                 <a href="javascript:;"> Dashboard
                                     <span class="arrow"></span>

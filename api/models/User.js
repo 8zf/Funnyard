@@ -58,10 +58,14 @@ module.exports = {
       collection: 'Activity',
       via: 'Participant'
     },
-    Like: {
+    Follow: {
       collection: 'Publisher',
       via: 'Follower'
-    }
+    },
+    Like: {
+      collection: 'User',
+      via: 'Like'
+    },
   },
   getProfile: function (option, callback) {
 

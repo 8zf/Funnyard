@@ -1,30 +1,31 @@
 /**
- * Keyword.js
+ * Comment.js
  *
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
 module.exports = {
-  tableName: 'Keyword',
-  autoUpdatedAt: true,
+  autoPK: true,
   autoCreatedAt: true,
-  autoPK: false,
+  autoUpdatedAt: true,
   attributes: {
-    ID: {
-      type: 'integer',
-      primaryKey: true,
-      required: true,
-      unique: true
-    },
-    Name: {
+    ActivityID: {
       type: 'string'
     },
-    IsOwnedBy: {
-      collection: 'Activity',
-      via: 'Features'
+    Type: {
+      // to_activity & to_user & to_publisher
+      type: 'string'
+    },
+    FromID: {
+      type: 'string'
+    },
+    ToID: {
+      type: 'string'
+    },
+    Content: {
+      type: 'string'
     }
   }
-
 };
 
