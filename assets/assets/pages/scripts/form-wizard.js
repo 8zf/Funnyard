@@ -114,14 +114,15 @@ var FormWizard = function () {
               .addClass('valid') // mark the current input as valid and display OK icon
               .closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
           }
-        },
-
-        submitHandler: function (form) {
-          success.show();
-          error.hide();
-          form[0].submit();
-          //add here some ajax code to submit your form or just call form.submit() if you want to submit the form without ajax
         }
+
+        // submitHandler: function (form) {
+        //   console.log("submit handler emitted");
+        //   success.show();
+        //   error.hide();
+        //   form.submit();
+        //   //add here some ajax code to submit your form or just call form.submit() if you want to submit the form without ajax
+        // }
 
       });
 
@@ -218,9 +219,9 @@ var FormWizard = function () {
       });
 
       $('#form_wizard_1').find('.button-previous').hide();
-      $('#form_wizard_1 .button-submit').click(function () {
-        $('#form_wizard_1').submit(alert("活动已提交"));
-      }).hide();
+      // $('#form_wizard_1 .button-submit').click(function () {
+      //   $('#form_wizard_1').submit(console.log("活动已提交"));
+      // }).hide();
 
       //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
       $('#country_list', form).change(function () {

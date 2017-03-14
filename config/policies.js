@@ -48,7 +48,7 @@ module.exports.policies = {
     'uploadIcon': ['sessionAuth']
   },
   UserController: {
-    '*': ['isUser']
+    'toSpace': ['isUser']
   },
   CommentController: {
     '*': ['sessionAuth']

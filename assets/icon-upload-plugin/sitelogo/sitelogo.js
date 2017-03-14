@@ -36,8 +36,8 @@
     this.$avatarPreview = this.$avatarModal.find('.avatar-preview');
     this.url = this.$avatar.attr('src');
     this.url = this.url.substring(0, (this.url.indexOf('?') === -1 ? this.url.length : this.url.indexOf('?')));
-    // console.log("init url");
-    // console.log(this.url);
+    console.log("init url");
+    console.log(this.url);
     this.$avatarSrc.val(this.url);
     this.init();
   }
@@ -83,10 +83,8 @@
 
     initPreview: function () {
       var url = this.$avatar.attr('src');
-      // console.log("avatar source: " + url);
-      this.$avatarPreview.empty().html('<img src="' + url.substring(0, (url.indexOf('?') === -1 ? url.length : url.indexOf('?'))) + '">');
-      // console.log("src in preview");
-      // console.log(this.$avatarPreview.html());
+      console.log("avatar source: " + url);
+      this.$avatarPreview.empty().html('<img src="' + url + '">');
       this.startCropper();
     },
 
@@ -138,8 +136,8 @@
     },
 
     change: function () {
-      var files,
-        file;
+      console.log('change file input');
+      var files, file;
 
       if (this.support.datauri) {
         files = this.$avatarInput.prop('files');
@@ -149,6 +147,7 @@
 
           if (this.isImageFile(file)) {
             if (this.url) {
+              console.log("have url");
               URL.revokeObjectURL(this.url); // Revoke the old one
             }
 
@@ -204,7 +203,7 @@
         this.$img.cropper('replace', this.url);
       } else {
         console.log(" not active");
-        // console.log(this.$avatarPreview.selector);
+        console.log(this.$avatarPreview.selector);
         this.$img = $('<img src="' + this.url + '">');
         this.$avatarWrapper.empty().html(this.$img);
         this.$img.cropper({
@@ -237,18 +236,24 @@
     },
 
     ajaxUpload: function () {
+      console.log("ajax upload");
+      if (!this.$avatarInput.val()) {
+        // data.delete('avatar_file');
+        $("#have_file").val("false");
+      }
+      else {
+        $("#have_file").val("true");
+      }
+      console.log($("#have_file").val());
       var url = this.$avatarForm.attr('action'),
         data = new FormData(this.$avatarForm[0]),
         _this = this;
       if (!this.$avatarInput.val()) {
         data.delete('avatar_file');
-        data.append('have_file', 'false');
       }
-      else {
-        data.append('have_file', 'true');
-      }
+      console.log(data)
       $.ajax(url, {
-        headers: {'X-XSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+
         type: 'post',
         data: data,
         dataType: 'json',
@@ -294,7 +299,8 @@
           if (this.support.datauri || this.uploaded) {
             this.uploaded = false;
             this.cropDone();
-          } else {
+          }
+          else {
             this.uploaded = true;
             this.$avatarSrc.val(this.url);
             this.alert("change url");

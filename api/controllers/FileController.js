@@ -13,7 +13,7 @@ bucket = 'funnyard';
 
 //构建上传策略函数，设置回调的url以及需要回调给业务服务器的数据
 function uptoken(bucket, key) {
-  var putPolicy = new qiniu.rs.PutPolicy(bucket+":"+key);
+  var putPolicy = new qiniu.rs.PutPolicy(bucket + ":" + key);
   // putPolicy.callbackUrl = 'http://your.domain.com/callback';
   // putPolicy.callbackBody = 'filename=$(fname)&filesize=$(fsize)';
   return putPolicy.token();
@@ -35,8 +35,15 @@ function uploadFile(uptoken, key, localFile, callback) {
 module.exports = {
   uploadIcon: function (req, res) {
     //截取头像的属性值
+    console.log('avatar_data');
+    console.log(req.param('avatar_data'));
     var crop_data = eval('(' + req.param('avatar_data') + ')');
+    console.log("crop_data");
     console.log(crop_data);
+    console.log('have_file');
+    console.log(req.param('have_file'));
+    console.log('all');
+    console.log(req.allParams());
     var width = crop_data.width;
     var height = crop_data.height;
     var x_offset = crop_data.x;
@@ -50,12 +57,10 @@ module.exports = {
     var token = uptoken(bucket, key);
 
     //用户还是发布者
-    var role = (req.session.role == 'user' ? User: Publisher);
-    // console.log('avatar_file: ');
-    // console.log(req.file('avatar_file'));
-    // console.log(req.param('avatar_file'));
-    console.log(req.param('have_file'));
-    if (req.param('have_file') == false) {
+    var role = (req.session.role == 'user' ? User : Publisher);
+
+    if (req.param('have_file') == "true") {
+      console.log('yes have_file');
       req.file('avatar_file').upload({dirname: filedir, saveAs: key}, function (err, uploadedFiles) {
         if (err) {
           return res.serverError(err);
@@ -64,7 +69,7 @@ module.exports = {
         // return res.send("see..");
         //调用uploadFile上传
         uploadFile(token, key, path.join(filedir, key), function (err, ret) {
-          if(!err) {
+          if (!err) {
             // 上传成功， 处理返回值
             img_path = 'http://image.funnyard.com/' + ret.key + '?imageMogr2/crop/!' + width + 'x' + height + 'a' + x_offset + 'a' + y_offset;
             console.log("上传成功");
@@ -77,8 +82,7 @@ module.exports = {
               record.Icon = img_path;
               // + '?imageMogr2/crop/!' + width + 'x' + height + 'a' + x_offset + 'a' + y_offset
               record.save(function (err) {
-                if (err)
-                {
+                if (err) {
                   console.log(err);
                   return res.send(err);
                 }
@@ -102,6 +106,7 @@ module.exports = {
       });
     }
     else {
+      console.log('not have_file');
       img_path = req.param('avatar_src') + '?imageMogr2/crop/!' + width + 'x' + height + 'a' + x_offset + 'a' + y_offset;
       role.findOne(req.session.userid).exec(function (err, record) {
         if (err) {
@@ -111,14 +116,13 @@ module.exports = {
         record.Icon = img_path;
         // + '?imageMogr2/crop/!' + width + 'x' + height + 'a' + x_offset + 'a' + y_offset
         record.save(function (err) {
-          if (err)
-          {
+          if (err) {
             console.log(err);
             return res.send(err);
           }
           console.log("保存数据库成功");
           req.session.icon = img_path;
-          return res.json({
+          res.json({
             result: img_path,
             message: '图片上传成功'
           });
@@ -126,7 +130,7 @@ module.exports = {
       });
     }
   },
-  
+
   setIcon: function (req, res) {
 
   }

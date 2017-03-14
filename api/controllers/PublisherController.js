@@ -73,7 +73,7 @@ module.exports = {
             var new_record = {
               PublisherID: uuidV4(),
               Email: email,
-              NickName: userid,
+              Nickname: userid,
               PassWd: EncryptionService.genSHA1(password),
               Department: name,
               PhoneNum: phone_num

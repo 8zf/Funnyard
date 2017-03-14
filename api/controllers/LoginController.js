@@ -52,6 +52,7 @@ module.exports = {
         req.session.icon = result[0].Icon;
         console.log(req.session.icon);
         // console.log(req.session.authenticated);
+        console.log(req.session);
         return res.redirect('/');
       }
       else {
@@ -80,6 +81,7 @@ module.exports = {
         req.session.nickname = result[0].Nickname;
         req.session.info = result[0];
         // console.log(req.session.authenticated);
+        console.log(req.session);
         return res.redirect('/');
       }
       else {
@@ -89,8 +91,9 @@ module.exports = {
   },
 
   logout: function (req, res) {
-    req.session = null;
-    return res.redirect('/login');
+    req.session.destroy(function(err) {
+      res.redirect('/login');
+    });
   },
 
   success : function(req,res){

@@ -17,10 +17,13 @@ module.exports = {
       required: true,
       unique: true
     },
-    NickName: {
+    Nickname: {
       type: 'string',
       required: true,
       unique: true
+    },
+    Icon: {
+      type: 'string'
     },
     EMail: {
       type: 'string',
