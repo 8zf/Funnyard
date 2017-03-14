@@ -35,15 +35,15 @@ function uploadFile(uptoken, key, localFile, callback) {
 module.exports = {
   uploadIcon: function (req, res) {
     //截取头像的属性值
-    console.log('avatar_data');
-    console.log(req.param('avatar_data'));
+    // console.log('avatar_data');
+    // console.log(req.param('avatar_data'));
     var crop_data = eval('(' + req.param('avatar_data') + ')');
-    console.log("crop_data");
-    console.log(crop_data);
-    console.log('have_file');
-    console.log(req.param('have_file'));
-    console.log('all');
-    console.log(req.allParams());
+    // console.log("crop_data");
+    // console.log(crop_data);
+    // console.log('have_file');
+    // console.log(req.param('have_file'));
+    // console.log('all');
+    // console.log(req.allParams());
     var width = crop_data.width;
     var height = crop_data.height;
     var x_offset = crop_data.x;
@@ -60,12 +60,12 @@ module.exports = {
     var role = (req.session.role == 'user' ? User : Publisher);
 
     if (req.param('have_file') == "true") {
-      console.log('yes have_file');
+      // console.log('yes have_file');
       req.file('avatar_file').upload({dirname: filedir, saveAs: key}, function (err, uploadedFiles) {
         if (err) {
           return res.serverError(err);
         }
-        console.log(uploadedFiles[0].filename);
+        // console.log(uploadedFiles[0].filename);
         // return res.send("see..");
         //调用uploadFile上传
         uploadFile(token, key, path.join(filedir, key), function (err, ret) {
@@ -106,7 +106,7 @@ module.exports = {
       });
     }
     else {
-      console.log('not have_file');
+      // console.log('not have_file');
       img_path = req.param('avatar_src') + '?imageMogr2/crop/!' + width + 'x' + height + 'a' + x_offset + 'a' + y_offset;
       role.findOne(req.session.userid).exec(function (err, record) {
         if (err) {
@@ -120,7 +120,7 @@ module.exports = {
             console.log(err);
             return res.send(err);
           }
-          console.log("保存数据库成功");
+          console.log("修改数据库成功");
           req.session.icon = img_path;
           res.json({
             result: img_path,

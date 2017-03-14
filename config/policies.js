@@ -41,6 +41,9 @@ module.exports.policies = {
   PublisherController: {
     // 'publish': ['isPublisher']
   },
+  PublishController: {
+    '*': ['isPublisher']
+  },
   ParticipateController: {
     '*': ['isUser']
   },

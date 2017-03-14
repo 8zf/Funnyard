@@ -29,22 +29,22 @@ module.exports = {
       .populate('Participant')
       .exec(function (err, record) {
         if (err) {
-          return res.send(err);
+          return res.serverError(err);
         }
         if (typeof record == 'undefined') {
-          return res.send("未找到相符的活动");
+          return res.notFound("未找到相符的活动");
         }
         if (record.NowNum >= record.MaxNum) {
-          return res.send("报名人数已满");
+          return res.forbidden("报名人数已满");
         }
         var time_now = new Date().getTime();
         var hold_time = new Date(record.HoldTime).getTime();
         if (time_now >= hold_time) {
-          return res.send("活动报名已截止");
+          return res.forbidden("活动报名已截止");
         }
         //确认是否已经报名
         if (isParticipant(req.session.userid, record.Participant)) {
-          return res.send("您已报名");
+          return res.forbidden("您已报名");
         }
         //可以报名
         record.Participant.add(req.session.userid);
@@ -57,9 +57,9 @@ module.exports = {
             record.NowNum--;
             record.save(function (err) {
               if (err)
-                return res.send(err);
+                return res.serverError(err);
             });
-            return res.send(err);
+            return res.serverError(err);
           }
           //参与成功
           return res.send('报名成功');
@@ -74,20 +74,20 @@ module.exports = {
       .populate('Participant')
       .exec(function (err, record) {
         if (err) {
-          return res.send(err);
+          return res.serverError(err);
         }
         if (typeof record == 'undefined') {
-          return res.send("未找到相符的活动");
+          return res.notFound("未找到相符的活动");
         }
         // console.log(record);
         if (!isParticipant(req.session.userid, record.Participant)) {
-          return res.send("未参加活动")
+          return res.forbidden("未参加活动")
         }
         record.NowNum--;
         record.Participant.remove(req.session.userid);
         record.save(function (err) {
           if (err) {
-            return res.send(err);
+            return res.serverError(err);
           }
           return res.send("取消成功");
         });

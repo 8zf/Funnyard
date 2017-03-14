@@ -1,129 +1,19 @@
 <!-- BEGIN PAGE CONTENT INNER -->
+<input type="hidden" id="aid" value="<%- activity.ActivityID %>">
 <div class="page-content-inner">
     <div class="blog-page blog-content-2">
         <div class="row">
             <div class="col-lg-9">
-                <div class="blog-single-content bordered blog-container">
-                    <div class="blog-single-head">
-                        <h1 class="blog-single-head-title">Metronic Blog Reborn</h1>
-                        <div class="blog-single-head-date">
-                            <i class="icon-calendar font-blue"></i>
-                            <a href="javascript:;">Oct 24, 2015</a>
-                        </div>
-                    </div>
-                        <%- activity.Content %>
-                    </div>
-                    <div class="blog-single-foot">
-                        <ul class="blog-post-tags">
-                            <li class="uppercase">
-                                <a href="javascript:;">Bootstrap</a>
-                            </li>
-                            <li class="uppercase">
-                                <a href="javascript:;">Sass</a>
-                            </li>
-                            <li class="uppercase">
-                                <a href="javascript:;">HTML</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="blog-comments">
-                        <h3 class="sbold blog-comments-title">Comments(30)</h3>
-                        <div class="c-comment-list">
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img class="media-object" alt=""
-                                             src="../assets/pages/img/avatars/team1.jpg">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">
-                                        <a href="#">Sean</a> on
-                                        <span class="c-date">23 May 2015, 10:40AM</span>
-                                    </h4>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel
-                                    metus scelerisque ante sollicitudin commodo. Cras purus
-                                    odio, vestibulum in vulputate at, tempus viverra turpis.
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img class="media-object" alt=""
-                                             src="../assets/pages/img/avatars/team3.jpg">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">
-                                        <a href="#">Strong Strong</a> on
-                                        <span class="c-date">21 May 2015, 11:40AM</span>
-                                    </h4> Cras sit amet nibh libero, in gravida nulla. Nulla
-                                    vel metus scelerisque ante sollicitudin commodo. Cras
-                                    purus odio, vestibulum in vulputate at, tempus viverra
-                                    turpis.
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <a href="#">
-                                                <img class="media-object" alt=""
-                                                     src="../assets/pages/img/avatars/team4.jpg">
-                                            </a>
-                                        </div>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">
-                                                <a href="#">Emma Stone</a> on
-                                                <span class="c-date">30 May 2015, 9:40PM</span>
-                                            </h4> Cras sit amet nibh libero, in gravida
-                                            nulla. Nulla vel metus scelerisque ante
-                                            sollicitudin commodo. Cras purus odio,
-                                            vestibulum in vulputate at, tempus viverra
-                                            turpis.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img class="media-object" alt=""
-                                             src="../assets/pages/img/avatars/team7.jpg">
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">
-                                        <a href="#">Nick Nilson</a> on
-                                        <span class="c-date">30 May 2015, 9:40PM</span>
-                                    </h4> Cras sit amet nibh libero, in gravida nulla. Nulla
-                                    vel metus scelerisque ante sollicitudin commodo. Cras
-                                    purus odio, vestibulum in vulputate at, tempus viverra
-                                    turpis.
-                                </div>
-                            </div>
-                        </div>
-                        <h3 class="sbold blog-comments-title">Leave A Comment</h3>
-                        <form action="#">
-                            <div class="form-group">
-                                <input type="text" placeholder="Your Name"
-                                       class="form-control c-square"></div>
-                            <div class="form-group">
-                                <input type="text" placeholder="Your Email"
-                                       class="form-control c-square"></div>
-                            <div class="form-group">
-                                <input type="text" placeholder="Your Website"
-                                       class="form-control c-square"></div>
-                            <div class="form-group">
-                                                            <textarea rows="8" name="message"
-                                                                      placeholder="Write comment here ..."
-                                                                      class="form-control c-square"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit"
-                                        class="btn blue uppercase btn-md sbold btn-block">
-                                    Submit
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                <div class="activity-content" id="activity_content">
+                    <%- activity.Content %>
                 </div>
+                <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" id="join_quit"
+                        data-style="slide-up" data-spinner-color="#333">
+                    <span class="ladda-label">
+                        参加活动
+                    </span>
+                    <div class="ladda-progress" style="width: 0px;"></div>
+                </button>
             </div>
             <div class="col-lg-3">
                 <div class="blog-single-sidebar bordered blog-container">
@@ -241,3 +131,88 @@
 </div>
 <!-- END PAGE CONTENT INNER -->
 
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="http://assets.funnyard.com/global/plugins/ladda/spin.min.js" type="text/javascript"></script>
+<script src="http://assets.funnyard.com/global/plugins/ladda/ladda.min.js" type="text/javascript"></script>
+<script>
+  var action = "join";
+  var aid = $("#aid").attr("value");
+  var l = Ladda.create(document.getElementById("join_quit"));
+  var options = {
+    "closeButton": true,
+    "debug": false,
+    "positionClass": "toast-top-center",
+    "onclick": null,
+    "showDuration": "1000",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  };
+  $("#join_quit").click(function (e) {
+    l.start();
+    if (action == "join") {
+      $.ajax({
+        url: "/participate",
+        data: {
+          aid: aid
+        },
+        success: function (result,status,xhr) {
+          console.log("result:");
+          console.log(result);
+          console.log("status: " + status);
+          l.stop();
+          toastr.success("参与成功", options);
+          $("#join_quit").html("取消报名");
+          action = "quit";
+        },
+        error: function (xhr,status,error) {
+          l.stop();
+          toastr.warning(xhr.responseText, options);
+          if (xhr.responseText == "您已报名") {
+            $("#join_quit").html("取消报名");
+            action = "quit";
+          }
+          console.log("error")
+          console.log(error);
+          console.log(status);
+          console.log(xhr.responseText);
+        }
+      });
+    }
+    else if (action == "quit") {
+      $.ajax({
+        url: "/quit",
+        data: {
+          aid: aid
+        },
+        success: function (result,status,xhr) {
+          console.log("result:");
+          console.log(result);
+          console.log("status: " + status);
+          l.stop();
+          toastr.success("取消成功", options);
+          $("#join_quit").html("参加活动");
+          action = "quit";
+        },
+        error: function (xhr,status,error) {
+          l.stop();
+          toastr.warning(xhr.responseText, options);
+          console.log("error")
+          console.log(error);
+          console.log(status);
+          console.log(xhr.responseText);
+        }
+      });
+    }
+  });
+
+</script>
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="http://assets.funnyard.com/pages/scripts/ui-buttons.min.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->

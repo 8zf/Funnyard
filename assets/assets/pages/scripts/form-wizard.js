@@ -219,9 +219,12 @@ var FormWizard = function () {
       });
 
       $('#form_wizard_1').find('.button-previous').hide();
-      // $('#form_wizard_1 .button-submit').click(function () {
-      //   $('#form_wizard_1').submit(console.log("活动已提交"));
-      // }).hide();
+      $('#form_wizard_1 .button-submit').hide();
+      $('#form_wizard_1 .button-submit').click(function (e) {
+        alert("ready to submit");
+        $("#content").val(ue.getContent());
+        $("#submit_form").submit();
+      });
 
       //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
       $('#country_list', form).change(function () {

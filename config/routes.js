@@ -36,9 +36,9 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'get /test': {
-    view: 'new/content',
-  },
+  // 'get /test': {
+  //   view: 'new/content',
+  // },
 
   'post /upload': 'TestController.upload',
 
@@ -90,7 +90,7 @@ module.exports.routes = {
   'post /upload_icon': 'FileController.uploadIcon',
 
   /********* TEST *********/
-  'post /test': 'HomeController.testUpload'
+  'get /test': 'HomeController.testUpload'
 
   /***************************************************************************
   *                                                                          *

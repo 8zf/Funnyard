@@ -44,15 +44,18 @@ module.exports = {
         console.log(err);
         return res.send(err);
       }
-      return res.send(record);
+      return res.redirect("/activity/" + new_record.ActivityID);
     });
   },
 
   show: function (req, res) {
+    // console.log(req.allParams());
+    // console.log("twice?");
     Activity.findOne({ActivityID: req.param('aid')}).exec(function (err, record) {
       if (err) {
         return res.send(err);
       }
+      console.log(record.ActivityID);
       return res.view('activity/activity', {
         activity: record
       });
