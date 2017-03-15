@@ -196,11 +196,15 @@
           l.stop();
           toastr.success("取消成功", options);
           $("#join_quit").html("参加活动");
-          action = "quit";
+          action = "join";
         },
         error: function (xhr,status,error) {
           l.stop();
           toastr.warning(xhr.responseText, options);
+          if (xhr.responseText == "未参加活动") {
+            $("#join_quit").html("参加活动");
+            action = "join";
+          }
           console.log("error")
           console.log(error);
           console.log(status);

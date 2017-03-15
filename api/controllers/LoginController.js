@@ -79,6 +79,7 @@ module.exports = {
         req.session.role = "publisher";
         req.session.department = result[0].Department;
         req.session.nickname = result[0].Nickname;
+        req.session.icon = result[0].Icon;
         req.session.info = result[0];
         // console.log(req.session.authenticated);
         console.log(req.session);

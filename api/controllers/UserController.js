@@ -13,7 +13,7 @@ module.exports = {
 
   toSpace: function (req, res) {
     // User.findOne({}).exec();
-    return res.view("space");
+    return res.view("user/space");
   },
 
   add: function (req, res) {

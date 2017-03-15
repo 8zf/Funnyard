@@ -21,8 +21,8 @@ module.exports = {
     });
   },
 
-  toConsole: function (req, res) {
-    return res.view("personal/content", {layout: "personal/layout"});
+  toSpace: function (req, res) {
+    return res.view("publisher/space");
   },
 
   add: function (req, res) {

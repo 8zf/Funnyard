@@ -7,8 +7,8 @@
                 <div class="container">
                     <!-- BEGIN LOGO -->
                     <div class="page-logo">
-                        <a href="index.html">
-                            <img src="../assets/layouts/layout3/img/logo-default.jpg" alt="logo" class="logo-default">
+                        <a href="/">
+                            <img src="http://assets.funnyard.com/logo_28x28.png" alt="logo" class="logo-default">
                         </a>
                     </div>
                     <!-- END LOGO -->
@@ -217,7 +217,7 @@
                             <li class="dropdown dropdown-user dropdown-dark">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
                                    data-hover="dropdown" data-close-others="true">
-                                    <% if (req.session.icon != undefined) { %>
+                                    <% if (req.session.icon) { %>
                                     <img alt="icon" class="img-circle" src="<%= req.session.icon %>">
                                     <% } else { %>
                                     <img alt="icon" class="img-circle" src="http://image.funnyard.com/default-icon.jpg">
@@ -227,13 +227,18 @@
                                 <ul class="dropdown-menu dropdown-menu-default">
                                     <% if (req.session.role == 'user') {%>
                                     <li>
-                                        <a href="/space">
+                                        <a href="/user_space">
                                             <i class="icon-user"></i> 个人信息 </a>
                                     </li>
                                     <% } else if (req.session.role == 'publisher') { %>
                                     <li>
-                                        <a href="/console">
-                                            <i class="icon-user"></i> 控制台
+                                        <a href="/publisher_space">
+                                            <i class="icon-user"></i> 发布者信息
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/publish">
+                                            <i class="fa fa-edit"></i> 发布活动
                                         </a>
                                     </li>
                                     <% } %>
@@ -252,7 +257,7 @@
                             <li class="quick-sidebar-toggler">
                                 <span class="sr-only">Toggle Quick Sidebar</span>
                                 <i class="icon-login" onclick="window.location = '/login'"></i><i
-                                        onclick="window.location = '/login'">Login</i>
+                                        onclick="window.location = '/login'">登陆</i>
                             </li>
                             <!-- END QUICK SIDEBAR TOGGLER -->
 
@@ -269,6 +274,7 @@
                 </div>
             </div>
             <!-- END HEADER TOP -->
+            <!-- 也就是菜单（SIDEBAR） -->
             <!-- BEGIN HEADER MENU -->
             <div class="page-header-menu">
                 <div class="container">

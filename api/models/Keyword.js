@@ -9,14 +9,8 @@ module.exports = {
   tableName: 'Keyword',
   autoUpdatedAt: true,
   autoCreatedAt: true,
-  autoPK: false,
+  autoPK: true,
   attributes: {
-    ID: {
-      type: 'integer',
-      primaryKey: true,
-      required: true,
-      unique: true
-    },
     Name: {
       type: 'string'
     },

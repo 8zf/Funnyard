@@ -79,8 +79,8 @@ module.exports.routes = {
   'get /quit': 'ParticipateController.quit',
 
   /********* SPACE/CONSOLE *********/
-  'get /space': 'UserController.toSpace',
-  'get /console': 'PublisherController.toConsole',
+  'get /user_space': 'UserController.toSpace',
+  'get /publisher_space': 'PublisherController.toSpace',
 
   /********* UEditor *********/
   'get /ueditor/qiniu': 'PublishController.getQiniu',

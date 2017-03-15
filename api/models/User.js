@@ -52,7 +52,8 @@ module.exports = {
       type: 'string'
     },
     Icon: {
-      type: 'string'
+      type: 'string',
+      defaultsTo: 'http://image.funnyard.com/default-icon.jpg'
     },
     Participate: {
       collection: 'Activity',

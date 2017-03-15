@@ -23,7 +23,8 @@ module.exports = {
       unique: true
     },
     Icon: {
-      type: 'string'
+      type: 'string',
+      defaultsTo: 'http://image.funnyard.com/default-icon.jpg'
     },
     EMail: {
       type: 'string',
