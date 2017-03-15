@@ -65,7 +65,7 @@
     addListener: function () {
       this.$avatarView.on('click', $.proxy(this.click, this));
       this.$avatarInput.on('change', $.proxy(this.change, this));
-      this.$avatarForm.on('submit', $.proxy(this.submit, this));
+      this.$avatarSave.on('click', $.proxy(this.submit, this));
       this.$avatarBtns.on('click', $.proxy(this.rotate, this));
     },
 
@@ -207,7 +207,7 @@
         this.$img = $('<img src="' + this.url + '">');
         this.$avatarWrapper.empty().html(this.$img);
         this.$img.cropper({
-          aspectRatio: this.option ? this.option.aspectRatio : 1,
+          aspectRatio: 42/57,
           preview: this.$avatarPreview.selector,
           strict: false,
           crop: function (data) {
@@ -246,7 +246,7 @@
       }
       console.log($("#have_file").val());
       var url = this.$avatarForm.attr('action'),
-        data = new FormData(this.$avatarForm[0]),
+        data = new FormData($("#submit_form")[0]),
         _this = this;
       if (!this.$avatarInput.val()) {
         data.delete('avatar_file');
@@ -292,6 +292,7 @@
 
     submitDone: function (data) {
       console.log("submitDone");
+      $("#is_cover_set").val("封面上传成功");
       console.log(data);
       if ($.isPlainObject(data)) {
         if (data.result) {
@@ -328,7 +329,7 @@
 
     cropDone: function () {
       console.log("cropDone");
-      this.$avatarForm.get(0).reset();
+      // this.$avatarForm.get(0).reset();
       this.$avatar.attr('src', this.url);
       this.stopCropper();
       this.$avatarModal.modal('hide');

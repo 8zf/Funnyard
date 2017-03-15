@@ -30,6 +30,7 @@ module.exports = {
       HoldTime: req.param('hold_date') + " " + req.param('hold_time'),
       EndTime: req.param('end_date') + " " + req.param('end_time'),
       Keywords: req.param('keyword'),
+      Poster: req.param('poster'),
       MaxNum: req.param('maxnum'),
       Location: req.param('location'),
       LocationLng: req.param('locationlng'),

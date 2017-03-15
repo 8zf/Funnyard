@@ -48,7 +48,8 @@ module.exports.policies = {
     '*': ['isUser']
   },
   FileController: {
-    'uploadIcon': ['sessionAuth']
+    'uploadIcon': ['sessionAuth'],
+    'uploadCover': ['isPublisher']
   },
   UserController: {
     'toSpace': ['isUser']

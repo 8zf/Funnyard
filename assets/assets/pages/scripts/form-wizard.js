@@ -1,7 +1,31 @@
 jQuery.validator.addMethod("isRegularString", function (value, element, param) {
   var ver = /^[\u4E00-\u9FA5\uF900-\uFA2Da-zA-Z0-9]{3,100}$/;
+  console.log("faqqqqqq");
   return ver.test(value);
 }, $.validator.format("不能包含符号"));
+
+
+var options = {
+  "closeButton": true,
+  "debug": false,
+  "positionClass": "toast-top-center",
+  "onclick": null,
+  "showDuration": "1000",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+};
+
+// jQuery.validator.addMethod("isCoverSet", function (value, element, param) {
+//   console.log(value);
+//   console.log(value == "封面上传成功");
+//   return value == "封面上传成功";
+// }, $.validator.format("请设置活动封面"));
+
 var FormWizard = function () {
 
   return {
@@ -13,7 +37,7 @@ var FormWizard = function () {
 
       function format(state) {
         if (!state.id) return state.text; // optgroup
-        return "<img class='flag' src='../../assets/global/img/flags/" + state.id.toLowerCase() + ".png'/>&nbsp;&nbsp;" + state.text;
+        return "<img class='flag' src='/assets/global/img/flags/" + state.id.toLowerCase() + ".png'/>&nbsp;&nbsp;" + state.text;
       }
 
       // $("#country_list").select2({
@@ -42,6 +66,10 @@ var FormWizard = function () {
             isRegularString: true,
             required: true
           },
+          // is_cover_set: {
+          //   isCoverSet: true,
+          //   required: true
+          // },
           hold_date: {
             required: true
           },
@@ -221,9 +249,16 @@ var FormWizard = function () {
       $('#form_wizard_1').find('.button-previous').hide();
       $('#form_wizard_1 .button-submit').hide();
       $('#form_wizard_1 .button-submit').click(function (e) {
-        alert("ready to submit");
+        console.log("ready to submit");
         $("#content").val(ue.getContent());
-        $("#submit_form").submit();
+        $("#poster").val($(".avatar-view img")[0].src);
+        if ($("#poster").val() != "http://image.funnyard.com/image/20170315/1489559469219vzLRLd")
+        {
+          $("#submit_form").submit();
+        }
+        else {
+          toastr.warning("请上传活动封面", options)
+        }
       });
 
       //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.

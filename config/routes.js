@@ -51,24 +51,14 @@ module.exports.routes = {
 
   /********* LOGIN/OUT *********/
   'get /login': 'LoginController.default',
-  // 'get /user_login': 'LoginController.userDefault',
   'post /user_login': 'LoginController.validateUser',
-
-  // 'get /publisher_login': 'LoginController.publisherDefault',
   'post /publisher_login': 'LoginController.validatePublisher',
-
   'get /logout': 'LoginController.logout',
 
   /********* REGISTER *********/
-  // 'get /register': 'RegisterController.default',
   'get /register': 'RegisterController.default',
-
   'get /sendSMS': 'RegisterController.sendSMS',
-
-  // 'get /register_user': 'UserController.register',
   'post /register_user': 'UserController.add',
-
-  // 'get /register_publisher': 'PublisherController.register',
   'post /register_publisher': 'PublisherController.add',
 
   /********* ACTIVITY *********/
@@ -88,6 +78,7 @@ module.exports.routes = {
 
   /********* FILE_TO_QINIU *********/
   'post /upload_icon': 'FileController.uploadIcon',
+  'post /upload_cover': 'FileController.uploadCover',
 
   /********* TEST *********/
   'get /test': 'HomeController.testUpload'

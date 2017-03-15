@@ -65,11 +65,11 @@ module.exports = {
     console.log('validate publisher');
     Publisher.find({or: [{Nickname: req.param('Name')}, {PhoneNum: req.param('Name')}]}).exec(function (err, result) {
       if (err) {
-        return res.view('wrong', {message: "error occured: " + err});
+        return res.serverError(err);
       }
 
       if (result.length == 0) {
-        return res.view('wrong', {message: "no such user found"});
+        return res.forbidden("未找到该发布者账号");
       }
       if (result[0].PassWd == EncryptionService.genSHA1(req.param("PassWd")))
       {

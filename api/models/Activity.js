@@ -55,7 +55,6 @@ module.exports = {
     },
     Poster: {
       type: 'string',
-      size: 50
     },
     Content: {
       type: 'string',
