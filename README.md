@@ -14,9 +14,8 @@ www.funnyard.com:1337/activity<br>
 具体api：http://sailsjs.com/documentation/reference/blueprint-api 不建议使用<br>
 www.funnyard.com/publish ：发布者发布活动，活动内容的图片以及网站静态文件头像等文件在线储存到七牛云，加快访问速度<br>
 数据库连接可用 MySQL Workbench，host: 139.129.30.235, port: 3306, user: root, pwd: ********* 直接操作数据库<br>
-
 活动信息界面：www.funnyard.com/activity/activity_id，登陆用户可进行报名与取消报名行为<br>
-
+发布者管理活动：删除活动，不能修改，只能重发
 ToDoList:
 > - [x] 活动信息界面UI
 > - [x] 活动发布UI
@@ -27,5 +26,7 @@ ToDoList:
 > - [ ] 关注活动，通知动态
 > - [ ] 活动筛选分类查找
 > - [ ] 活动筛选
-
+> - [ ] 天地图API开发
+> - [ ] HTTPS 证书申请
+> - [ ] 删除一个活动时如何向用户发送消息
 >七牛图片裁剪api：\<imageurl>?imageMogr2/
