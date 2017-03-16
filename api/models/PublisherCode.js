@@ -18,7 +18,8 @@ module.exports = {
       type: 'string'
     },
     IsUsable: {
-      type: 'integer'
+      type: 'integer',
+      defaultsTo: 1
     },
     PublisherID: {
       type: 'string'

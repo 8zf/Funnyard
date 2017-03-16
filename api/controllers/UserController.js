@@ -12,8 +12,22 @@ module.exports = {
   },
 
   toSpace: function (req, res) {
-    // User.findOne({}).exec();
-    return res.view("user/space");
+
+    User.findOne({UserID: req.session.userid})
+      .populate("Participate")
+      .exec(function (err, record) {
+      if (err) {
+        return res.serverError(err);
+      }
+      if (record.length == 0) {
+        return res.notFound("未找到该用户");
+      }
+      console.log(record.Participate.length);
+      return res.view("user/space", {
+        user_info: record
+      });
+    });
+
   },
 
   add: function (req, res) {
@@ -25,7 +39,7 @@ module.exports = {
     VerifyPhone.find({PhoneNum: req.param('phone_num')}).exec(function (err, record) {
       if (err) {
         console.log(err);
-        return res.send(err);
+        return res.serverError(err);
       }
       // console.log(record);
       // console.log(record[0].VerifyCode);
@@ -52,12 +66,11 @@ module.exports = {
         User.create(new_record).exec(function (err, record) {
           if (err) {
             console.log(err);
-            return res.send(err)
+            return res.serverError(err)
           }
           console.log('new record created: ');
           // console.log(record);
           return res.redirect("/login");
-          // return res.send('add user successfully' + JSON.stringify(record));
         });
       }
       else {

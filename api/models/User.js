@@ -31,7 +31,8 @@ module.exports = {
       defaultsTo: 5
     },
     School: {
-      type: 'string'
+      type: 'string',
+      defaultsTo: '同济大学'
     },
     Nickname: {
       type: 'string'
@@ -40,13 +41,16 @@ module.exports = {
       type: 'datetime'
     },
     Description: {
-      type: 'string'
+      type: 'string',
+      defaultsTo: '这个人很懒，什么都没有留下'
     },
     Sex: {
-      type: 'string'
+      type: 'string',
+      defaultsTo: '未设置'
     },
     Age: {
-      type: 'integer'
+      type: 'integer',
+      defaultsTo: 0
     },
     Profile: {
       type: 'string'
@@ -77,7 +81,7 @@ module.exports = {
   },
 
   findWithSameNameAsPerson: function (opts, cb) {
-    
+
   }
 };
 

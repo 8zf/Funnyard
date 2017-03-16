@@ -92,9 +92,14 @@ module.exports = {
   },
 
   logout: function (req, res) {
-    req.session.destroy(function(err) {
+    if (req.session) {
+      req.session.destroy(function(err) {
+        res.redirect('/login');
+      });
+    }
+    else {
       res.redirect('/login');
-    });
+    }
   },
 
   success : function(req,res){

@@ -59,12 +59,17 @@ module.exports = {
       type: 'string'
     },
     Description: {
-      type: 'string'
+      type: 'string',
+      defaultsTo: '这个发布者很懒，什么都没有留下'
     },
     Follower: {
       collection: 'User',
       via: 'Follow'
-    }
+    },
+    Publish: {
+      collection: 'Activity',
+      via: 'Owner'
+    },
   },
   
   getProfile: function (option, callback) {

@@ -19,22 +19,28 @@ module.exports = {
     },
     Theme: {
       type: 'string',
+      required: true
     },
     LocationLng: {
-      type: 'float'
+      type: 'float',
+      required: true
     },
     LocationLat: {
-      type: 'float'
+      type: 'float',
+      required: true
     },
     Location: {
       type: 'string',
+      required: true,
       size: 120
     },
     HoldTime: {
-      type: 'datetime'
+      type: 'datetime',
+      required: true
     },
     EndTime: {
-      type: 'datetime'
+      type: 'datetime',
+      required: true
     },
     // HoldTimeStamp: {
     //   type: 'integer'
@@ -47,22 +53,22 @@ module.exports = {
     },
     NowNum: {
       type: 'integer',
-      type: 'integer',
       defaultsTo: 0
     },
-    PublishTime: {
-      type: 'datetime'
-    },
+    // PublishTime: {
+    //   type: 'datetime'
+    // },
     Poster: {
       type: 'string',
+      required: true
     },
     Content: {
       type: 'string',
       size: 100000
     },
-    PublisherID: {
-      type: 'string'
-    },
+    // PublisherID: {
+    //   type: 'string'
+    // },
     Category: {
       type: 'string',
       size: 20
@@ -94,6 +100,9 @@ module.exports = {
     Features: {
       collection: 'Keyword',
       via: 'IsOwnedBy'
+    },
+    Owner: {
+      model: 'Publisher'
     }
   }
 };

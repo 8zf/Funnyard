@@ -12,7 +12,8 @@ module.exports = {
   autoPK: true,
   attributes: {
     Name: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
     IsOwnedBy: {
       collection: 'Activity',

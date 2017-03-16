@@ -12,7 +12,7 @@ jQuery.validator.addMethod("isUserID", function (value, element, param) {
 
 jQuery.validator.addMethod("isName", function (value, element, param) {
   var length = value.length;
-  var ver = /^[\u4E00-\u9FA5\uF900-\uFA2Da-zA-Z0-9]{3,15}$/;
+  var ver = /^[\u4E00-\u9FA5\uF900-\uFA2Da-zA-Z0-9]{2,15}$/;
   if (length > 20 || length < 2) {
     return false;
   }
@@ -20,7 +20,7 @@ jQuery.validator.addMethod("isName", function (value, element, param) {
     return false;
   }
   return true;
-}, $.validator.format("姓名不能包含符号，2~20个字符"));
+}, $.validator.format("纯中文或英文，2~20个字符"));
 
 jQuery.validator.addMethod("isPassword", function (value, element, param) {
   var length = value.length;
