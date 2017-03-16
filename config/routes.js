@@ -32,22 +32,8 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'homepage'
-  },
-
-  // 'get /test': {
-  //   view: 'new/content',
-  // },
-
-  'post /upload': 'TestController.upload',
-
-  // 'get /test_login' : {
-  //   view: 'new/login',
-  //   locals: {
-  //     layout: false
-  //   }
-  // },
+  /********* HOMEPAGE *********/
+  '/': 'HomeController.default',
 
   /********* LOGIN/OUT *********/
   'get /login': 'LoginController.default',
@@ -81,7 +67,6 @@ module.exports.routes = {
   'post /upload_cover': 'FileController.uploadCover',
 
   /********* TEST *********/
-  'get /test': 'HomeController.testUpload'
 
   /***************************************************************************
   *                                                                          *

@@ -22,7 +22,6 @@ module.exports = {
       if (record.length == 0) {
         return res.notFound("未找到该用户");
       }
-      console.log(record.Participate.length);
       return res.view("user/space", {
         user_info: record
       });

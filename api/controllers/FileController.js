@@ -64,9 +64,9 @@ module.exports = {
         uploadFile(token, key, path.join(filedir, key), function (err, ret) {
           if (!err) {
             // 上传成功， 处理返回值
-            img_path = 'http://image.funnyard.com/' + ret.key + '?imageMogr2/crop/!' + width + 'x' + height + 'a' + x_offset + 'a' + y_offset;
+            img_path = '//omwktgfmo.qnssl.com/' + ret.key + '?imageMogr2/crop/!' + width + 'x' + height + 'a' + x_offset + 'a' + y_offset;
             console.log("上传成功");
-            console.log('http://image.funnyard.com/' + ret.key);
+            console.log('//omwktgfmo.qnssl.com/' + ret.key);
             role.findOne(req.session.userid).exec(function (err, record) {
               if (err) {
                 console.log(err);
@@ -113,7 +113,7 @@ module.exports = {
             console.log(err);
             return res.send(err);
           }
-          console.log("修改数据库成功");
+          console.log("修改图片参数成功");
           req.session.icon = img_path;
           res.json({
             result: img_path,
@@ -154,9 +154,9 @@ module.exports = {
         uploadFile(token, key, path.join(filedir, key), function (err, ret) {
           if (!err) {
             // 上传成功， 处理返回值
-            img_path = 'http://image.funnyard.com/' + ret.key + '?imageMogr2/crop/!' + width + 'x' + height + 'a' + x_offset + 'a' + y_offset;
+            img_path = '//omwktgfmo.qnssl.com/' + ret.key + '?imageMogr2/crop/!' + width + 'x' + height + 'a' + x_offset + 'a' + y_offset;
             console.log("上传成功");
-            console.log('http://image.funnyard.com/' + ret.key);
+            console.log('//omwktgfmo.qnssl.com/' + ret.key);
             return res.json({
               result: img_path,
               message: '图片上传成功'

@@ -1,0 +1,89 @@
+<script type="text/javascript" src="http://api.tianditu.com/js/maps.js"></script>
+<script type="text/javascript">
+  var map, zoom = 16;
+  var customerWinInfo;
+  var lng = new Array();
+  var lat = new Array();
+  var acid = new Array();
+  var marker = new Array();
+  var result;
+
+  function onLoad() {
+    //初始化地图对象
+    map = new TMap("mapDiv");
+    //设置显示地图的中心点和级别
+    map.centerAndZoom(new TLngLat(121.49722, 31.28532), zoom);
+    //允许鼠标双击放大地图
+    map.enableHandleMouseScroll();
+    var config_scale = {
+      type: "TMAP_NAVIGATION_CONTROL_LARGE",	//缩放平移的显示类型
+      anchor: "TMAP_ANCHOR_TOP_LEFT",			//缩放平移控件显示的位置
+      offset: [0, 0],							//缩放平移控件的偏移值
+      showZoomInfo: true						//是否显示级别提示信息，true表示显示，false表示隐藏。
+    };
+    //创建缩放平移控件对象
+    var control = new TNavigationControl(config_scale);
+    //添加缩放平移控件
+    map.addControl(control);
+    //创建地图类型控件对象
+    var config_type = [TMAP_NORMAL_MAP, TMAP_SATELLITE_MAP, TMAP_HYBRID_MAP];
+    var maptype = new TMapTypeControl(config_type);
+    //将地图类型控件添加到地图上
+    map.addControl(maptype);
+//          //设置地图类型控件在地图上显示的位置，默认为在右侧，注：将控件加载到map之后再做此配置
+//          control.setLeft(10);
+//          control.setTop(20);
+
+    //添加学校选择
+    var choose_school = new THtmlElementControl(document.getElementById('choose_school'));
+    choose_school.setRight(20);
+    choose_school.setBottom(5);
+    map.addControl(choose_school);
+  }
+
+</script>
+
+<!--<div style="margin: 7px;">-->
+    <!--<a class="btn btn-default">社团</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+    <!--<a class="btn btn-default">学术</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+    <!--<a class="btn btn-default">招聘</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+    <!--<a class="btn btn-default">活动</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+    <!--<a class="btn btn-default">校外</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+    <!--<a class="btn btn-default">志愿者</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+    <!--<a class="btn btn-link" href="showactivity.php">活动总览>></a>-->
+<!--</div>-->
+
+<div align="center">
+    <table>
+        <tr>
+            <td>
+                <div id="mapDiv" style="width:800px; height:600px;"></div>
+            </td>
+            <td>
+                <div class="btn-group-vertical" role="group">
+                    <div id="slide_left"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="container table-bordered" id="choose_school" style="width: auto; background-color: ">
+    <label for="choose_school">定位所在学校</label><br/>
+    <select name="school" id="school">
+        <option value="121.50993,31.30461">复旦大学</option>
+        <option value="121.49667,31.28573">同济大学四平路校区</option>
+        <option value="121.21490,31.29167">同济大学嘉定校区</option>
+        <option value="121.43212,31.02775">上海交通大学闵行校区</option>
+        <option value="121.42814,31.20073">上海交通大学徐汇校区</option>
+        <option value="121.38817,31.31815">上海大学宝山校区</option>
+        <!--        <option value=""></option>-->
+    </select><br/>
+    <button type="button" class="btn btn-xs"
+            onclick="var loc = new TLngLat(document.getElementById('school').value.slice(0,8), document.getElementById('school').value.slice(10,18));map.panTo(loc);">
+        确定
+    </button>
+</div>
+<script>
+    onLoad();
+</script>

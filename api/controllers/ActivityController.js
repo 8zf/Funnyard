@@ -70,7 +70,7 @@ module.exports = {
       if (err) {
         return res.serverError(err);
       }
-      console.log(record.ActivityID);
+      console.log("展示活动：" + record.ActivityID);
       return res.view('activity/activity', {
         activity: record
       });
