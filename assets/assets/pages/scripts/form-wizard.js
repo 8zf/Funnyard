@@ -1,9 +1,7 @@
 jQuery.validator.addMethod("isRegularString", function (value, element, param) {
-  var ver = /^[\u4E00-\u9FA5\uF900-\uFA2Da-zA-Z0-9]{3,100}$/;
-  console.log("faqqqqqq");
+  var ver = /^[\u4E00-\u9FA5\uF900-\uFA2Da-zA-Z0-9\-()]{3,100}$/;
   return ver.test(value);
 }, $.validator.format("不能包含符号"));
-
 
 var options = {
   "closeButton": true,
@@ -19,12 +17,6 @@ var options = {
   "showMethod": "fadeIn",
   "hideMethod": "fadeOut"
 };
-
-// jQuery.validator.addMethod("isCoverSet", function (value, element, param) {
-//   console.log(value);
-//   console.log(value == "封面上传成功");
-//   return value == "封面上传成功";
-// }, $.validator.format("请设置活动封面"));
 
 var FormWizard = function () {
 
@@ -252,8 +244,7 @@ var FormWizard = function () {
         console.log("ready to submit");
         $("#content").val(ue.getContent());
         $("#poster").val($(".avatar-view img")[0].src);
-        if ($("#poster").val() != "http://image.funnyard.com/image/20170315/1489559469219vzLRLd")
-        {
+        if ($("#poster").val() != "http://image.funnyard.com/image/20170315/1489559469219vzLRLd") {
           $("#submit_form").submit();
         }
         else {
@@ -271,38 +262,96 @@ var FormWizard = function () {
 
 }();
 
-var map, zoom = 16, isexit = false;
+// var map, zoom = 16, isexit = false;
+// //鼠标在地图上按下左键时添加一个点标记
+// function mouseup(point) {
+//   if (isexit == false) {
+//     marker = new TMarker(point);
+//     map.addOverLay(marker);
+// //                alert(point.getLng() + ', ' + point.getLat());
+//     markerTool.close();
+//     marker.enableEdit();
+//     isexit = true;
+//     var location = marker.getLngLat();
+// //      document.getElementById('content').value = content_;
+//     document.getElementById('locationlng').value = location.getLng();
+//     document.getElementById('locationlat').value = location.getLat();
+//   }
+//   else {
+//   }
+// }
+//
+// //初始化地图对象
+// map = new TMap("mapDiv");
+// //设置显示地图的中心点和级别
+// map.centerAndZoom(new TLngLat(121.4986695687, 31.2801283584), zoom);
+// //允许鼠标双击放大地图
+// map.enableHandleMouseScroll();
+//
+// //创建标注工具对象
+// var markerTool = new TMarkTool(map);
+// //注册标注的mouseup事件
+// TEvent.addListener(markerTool, "mouseup", mouseup);
+// $("#marker-btn").click(markerTool.open());
 
-//鼠标在地图上按下左键时添加一个点标记
-function mouseup(point) {
-  if (isexit == false) {
-    marker = new TMarker(point);
-    map.addOverLay(marker);
-//                alert(point.getLng() + ', ' + point.getLat());
-    markerTool.close();
-    marker.enableEdit();
-    isexit = true;
-    var location = marker.getLngLat();
-//      document.getElementById('content').value = content_;
-    document.getElementById('locationlng').value = location.getLng();
-    document.getElementById('locationlat').value = location.getLat();
+var map = new BMap.Map("mapDiv");
+map.enableScrollWheelZoom();
+map.centerAndZoom("上海", 14);
+var marker = new BMap.Marker();
+marker.enableDragging();
+marker.addEventListener("dragend", function () {
+  $("#locationlng").val(marker.getPosition().lng);
+  $("#locationlat").val(marker.getPosition().lat);
+  // console.log(marker.getPosition());
+});
+var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+  {
+    "input": "location",
+    "location": map
+  });
+
+ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+  var str = "";
+  var _value = e.fromitem.value;
+  var value = "";
+  if (e.fromitem.index > -1) {
+    value = _value.province + _value.city + _value.district + _value.street + _value.business;
   }
-  else {
+  str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+  value = "";
+  if (e.toitem.index > -1) {
+    _value = e.toitem.value;
+    value = _value.province + _value.city + _value.district + _value.street + _value.business;
   }
+  str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+  $("#searchResultPanel").html(str);
+});
+
+var myValue;
+ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+  var _value = e.item.value;
+  myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+  $("#searchResultPanel").html("onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue);
+  setPlace();
+});
+
+function setPlace() {
+  map.clearOverlays();    //清除地图上所有覆盖物
+  function myFun() {
+    var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+    map.centerAndZoom(pp, 18);
+    marker.setPosition(pp);
+    map.addOverlay(marker);    //添加标注
+    $("#locationlng").val(marker.getPosition().lng);
+    $("#locationlat").val(marker.getPosition().lat);
+  }
+
+  var local = new BMap.LocalSearch(map, { //智能搜索
+    onSearchComplete: myFun
+  });
+  local.search(myValue);
 }
-
-//初始化地图对象
-map = new TMap("mapDiv");
-//设置显示地图的中心点和级别
-map.centerAndZoom(new TLngLat(121.4986695687, 31.2801283584), zoom);
-//允许鼠标双击放大地图
-map.enableHandleMouseScroll();
-
-//创建标注工具对象
-var markerTool = new TMarkTool(map);
-//注册标注的mouseup事件
-TEvent.addListener(markerTool, "mouseup", mouseup);
-$("#marker-btn").click(markerTool.open());
 
 <!-- 实例化编辑器 -->
 var ue = UE.getEditor('container', {});

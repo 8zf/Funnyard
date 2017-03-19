@@ -2,7 +2,8 @@
 <!--<link href="/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />-->
 <!--<link href="/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />-->
 <!-- END PAGE LEVEL PLUGINS -->
-<script type="text/javascript" src="http://api.tianditu.com/js/maps.js"></script>
+
+<!--<script type="text/javascript" src="http://api.tianditu.com/js/maps.js"></script>-->
 <script type="text/javascript" src="ueditor/ueditor.config.js"></script>
 <script type="text/javascript" src="ueditor/ueditor.all.js"></script>
 
@@ -128,8 +129,10 @@
                                     <span class="required"> * </span>
                                 </label>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" name="location"/>
-                                    <span class="help-block"> 描述活动的地点 </span>
+                                    <input type="text" id="location" class="form-control" name="location"/>
+                                    <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                                    <!--<input type="text" class="form-control" name="location"/>-->
+                                    <span class="help-block"> 输入地点查询，定位，并补全 </span>
                                 </div>
                             </div>
                             <div class="form-group">
