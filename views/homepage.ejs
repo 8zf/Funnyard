@@ -1,8 +1,6 @@
-<!--<script src="https://api.map.baidu.com/api?v=2.0&ak=OmDdyk1DfSWi8to1KNt7bbXEjIPn2O6I&s=1"-->
-        <!--type="text/javascript"></script>-->
-<style type="text/css">
-    /*#container{height:100%}*/
-</style>
+<script type="text/javascript" src="//api.map.baidu.com/library/RichMarker/1.2/src/RichMarker_min.js"></script>
+<script type="text/javascript" src="//api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+<script type="text/javascript" src="//api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
 <div class="row">
     <div class="col-md-2">
 
@@ -16,7 +14,7 @@
 </div>
 <div class="row">
     <% for (var index = 0; index < activities.length; index++) { %>
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
         <div class="portlet light portlet-fit ">
             <div class="portlet-title">
                 <div class="caption">
@@ -55,10 +53,11 @@
 </div>
 <script type="text/javascript">
   var map = new BMap.Map("container");
+  var activities_markers = [];
   map.enableScrollWheelZoom();
   map.centerAndZoom(new BMap.Point(121.225942, 31.295851), 21);
   map.addEventListener("click", function (e) {
-    console.log(e.point.lng + ", " + e.point.lat);
+    console.log("点击位置：" + e.point.lng + ", " + e.point.lat);
   });
   if (navigator.geolocation) {
     toastr.success("支持获取地理位置");
@@ -86,5 +85,25 @@
     map.centerAndZoom(point, 15);
   }
 
+  $.ajax({
+    url:"/get_activities",
+    method: "GET",
+    success: function (activities,status,xhr) {
+//      activities_markers;
+      for (i in activities) {
+        var temp = new BMap.Point(parseFloat(activities[i].LocationLng), parseFloat(activities[i].LocationLat));
+        var marker = new BMap.Marker(temp);
+//        map.addOverlay(marker);
+        activities_markers.push(marker);
+      }
+      var markerClusterer = new BMapLib.MarkerClusterer(map, {markers: activities_markers, minClusterSize: 5, isAverangeCenter:true})
+      console.log(activities);
+    },
+    error: function (xhr,status,error) {
+
+    }
+  });
+
+//  $("div.anchorBL").hide();
 
 </script>

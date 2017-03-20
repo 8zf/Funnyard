@@ -340,7 +340,7 @@ function setPlace() {
   map.clearOverlays();    //清除地图上所有覆盖物
   function myFun() {
     var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
-    map.centerAndZoom(pp, 18);
+    map.centerAndZoom(pp, 20);
     marker.setPosition(pp);
     map.addOverlay(marker);    //添加标注
     $("#locationlng").val(marker.getPosition().lng);

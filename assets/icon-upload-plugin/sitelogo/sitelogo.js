@@ -209,7 +209,8 @@
         this.$img.cropper({
           aspectRatio: this.option ? this.option.aspectRatio : 1,
           preview: this.$avatarPreview.selector,
-          strict: false,
+          viewMode: 1,
+          // strict: false,
           crop: function (data) {
             var json = [
               '{"x":' + data.x,

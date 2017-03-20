@@ -207,9 +207,9 @@
         this.$img = $('<img src="' + this.url + '">');
         this.$avatarWrapper.empty().html(this.$img);
         this.$img.cropper({
+          viewMode: 1,
           aspectRatio: 42/57,
           preview: this.$avatarPreview.selector,
-          strict: false,
           crop: function (data) {
             var json = [
               '{"x":' + data.x,
@@ -220,6 +220,9 @@
             ].join();
 
             _this.$avatarData.val(json);
+          },
+          ready: function () {
+            $(this).reset();
           }
         });
 

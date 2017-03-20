@@ -75,6 +75,10 @@ module.exports = {
         activity: record
       });
     });
+  },
+  
+  delete: function (req, res) {
+    
   }
 };
 
