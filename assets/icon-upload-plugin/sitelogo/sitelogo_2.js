@@ -220,10 +220,10 @@
             ].join();
 
             _this.$avatarData.val(json);
-          },
-          ready: function () {
-            $(this).reset();
           }
+          // ready: function () {
+          //   $(this).reset();
+          // }
         });
 
         this.active = true;

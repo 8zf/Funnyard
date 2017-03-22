@@ -30,7 +30,7 @@ module.exports = {
       // PublisherID: req.session.info.PublisherID,
       HoldTime: req.param('hold_date') + " " + req.param('hold_time'),
       EndTime: req.param('end_date') + " " + req.param('end_time'),
-      Keywords: req.param('keyword'),
+      Keywords: req.param('keywords'),
       Poster: req.param('poster'),
       MaxNum: req.param('maxnum'),
       Location: req.param('location'),
@@ -38,24 +38,32 @@ module.exports = {
       LocationLat: req.param('locationlat'),
       Content: req.param('content')
     };
+    console.log(new_record);
     Activity.create(new_record).exec(function (err, record) {
       if (err) {
         console.log("创建活动失败");
         console.log(err);
         return res.serverError(err);
       }
-      console.log("创建活动成功");
-      console.log(new_record);
+      console.log("创建活动成功: " + record.ActivityID);
+      // console.log(new_record);
       Publisher.findOne({PublisherID: req.session.userid})
         .populate("Publish")
         .exec(function (err, publisher) {
           publisher.Publish.add(record.ActivityID);
           publisher.save(function (err) {
             if (err) {
-              return res.serverError("无法创建发布者鱼活动的联系")
+              return res.serverError(err + "无法创建发布者与活动的联系");
             }
-            console.log("创建联系集成功");
-            return res.redirect("/activity/" + new_record.ActivityID);
+            console.log("活动与发布者关联");
+            record.Features.add(record.Keywords.split(","));
+            record.save(function (err) {
+              if (err) {
+                return res.serverError("活动添加关键词失败" + err);
+              }
+              console.log("活动与分类关联");
+              return res.redirect("/activity/" + new_record.ActivityID);
+            });
           })
         });
     });
@@ -66,19 +74,47 @@ module.exports = {
     // console.log("twice?");
     Activity.findOne({ActivityID: req.param('aid')})
       .populate("Owner")
+      .populate("Features")
       .exec(function (err, record) {
+        if (err) {
+          return res.serverError(err);
+        }
+        console.log("展示活动：" + record.ActivityID);
+        return res.view('activity/activity', {
+          activity: record
+        });
+      });
+  },
+
+  search: function (req, res) {
+    console.log(req.param('key'));
+    Activity.find({
+      or: [
+        {
+          Theme: {
+            'like': '%' + req.param('key') + '%'
+          }
+        },
+        {
+          Location: {
+            'like': '%' + req.param('key') + '%'
+          }
+        },
+        {
+          Content: {
+            'like': '%' + req.param('key') + '%'
+          }
+        }],
+    }).exec(function (err, records) {
       if (err) {
         return res.serverError(err);
       }
-      console.log("展示活动：" + record.ActivityID);
-      return res.view('activity/activity', {
-        activity: record
-      });
-    });
+      return res.send(records);
+    })
   },
-  
+
   delete: function (req, res) {
-    
+
   }
 };
 

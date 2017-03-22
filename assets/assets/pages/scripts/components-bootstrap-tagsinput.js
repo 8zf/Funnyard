@@ -1,27 +1,29 @@
 var ComponentsBootstrapTagsinput = function() {
 
     var handleDemo1 = function() {
-        var elt = $('#object_tagsinput');
+        var elt = $('#keywords');
         
         elt.tagsinput({
           itemValue: 'value',
           itemText: 'text',
         });
 
-        $('#object_tagsinput_add').on('click', function(){
-            elt.tagsinput('add', { 
-                "value": $('#object_tagsinput_value').val(), 
-                "text": $('#object_tagsinput_city').val(), 
-                "continent": $('#object_tagsinput_continent').val()    
-            });
+        $('#add_keyword').on('click', function(){
+            if ($('#keywords_select').val()){
+              elt.tagsinput('add', {
+                "value": $('#keywords_select').val(),
+                "text": $('#keywords_select [value=' + $('#keywords_select').val() + ']').html()
+                // "continent": $('#object_tagsinput_continent').val()
+              });
+            }
         });
 
-        elt.tagsinput('add', { "value": 1 , "text": "Amsterdam"   , "continent": "Europe"    });
-        elt.tagsinput('add', { "value": 4 , "text": "Washington"  , "continent": "America"   });
-        elt.tagsinput('add', { "value": 7 , "text": "Sydney"      , "continent": "Australia" });
-        elt.tagsinput('add', { "value": 10, "text": "Beijing"     , "continent": "Asia"      });
-        elt.tagsinput('add', { "value": 13, "text": "Cairo"       , "continent": "Africa"    });
-    }
+        // elt.tagsinput('add', { "value": 1 , "text": "Amsterdam"   , "continent": "Europe"    });
+        // elt.tagsinput('add', { "value": 4 , "text": "Washington"  , "continent": "America"   });
+        // elt.tagsinput('add', { "value": 7 , "text": "Sydney"      , "continent": "Australia" });
+        // elt.tagsinput('add', { "value": 10, "text": "Beijing"     , "continent": "Asia"      });
+        // elt.tagsinput('add', { "value": 13, "text": "Cairo"       , "continent": "Africa"    });
+    };
 
     var handleDemo2 = function() {
 
@@ -111,8 +113,8 @@ var ComponentsBootstrapTagsinput = function() {
         //main function to initiate the module
         init: function() {
             handleDemo1();
-            handleDemo2();
-            handleDemo3();
+            // handleDemo2();
+            // handleDemo3();
         }
     };
 

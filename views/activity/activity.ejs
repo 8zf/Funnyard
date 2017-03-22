@@ -8,8 +8,11 @@
                     <div class="blog-single-head">
                         <h1 class="blog-single-head-title"><%= activity.Theme %></h1>
                         <div class="blog-single-head-date">
-                            <i class="icon-calendar font-blue"></i>
-                            <a href="javascript:;"><%= activity.HoldTime %></a>
+                            <span style="color: #9aa5b2">
+                                开始时间：
+                            </span>
+                            <!--<i class="icon-calendar font-blue"></i>-->
+                            <a href="javascript:;"><%= activity.HoldTime.toLocaleString() %></a>
                         </div>
                     </div>
                     <div class="blog-single-desc activity-content" id="activity_content">
@@ -107,9 +110,7 @@
                                 <input type="text" placeholder="Your Website"
                                        class="form-control c-square"></div>
                             <div class="form-group">
-                                                            <textarea rows="8" name="message"
-                                                                      placeholder="Write comment here ..."
-                                                                      class="form-control c-square"></textarea>
+                                <textarea rows="8" name="message" placeholder="Write comment here ..." class="form-control c-square"></textarea>
                             </div>
                             <div class="form-group">
                                 <button type="submit"
@@ -130,7 +131,7 @@
                                    placeholder="Search Blog"></div>
                     </div>
                     <div class="blog-single-sidebar-recent">
-                        <h3 class="blog-sidebar-title uppercase">Recent Posts</h3>
+                        <h3 class="blog-sidebar-title uppercase">最近发布的活动</h3>
                         <ul>
                             <li>
                                 <a href="javascript:;">Metronic Admin Progress</a>
@@ -147,36 +148,41 @@
                         </ul>
                     </div>
                     <div class="blog-single-sidebar-tags">
-                        <h3 class="blog-sidebar-title uppercase">Tags</h3>
+                        <h3 class="blog-sidebar-title uppercase">关键词</h3>
                         <ul class="blog-post-tags">
+                            <% for (var i = 0; i < activity.Features.length; i++) { %>
                             <li class="uppercase">
-                                <a href="javascript:;">Bootstrap</a>
+                                <a href="javascript:;"><%= activity.Features[i].Name %></a>
                             </li>
-                            <li class="uppercase">
-                                <a href="javascript:;">Sass</a>
-                            </li>
-                            <li class="uppercase">
-                                <a href="javascript:;">HTML</a>
-                            </li>
-                            <li class="uppercase">
-                                <a href="javascript:;">CSS</a>
-                            </li>
-                            <li class="uppercase">
-                                <a href="javascript:;">Gulp</a>
-                            </li>
-                            <li class="uppercase">
-                                <a href="javascript:;">Framework</a>
-                            </li>
-                            <li class="uppercase">
-                                <a href="javascript:;">Admin Theme</a>
-                            </li>
-                            <li class="uppercase">
-                                <a href="javascript:;">UI Features</a>
-                            </li>
+                            <% } %>
+                            <!--<li class="uppercase">-->
+                            <!--<a href="javascript:;">Bootstrap</a>-->
+                            <!--</li>-->
+                            <!--<li class="uppercase">-->
+                            <!--<a href="javascript:;">Sass</a>-->
+                            <!--</li>-->
+                            <!--<li class="uppercase">-->
+                            <!--<a href="javascript:;">HTML</a>-->
+                            <!--</li>-->
+                            <!--<li class="uppercase">-->
+                            <!--<a href="javascript:;">CSS</a>-->
+                            <!--</li>-->
+                            <!--<li class="uppercase">-->
+                            <!--<a href="javascript:;">Gulp</a>-->
+                            <!--</li>-->
+                            <!--<li class="uppercase">-->
+                            <!--<a href="javascript:;">Framework</a>-->
+                            <!--</li>-->
+                            <!--<li class="uppercase">-->
+                            <!--<a href="javascript:;">Admin Theme</a>-->
+                            <!--</li>-->
+                            <!--<li class="uppercase">-->
+                            <!--<a href="javascript:;">UI Features</a>-->
+                            <!--</li>-->
                         </ul>
                     </div>
                     <div class="blog-single-sidebar-links">
-                        <h3 class="blog-sidebar-title uppercase">Useful Links</h3>
+                        <h3 class="blog-sidebar-title uppercase">其他链接</h3>
                         <ul>
                             <li>
                                 <a href="javascript:;">Lorem Ipsum </a>
@@ -195,41 +201,41 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="blog-single-sidebar-ui">
-                        <h3 class="blog-sidebar-title uppercase">UI Examples</h3>
-                        <div class="row ui-margin">
-                            <div class="col-xs-4 ui-padding">
-                                <a href="javascript:;">
-                                    <img src="../assets/pages/img/background/1.jpg"/>
-                                </a>
-                            </div>
-                            <div class="col-xs-4 ui-padding">
-                                <a href="javascript:;">
-                                    <img src="../assets/pages/img/background/37.jpg"/>
-                                </a>
-                            </div>
-                            <div class="col-xs-4 ui-padding">
-                                <a href="javascript:;">
-                                    <img src="../assets/pages/img/background/57.jpg"/>
-                                </a>
-                            </div>
-                            <div class="col-xs-4 ui-padding">
-                                <a href="javascript:;">
-                                    <img src="../assets/pages/img/background/53.jpg"/>
-                                </a>
-                            </div>
-                            <div class="col-xs-4 ui-padding">
-                                <a href="javascript:;">
-                                    <img src="../assets/pages/img/background/59.jpg"/>
-                                </a>
-                            </div>
-                            <div class="col-xs-4 ui-padding">
-                                <a href="javascript:;">
-                                    <img src="../assets/pages/img/background/42.jpg"/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="blog-single-sidebar-ui">-->
+                        <!--<h3 class="blog-sidebar-title uppercase">UI Examples</h3>-->
+                        <!--<div class="row ui-margin">-->
+                            <!--<div class="col-xs-4 ui-padding">-->
+                                <!--<a href="javascript:;">-->
+                                    <!--<img src="../assets/pages/img/background/1.jpg"/>-->
+                                <!--</a>-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-4 ui-padding">-->
+                                <!--<a href="javascript:;">-->
+                                    <!--<img src="../assets/pages/img/background/37.jpg"/>-->
+                                <!--</a>-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-4 ui-padding">-->
+                                <!--<a href="javascript:;">-->
+                                    <!--<img src="../assets/pages/img/background/57.jpg"/>-->
+                                <!--</a>-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-4 ui-padding">-->
+                                <!--<a href="javascript:;">-->
+                                    <!--<img src="../assets/pages/img/background/53.jpg"/>-->
+                                <!--</a>-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-4 ui-padding">-->
+                                <!--<a href="javascript:;">-->
+                                    <!--<img src="../assets/pages/img/background/59.jpg"/>-->
+                                <!--</a>-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-4 ui-padding">-->
+                                <!--<a href="javascript:;">-->
+                                    <!--<img src="../assets/pages/img/background/42.jpg"/>-->
+                                <!--</a>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>

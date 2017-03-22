@@ -104,6 +104,14 @@ module.exports = {
     Owner: {
       model: 'Publisher'
     }
+  },
+  findByKeyword: function (option, cb) {
+    Activity.findByKeyword({keyword: "学术科技"}, function (err, records) {
+
+    })
+  },
+  findByName: function (option, cb) {
+
   }
 };
 

@@ -54,6 +54,7 @@ module.exports.routes = {
   'get /participate': 'ParticipateController.participate',
   'get /quit': 'ParticipateController.quit',
   'get /get_activities': 'HomeController.getActivities',
+  'get /search': 'ActivityController.search',
 
   /********* SPACE/CONSOLE *********/
   'get /user_space': 'UserController.toSpace',
