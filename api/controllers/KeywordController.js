@@ -6,6 +6,8 @@
  */
 
 module.exports = {
-	
+  getRelatedActivity: function (req, res) {
+    
+  }
 };
 

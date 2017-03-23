@@ -62,7 +62,7 @@ module.exports = {
                 return res.serverError("活动添加关键词失败" + err);
               }
               console.log("活动与分类关联");
-              return res.redirect("/activity/" + new_record.ActivityID);
+              return res.redirect("/ac/" + new_record.ActivityID);
             });
           })
         });
@@ -79,7 +79,7 @@ module.exports = {
         if (err) {
           return res.serverError(err);
         }
-        console.log("展示活动：" + record.ActivityID);
+        // console.log("展示活动：" + record.ActivityID);
         return res.view('activity/activity', {
           activity: record
         });

@@ -3,15 +3,15 @@ var App = require('alidayu-node');
 var app = new App('23632391', '390ec7ef515d368c940e3e2b996ae82f');
 
 module.exports = {
-  sendVerifyCode: function (options, callback) {
+  sendSMS: function (options, callback) {
     app.smsSend({
       sms_free_sign_name: '趣往',
-      sms_param: {"verify_code": options.code},
+      sms_param: options.params,
       rec_num: options.rec_num,
-      sms_template_code: 'SMS_46545011'
+      sms_template_code: options.template_code
     }, callback);
   },
-  sendSMS: function (req, res) {
+  sendRegisterSMS: function (req, res) {
     var rec_num = parseInt(req.param("phone_num"));
     if (rec_num == "") {
       return res.send("号码为空");
@@ -23,7 +23,7 @@ module.exports = {
     if (type == "user") {
       target = User;
     }
-    else if(type = "publisher") {
+    else if (type = "publisher") {
       target = Publisher;
     }
     //确认手机号是否被注册
@@ -35,7 +35,7 @@ module.exports = {
         console.log("手机号码已注册");
         return res.send("手机号码已注册");
       }
-      this_.sendVerifyCode({code: verify_code, rec_num: rec_num}, function (result) {
+      this_.sendSMS({rec_num: rec_num, template_code: 'SMS_52085266', params: {"verify_code": verify_code}}, function (result) {
         if (result.alibaba_aliqin_fc_sms_num_send_response) {
           if (result.alibaba_aliqin_fc_sms_num_send_response.result.err_code == '0')
             result = true;
@@ -90,7 +90,5 @@ module.exports = {
         }
       });
     });
-
-
   }
 };

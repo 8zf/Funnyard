@@ -50,7 +50,7 @@ module.exports.routes = {
   /********* ACTIVITY *********/
   'get /publish': 'PublishController.publish',
   'post /publish': 'ActivityController.add',
-  'get /activity/:aid': 'ActivityController.show',
+  'get /ac/:aid': 'ActivityController.show',
   'get /participate': 'ParticipateController.participate',
   'get /quit': 'ParticipateController.quit',
   'get /get_activities': 'HomeController.getActivities',

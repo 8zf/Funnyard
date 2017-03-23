@@ -47,7 +47,7 @@ module.exports = {
       type: 'datetime'
     },
     PhoneNum: {
-      type: 'integer'
+      type: 'string'
     },
     AuditWay: {
       type: 'string'

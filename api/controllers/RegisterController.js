@@ -10,7 +10,7 @@ module.exports = {
   },
 
   sendSMS: function (req, res) {
-    SMSService.sendSMS(req, res);
+    SMSService.sendRegisterSMS(req, res);
   }
 
   // registerUser: function (req, res) {

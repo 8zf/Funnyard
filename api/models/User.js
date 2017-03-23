@@ -24,7 +24,7 @@ module.exports = {
       type: 'string'
     },
     PhoneNum: {
-      type: 'integer'
+      type: 'string'
     },
     Credit: {
       type: 'integer',

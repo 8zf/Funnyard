@@ -105,8 +105,8 @@ module.exports = {
       model: 'Publisher'
     }
   },
-  findByKeyword: function (option, cb) {
-    Activity.findByKeyword({keyword: "学术科技"}, function (err, records) {
+  findByKeyword: function (key, cb) {
+    Activity.findByKeyword(key, function (err, records) {
 
     })
   },

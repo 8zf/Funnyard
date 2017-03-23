@@ -27,40 +27,65 @@ module.exports = {
     //检查现在报名人数是否已满，活动是否已经开始或结束
     Activity.findOne({ActivityID: req.param("aid")})
       .populate('Participant')
-      .exec(function (err, record) {
+      .exec(function (err, activity) {
         if (err) {
           return res.serverError(err);
         }
-        if (typeof record == 'undefined') {
+        if (typeof activity == 'undefined') {
           return res.notFound("未找到相符的活动");
         }
-        if (record.NowNum >= record.MaxNum) {
+        if (activity.NowNum >= activity.MaxNum) {
           return res.forbidden("报名人数已满");
         }
         var time_now = new Date().getTime();
-        var hold_time = new Date(record.HoldTime).getTime();
+        var hold_time = new Date(activity.HoldTime).getTime();
         if (time_now >= hold_time) {
           return res.forbidden("活动报名已截止");
         }
         //确认是否已经报名
-        if (isParticipant(req.session.userid, record.Participant)) {
+        if (isParticipant(req.session.userid, activity.Participant)) {
           return res.forbidden("您已报名");
         }
         //可以报名
-        record.Participant.add(req.session.userid);
-        record.NowNum++;
-        record.save(function (err) {
+        activity.Participant.add(req.session.userid);
+        activity.NowNum++;
+        activity.save(function (err) {
           if (err) {
             //回滚一次
-            console.log("参与活动数据库添加失败");
-            console.log(err);
-            record.NowNum--;
-            record.save(function (err) {
+            sails.log.error("参与活动数据库添加失败");
+            sails.log.error(err);
+            activity.NowNum--;
+            activity.save(function (err) {
               if (err)
                 return res.serverError(err);
             });
             return res.serverError(err);
           }
+          User.findOne({UserID: req.session.userid}).exec(function (err, user) {
+            if (err) {
+              sails.log.error("提醒用户参加活动成功时无法找到用户");
+              sails.log.error(err);
+            }
+            var time = activity.HoldTime;
+            SMSService.sendSMS({
+              params: {
+                "nickname": user.Nickname,
+                "a_name": activity.Theme,
+                "t_month": (time.getMonth() + 1).toString(),
+                "t_day": time.getDate().toString(),
+                "t_hour": (time.getHours() + 1).toString(),
+                "t_minute": (time.getMinutes() + 1).toString(),
+              }, rec_num: user.PhoneNum, template_code: 'SMS_57225339'
+            }, function (response) {
+              if (response.error_response) {
+                sails.log.error("提醒用户报名成功失败");
+                sails.log.error(response);
+              }
+              else if (response.alibaba_aliqin_fc_sms_num_send_response) {
+
+              }
+            });
+          });
           //参与成功
           return res.send('报名成功');
         })
@@ -72,23 +97,42 @@ module.exports = {
     //检查是否是参与者
     Activity.findOne({ActivityID: req.param("aid")})
       .populate('Participant')
-      .exec(function (err, record) {
+      .exec(function (err, activity) {
         if (err) {
           return res.serverError(err);
         }
-        if (typeof record == 'undefined') {
+        if (typeof activity == 'undefined') {
           return res.notFound("未找到相符的活动");
         }
-        // console.log(record);
-        if (!isParticipant(req.session.userid, record.Participant)) {
+        // console.log(activity);
+        if (!isParticipant(req.session.userid, activity.Participant)) {
           return res.forbidden("未参加活动")
         }
-        record.NowNum--;
-        record.Participant.remove(req.session.userid);
-        record.save(function (err) {
+        activity.NowNum--;
+        activity.Participant.remove(req.session.userid);
+        activity.save(function (err) {
           if (err) {
             return res.serverError(err);
           }
+          User.findOne({UserID: req.session.userid}).exec(function (err, user) {
+            if (err) {
+              sails.log.error("提醒用户离开活动成功时无法找到用户");
+              sails.log.error(err);
+            }
+            SMSService.sendSMS({
+              params: {"nickname": user.Nickname, "a_name": activity.Theme},
+              rec_num: user.PhoneNum,
+              template_code: 'SMS_57365133'
+            }, function (response) {
+              if (response.error_response) {
+                sails.log.error("提醒用户离开活动失败");
+                sails.log.error(response);
+              }
+              else if (response.alibaba_aliqin_fc_sms_num_send_response) {
+
+              }
+            });
+          });
           return res.send("取消成功");
         });
       });
