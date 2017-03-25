@@ -9,19 +9,15 @@ module.exports = {
   autoPK: true,
   autoCreatedAt: true,
   autoUpdatedAt: true,
+  tableName: 'Comment',
   attributes: {
-    ActivityID: {
-      type: 'string'
+    From: {
+      collection: 'User',
+      via: 'Comment'
     },
-    Type: {
-      // to_activity & to_user & to_publisher
-      type: 'string'
-    },
-    FromID: {
-      type: 'string'
-    },
-    ToID: {
-      type: 'string'
+    To: {
+      collection: 'Activity',
+      via: 'Comment'
     },
     Content: {
       type: 'string'

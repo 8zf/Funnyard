@@ -31,7 +31,7 @@ module.exports = {
   validateUser:function (req, res) {
     User.find({or: [{Nickname: req.param('Name')}, {PhoneNum: req.param('Name')}]}).exec(function (err, result) {
       if (err) {
-        return res.view('wrong', {message: "error occured: " + err});
+        return res.serverError(err);
       }
 
       if (result.length == 0) {

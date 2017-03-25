@@ -114,7 +114,7 @@ module.exports = {
   },
 
   delete: function (req, res) {
-
+    var id = req.param("a_id");
   }
 };
 

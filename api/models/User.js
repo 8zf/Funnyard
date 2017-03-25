@@ -57,7 +57,7 @@ module.exports = {
     },
     Icon: {
       type: 'string',
-      defaultsTo: 'http://image.funnyard.com/default-icon.jpg'
+      defaultsTo: 'https://omwktgfmo.qnssl.com/default-icon.jpg'
     },
     Participate: {
       collection: 'Activity',
@@ -71,6 +71,10 @@ module.exports = {
       collection: 'User',
       via: 'Like'
     },
+    Comment: {
+      collection: 'Comment',
+      via: 'From'
+    }
   },
   getProfile: function (option, callback) {
 

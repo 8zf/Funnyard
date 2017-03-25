@@ -103,6 +103,10 @@ module.exports = {
     },
     Owner: {
       model: 'Publisher'
+    },
+    Comment: {
+      collection: 'Comment',
+      via: 'To'
     }
   },
   findByKeyword: function (key, cb) {

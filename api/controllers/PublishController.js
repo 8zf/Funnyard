@@ -111,7 +111,7 @@ module.exports = {
 
   ueditor: ueditor('/home/zhang/Desktop/funnyard-on-sails/funnyard/assets', function (req, res, next) {
 
-    console.log(req.param("action"));
+    // console.log(req.param("action"));
     // ueditor 客户发起上传图片请求
     if (req.param("action") === 'uploadimage') {
 

@@ -1,6 +1,8 @@
 <script type="text/javascript" src="//api.map.baidu.com/library/RichMarker/1.2/src/RichMarker_min.js"></script>
-<script type="text/javascript" src="//api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
-<script type="text/javascript" src="//api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+<script type="text/javascript"
+        src="//api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+<script type="text/javascript"
+        src="//api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
 <div class="row">
     <div class="col-md-2">
 
@@ -18,7 +20,7 @@
         <div class="portlet light portlet-fit ">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class=" icon-layers font-green"></i>
+                    <i class="fa fa-calendar"></i>
                     <span class="caption-subject font-red bold uppercase"><%= activities[index].HoldTime.toLocaleString() %>
                         开始</span>
                     <div class="caption-desc font-grey-cascade"><%= activities[index].Location %></div>
@@ -62,8 +64,7 @@
   if (navigator.geolocation) {
     toastr.success("支持获取地理位置");
     navigator.geolocation.getCurrentPosition(function (position) {
-      toastr.success("来自网页的坐标");
-      toastr.success(position.coords.longitude + ',' + position.coords.latitude);
+      toastr.success("来自网页的坐标" + position.coords.longitude + ',' + position.coords.latitude);
       var convertor = new BMap.Convertor();
       var origin_point = new BMap.Point(position.coords.longitude, position.coords.latitude);
       convertor.translate([origin_point], 1, 5, function (data) {
@@ -73,8 +74,7 @@
           var new_point = new BMap.Point(data.points[0].lng, data.points[0].lat);
 //          map.setCenter(data.points[0]);
           map.centerAndZoom(new_point, 21);
-          toastr.success("新坐标");
-          toastr.success(data.points[0].lng + ',' + data.points[0].lat);
+          toastr.success("新坐标" + data.points[0].lng + ',' + data.points[0].lat);
         }
       });
     })
@@ -86,9 +86,9 @@
   }
 
   $.ajax({
-    url:"/get_activities",
+    url: "/get_activities",
     method: "GET",
-    success: function (activities,status,xhr) {
+    success: function (activities, status, xhr) {
 //      activities_markers;
       for (i in activities) {
         var temp = new BMap.Point(parseFloat(activities[i].LocationLng), parseFloat(activities[i].LocationLat));
@@ -96,14 +96,18 @@
 //        map.addOverlay(marker);
         activities_markers.push(marker);
       }
-      var markerClusterer = new BMapLib.MarkerClusterer(map, {markers: activities_markers, minClusterSize: 5, isAverangeCenter:true})
+      var markerClusterer = new BMapLib.MarkerClusterer(map, {
+        markers: activities_markers,
+        minClusterSize: 5,
+        isAverangeCenter: true
+      })
       console.log(activities);
     },
-    error: function (xhr,status,error) {
+    error: function (xhr, status, error) {
 
     }
   });
 
-//  $("div.anchorBL").hide();
+  //  $("div.anchorBL").hide();
 
 </script>

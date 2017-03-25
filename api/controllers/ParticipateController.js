@@ -73,8 +73,8 @@ module.exports = {
                 "a_name": activity.Theme,
                 "t_month": (time.getMonth() + 1).toString(),
                 "t_day": time.getDate().toString(),
-                "t_hour": (time.getHours() + 1).toString(),
-                "t_minute": (time.getMinutes() + 1).toString(),
+                "t_hour": time.getHours().toString(),
+                "t_minute": time.getMinutes().toString(),
               }, rec_num: user.PhoneNum, template_code: 'SMS_57225339'
             }, function (response) {
               if (response.error_response) {
@@ -122,7 +122,7 @@ module.exports = {
             SMSService.sendSMS({
               params: {"nickname": user.Nickname, "a_name": activity.Theme},
               rec_num: user.PhoneNum,
-              template_code: 'SMS_57365133'
+              template_code: 'SMS_57265178'
             }, function (response) {
               if (response.error_response) {
                 sails.log.error("提醒用户离开活动失败");
