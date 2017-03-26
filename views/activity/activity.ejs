@@ -6,7 +6,11 @@
             <div class="col-lg-9">
                 <div class="blog-single-content bordered blog-container">
                     <div class="blog-single-head">
-                        <h1 class="blog-single-head-title"><%= activity.Theme %></h1>
+                        <h1 class="blog-single-head-title"><%= activity.Theme %>
+                        <% if (new Date().getTime() > activity.HoldTime.getTime()) { %>
+                            (已停止报名)
+                        <% } %>
+                        </h1>
                         <div class="blog-single-head-date">
                             <span style="color: #9aa5b2">
                                 开始时间：
@@ -19,11 +23,14 @@
                         <%- activity.Content %>
                     </div>
                     <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" id="join_quit" data-style="slide-up" data-spinner-color="#333">
-                    <span class="ladda-label">
-                        参加活动
-                    </span>
+                        <span class="ladda-label">
+                            参加活动
+                        </span>
                         <div class="ladda-progress" style="width: 0px;"></div>
                     </button>
+                    <div style="float: right">
+                        当前人数：<%= activity.NowNum %>/<%= activity.MaxNum %>
+                    </div>
                     <div class="blog-comments">
                         <h3 class="sbold blog-comments-title">评论(<%= activity.Comment.length %>)</h3>
                         <div class="c-comment-list">

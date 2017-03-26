@@ -3,6 +3,7 @@ module.exports = {
   
   default: function (req, res) {
     Activity.find()
+      .sort('createdAt DESC')
       .exec(function (err, records) {
       if (err) {
         return res.serverError(err);

@@ -24,7 +24,7 @@
             cols: 1
         }],
         defaultFilter: '*',
-        animationType: 'rotateSides',
+        animationType: 'quicksand',
         gapHorizontal: 10,
         gapVertical: 10,
         gridAdjustment: 'responsive',

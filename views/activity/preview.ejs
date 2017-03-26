@@ -1,0 +1,33 @@
+<!-- BEGIN PAGE CONTENT INNER -->
+<div class="page-content-inner">
+    <div class="blog-page blog-content-2">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="blog-single-content bordered blog-container">
+                    <div class="blog-single-head">
+                        <h1 class="blog-single-head-title">
+                            <a href="/ac/<%= activity.ActivityID %>">
+                                <%= activity.Theme %>
+                                <% if (new Date().getTime() > activity.HoldTime.getTime()) { %>
+                                (已停止报名)
+                                <% } %>
+                            </a>
+                        </h1>
+                        <div class="blog-single-head-date">
+                            <span style="color: #9aa5b2">
+                                开始时间：
+                            </span>
+                            <!--<i class="icon-calendar font-blue"></i>-->
+                            <a href="javascript:;"><%= activity.HoldTime.toLocaleString() %></a>
+                            <span style="color: #9aa5b2">| 当前人数：<%= activity.NowNum %>/<%= activity.MaxNum %></span>
+                        </div>
+                    </div>
+                    <div class="blog-single-desc activity-content">
+                        <%- activity.Content %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT INNER -->

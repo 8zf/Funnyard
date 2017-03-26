@@ -81,11 +81,28 @@ module.exports = {
           return res.serverError(err);
         }
         for (comment of record.Comment) {
-          
+
         }
         // console.log("展示活动：" + record.ActivityID);
         return res.view('activity/activity', {
           activity: record
+        });
+      });
+  },
+
+  preview: function (req, res) {
+    Activity.findOne({ActivityID: req.param('aid')})
+      .populate("Owner")
+      .populate("Features")
+      .populate("Comment")
+      .exec(function (err, record) {
+        if (err) {
+          return res.serverError(err);
+        }
+        // console.log("展示活动：" + record.ActivityID);
+        return res.view('activity/preview', {
+          activity: record,
+          layout: false
         });
       });
   },
@@ -117,8 +134,15 @@ module.exports = {
     })
   },
 
-  delete: function (req, res) {
-    var id = req.param("a_id");
+  remove: function (req, res) {
+    //删除之后要通知所有参与活动的用户
+    var aid = req.param("aid");
+    Activity.destory({ActivityID: aid}).exec(function (err) {
+      if (err) {
+        return res.serverError(err);
+      }
+      return res.send("success");
+    });
   }
 };
 
