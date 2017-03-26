@@ -68,6 +68,9 @@ module.exports.routes = {
   'post /upload_icon': 'FileController.uploadIcon',
   'post /upload_cover': 'FileController.uploadCover',
 
+  /********* COMMENT *********/
+  'post /add_comment': 'CommentController.add',
+
   /********* TEST *********/
 
   /***************************************************************************

@@ -55,7 +55,7 @@ module.exports.policies = {
     'toSpace': ['isUser']
   },
   CommentController: {
-    '*': ['sessionAuth']
+    '*': ['isUser']
   }
 	// RabbitController: {
 

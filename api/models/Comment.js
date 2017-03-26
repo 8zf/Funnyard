@@ -9,7 +9,7 @@ module.exports = {
   autoPK: true,
   autoCreatedAt: true,
   autoUpdatedAt: true,
-  tableName: 'Comment',
+  tableNactivityame: 'Comment',
   attributes: {
     From: {
       collection: 'User',
@@ -20,6 +20,12 @@ module.exports = {
       via: 'Comment'
     },
     Content: {
+      type: 'string'
+    },
+    Icon: {
+      type: 'string'
+    },
+    Nickname: {
       type: 'string'
     }
   }

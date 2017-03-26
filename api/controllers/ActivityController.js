@@ -75,9 +75,13 @@ module.exports = {
     Activity.findOne({ActivityID: req.param('aid')})
       .populate("Owner")
       .populate("Features")
+      .populate("Comment")
       .exec(function (err, record) {
         if (err) {
           return res.serverError(err);
+        }
+        for (comment of record.Comment) {
+          
         }
         // console.log("展示活动：" + record.ActivityID);
         return res.view('activity/activity', {
