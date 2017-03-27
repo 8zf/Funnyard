@@ -1,0 +1,81 @@
+<!-- BEGIN PAGE CONTENT INNER -->
+<div class="page-content-inner">
+    <div class="portfolio-content portfolio-3">
+        <div class="clearfix">
+            <select style="float: right; border: 1px;" class=" btn  btn-default" id="ac_filter" name="ac_filter">
+                <option value="">所有</option>
+                <option value="viewtime">最热门</option>
+                <option value="starttime">即将开始</option>
+                <option value="ing">正在举行</option>
+                <option value="outofdate">已结束</option>
+            </select>
+            <!--<div id="js-filters-lightbox-gallery1" class="cbp-l-filters-dropdown cbp-l-filters-dropdown-floated">-->
+            <!--<div class="cbp-l-filters-dropdownWrap border-grey-salsa">-->
+            <!--<div class="cbp-l-filters-dropdownHeader uppercase">活动</div>-->
+            <!--<div class="cbp-l-filters-dropdownList">-->
+            <!--<div class="cbp-filter-item-active cbp-filter-item uppercase"> 所有-->
+            <!--</div>-->
+            <!--<div class="cbp-filter-item uppercase"> 最热门-->
+            <!--</div>-->
+            <!--<div class="cbp-filter-item uppercase"> 即将开始-->
+            <!--</div>-->
+            <!--<div class="cbp-filter-item uppercase"> 正在举行-->
+            <!--</div>-->
+            <!--<div class="cbp-filter-item uppercase"> 已结束-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <div id="js-filters-lightbox-gallery2" class="cbp-l-filters-button cbp-l-filters-left">
+                <div data-filter="*" class="cbp-filter-item-active cbp-filter-item btn blue btn-outline uppercase">所有
+                </div>
+                <div data-filter=".sci" class="cbp-filter-item btn blue btn-outline uppercase">学术科技</div>
+                <div data-filter=".fun" class="cbp-filter-item btn blue btn-outline uppercase">娱乐休闲</div>
+                <div data-filter=".pty" class="cbp-filter-item btn blue btn-outline uppercase">社团活动</div>
+                <div data-filter=".exh" class="cbp-filter-item btn blue btn-outline uppercase">展览演出</div>
+                <div data-filter=".spt" class="cbp-filter-item btn blue btn-outline uppercase">体育赛事</div>
+                <div data-filter=".job" class="cbp-filter-item btn blue btn-outline uppercase">兼职快讯</div>
+            </div>
+        </div>
+        <div id="js-grid-lightbox-gallery" class="cbp">
+            <% var keyword_map = ['', 'sci', 'fun', 'pty', 'sxh', 'spt', 'job']; %>
+            <% for (activity of activities) { %>
+            <div class="cbp-item <% for (var i = 0; i < activity.Features.length; i++) { %> <%= keyword_map[activity.Features[i].id] %> <% } %>">
+                <a href="/ac_preview/<%= activity.ActivityID %>" class="cbp-caption cbp-singlePageInline"
+                   data-title="Bolt UI<br>by Tiberiu Neamu" rel="nofollow">
+                    <div class="cbp-caption-defaultWrap">
+                        <img src=<%= activity.Poster %> alt=<%= activity.Theme %>></div>
+                    <div class="cbp-caption-activeWrap">
+                        <div class="cbp-l-caption-alignLeft">
+                            <div class="cbp-l-caption-body">
+                                <div class="cbp-l-caption-title"><%= activity.Theme %></div>
+                                <div class="cbp-l-caption-desc"><%= activity.Location %></div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <% } %>
+        </div>
+        <div id="js-loadMore-lightbox-gallery" class="cbp-l-loadMore-button">
+            <a href="../assets/global/plugins/cubeportfolio/ajax/loadMore3.html"
+               class="cbp-l-loadMore-link btn grey-mint btn-outline" rel="nofollow">
+                <span class="cbp-l-loadMore-defaultText">LOAD MORE</span>
+                <span class="cbp-l-loadMore-loadingText">LOADING...</span>
+                <span class="cbp-l-loadMore-noMoreLoading">NO MORE WORKS</span>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- END PAGE CONTENT INNER -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script>
+  $("#ac_filter").change(function () {
+    console.log("???");
+    if (this.value != "")
+      window.location.href = window.location.href.substring(0, window.location.href.indexOf('?')) + "?order=" + this.value;
+  })
+</script>
+<script src="/assets/pages/scripts/portfolio-ac.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->

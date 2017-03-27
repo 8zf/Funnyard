@@ -80,13 +80,61 @@ module.exports = {
         if (err) {
           return res.serverError(err);
         }
-        for (comment of record.Comment) {
-
-        }
+        record.ViewTime++;
+        record.save(function (err) {
+          if (err) {
+            return res.serverError(err);
+          }
+        });
         // console.log("展示活动：" + record.ActivityID);
         return res.view('activity/activity', {
           activity: record
         });
+      });
+  },
+
+  showAll: function (req, res) {
+    Activity.find()
+      .populate("Features")
+      .exec(function (err, activities) {
+        if (err) {
+          return res.serverError(err);
+        }
+        var order;
+        if (req.param("order") != "") {
+          order = req.param("order");
+          // console.log("order exists");
+          switch (order) {
+            case "viewtime":
+              activities.sort(function (a, b) {
+                return parseInt(b.ViewTime) - parseInt(a.ViewTime);
+              });
+              break;
+            case "starttime":
+              activities.sort(function (a, b) {
+                //时间差从小到大 a>b
+                return a.HoldTime.getTime() > b.HoldTime.getTime();
+              });
+              break;
+            case "ing":
+              activities = activities.filter(function (element) {
+                return ((element.EndTime.getTime() > new Date().getTime()) && (element.HoldTime.getTime() < new Date().getTime()));
+              });
+              break;
+            case "outofdate":
+              activities = activities.filter(function (element) {
+                // console.log(element.EndTime.getTime() + ", " + new Date().getTime());
+                return element.EndTime.getTime() < new Date().getTime();
+              });
+              break;
+            default:
+              break;
+          }
+        }
+        // console.log(activities);
+        return res.view('activity/activities', {
+          activities: activities
+        })
       });
   },
 

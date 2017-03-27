@@ -42,12 +42,10 @@ module.exports = {
       type: 'datetime',
       required: true
     },
-    // HoldTimeStamp: {
-    //   type: 'integer'
-    // },
-    // EndTimeStamp: {
-    //   type: 'integer'
-    // },
+    ViewTime: {
+      type: 'integer',
+      defaultsTo: 0
+    },
     MaxNum: {
       type: 'integer'
     },
