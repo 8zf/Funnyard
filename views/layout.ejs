@@ -106,11 +106,35 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END HEAD -->
 
 <body class="page-container-bg-solid page-header-top-fixed">
-<% include header %>
+<div class="page-wrapper">
+    <div class="page-wrapper-row">
+        <div class="page-wrapper-top">
+            <!-- BEGIN HEADER -->
+            <% include header %>
+            <!-- END HEADER -->
+        </div>
+    </div>
+    <div class="page-wrapper-row full-height">
+        <div class="page-wrapper-middle">
+            <!-- BEGIN CONTAINER -->
+            <div class="page-container">
+                <!-- BEGIN CONTENT -->
+                <!--page-content-wrapper-->
+                <%- body %>
+                <!-- END CONTENT -->
+            </div>
+            <!-- END CONTAINER -->
+        </div>
+    </div>
+    <div class="page-wrapper-row">
+        <div class="page-wrapper-bottom">
+            <!-- BEGIN FOOTER -->
+            <% include footer %>
+            <!-- END FOOTER -->
+        </div>
+    </div>
+</div>
 
-<%- body %>
-
-<% include footer %>
 
 <!--[if lt IE 9]> <script src="//omwkklawt.qnssl.com/global/plugins/respond.min.js"></script> <script src="//omwkklawt.qnssl.com/global/plugins/excanvas.min.js"></script> <script src="//omwkklawt.qnssl.com/global/plugins/ie8.fix.min.js"></script> <![endif]-->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->

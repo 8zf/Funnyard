@@ -1,0 +1,85 @@
+<!--按照创建时间排序-->
+<!--正在进行的green-seagreen，未开始blue，结束grey-salt-->
+<!--功能：全屏，收起，删除活动-->
+<div class="page-content-wrapper">
+    <div class="page-head">
+        <div class="container">
+            <!-- BEGIN PAGE TITLE -->
+            <div class="page-title">
+                <h1>管理您发布的活动
+                    <!--<small>boxed bootstrap portlet samples</small>-->
+                </h1>
+            </div>
+            <!-- END PAGE TITLE -->
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="container">
+            <div class="page-content-inner">
+                <div class="row" align="center">
+                    <% state_map = {
+                        "NOT_STARTED_YET": "blue",
+                        "ING": "green-seagreen",
+                        "ENDED": "grey-salt"
+                    } %>
+                    <% for(activity of publisher.Publish) { %>
+                    <div class="col-md-6 col-sm-12 col-lg-6">
+                        <!-- BEGIN Portlet PORTLET-->
+                        <div class="portlet box <%= state_map[activity.State] %>">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <a href="/ac/<%= activity.ActivityID %>" style="color: white;"><%= activity.Theme %></a>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse"> </a>
+                                    <!--<a href="" class="fullscreen"> </a>-->
+                                    <!--<a href="#portlet-config" data-toggle="modal" class="config"> </a>-->
+                                </div>
+                                <div class="actions">
+                                    <a href="javascript:;" class="btn btn-sm btn-default delete-ac" style="color: white;">
+                                        <input type="hidden" class="ac-id" value="<%= activity.ActivityID %>">
+                                        <i class="fa fa-close"></i> 删除 </a>
+                                </div>
+                                <span class="caption" style="font-size: 13px; padding-top: 14px;">
+                                    &nbsp(<%= activity.status %>)
+                                </span>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="scroller" style="height:200px" data-rail-visible="1"
+                                     data-rail-color="white"
+                                     data-handle-color="#a1b2bd">
+                                    <%- activity.Content %>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Portlet PORTLET-->
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".delete-ac").click(function (e) {
+//      console.log(this.childNodes);
+      var result;
+      for (node of this.childNodes) {
+        if (node.className == "ac-id") {
+          $.ajax({
+            url: '/activity/remove',
+            type: 'POST',
+            data: {},
+            success: function (result,status,xhr) {
+              
+            },
+            error: function (xhr,status,error) {
+              
+            }
+          });
+        }
+      }
+
+    });
+</script>

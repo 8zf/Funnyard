@@ -1,231 +1,229 @@
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
+    <!-- BEGIN PAGE HEAD-->
+    <!-- END PAGE HEAD-->
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content">
-        <!-- BEGIN PAGE HEAD-->
-
-        <!-- END PAGE HEAD-->
-        <!-- BEGIN PAGE BREADCRUMB -->
-
-        <!-- END PAGE BREADCRUMB -->
-        <!-- BEGIN PAGE BASE CONTENT -->
-        <div class="row">
-            <div class="col-md-12">
-                <!-- BEGIN PROFILE SIDEBAR -->
-                <div class="profile-sidebar">
-                    <!-- PORTLET MAIN -->
-                    <div class="portlet light profile-sidebar-portlet">
-                        <!-- SIDEBAR USERPIC -->
-                        <div class="profile-userpic">
-                            <!--<img src="http://image.funnyard.com/default-icon.jpg" class="img-responsive" alt=""> -->
-                            <div id="crop-avatar">
-                                <div class="avatar-view" title="修改头像">
-                                    <img src="<%= req.session.icon %>" class="img-responsive" alt="ICON">
+        <div class="container">
+            <div class="page-content-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- BEGIN PROFILE SIDEBAR -->
+                        <div class="profile-sidebar">
+                            <!-- PORTLET MAIN -->
+                            <div class="portlet light profile-sidebar-portlet">
+                                <!-- SIDEBAR USERPIC -->
+                                <div class="profile-userpic">
+                                    <!--<img src="http://image.funnyard.com/default-icon.jpg" class="img-responsive" alt=""> -->
+                                    <div id="crop-avatar">
+                                        <div class="avatar-view" title="修改头像">
+                                            <img src="<%= req.session.icon %>" class="img-responsive" alt="ICON">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="avatar-modal" aria-hidden="true"
+                                     aria-labelledby="avatar-modal-label" role="dialog"
+                                     tabindex="-1">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <form class="avatar-form" action="/upload_icon" enctype="multipart/form-data"
+                                                  method="post">
+                                                <div class="modal-header">
+                                                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                                                    <h4 class="modal-title" id="avatar-modal-label">修改头像</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="avatar-body">
+                                                        <div class="avatar-upload">
+                                                            <input class="avatar-src" name="avatar_src" type="hidden">
+                                                            <input class="avatar-data" name="avatar_data" type="hidden">
+                                                            <input class="have-file" name="have_file" value="false"
+                                                                   id="have_file" type="hidden">
+                                                            <label for="avatarInput">图片上传</label>
+                                                            <input class="avatar-input" id="avatarInput" name="avatar_file"
+                                                                   type="file"></div>
+                                                        <div class="row">
+                                                            <div class="col-md-9">
+                                                                <div class="avatar-wrapper"></div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="avatar-preview preview-lg"></div>
+                                                                <div class="avatar-preview preview-md"></div>
+                                                                <div class="avatar-preview preview-sm"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row avatar-btns">
+                                                            <!--<div class="col-md-9">-->
+                                                            <!--<div class="btn-group">-->
+                                                            <!--<button class="btn" data-method="rotate" data-option="-90" type="button"-->
+                                                            <!--title="Rotate -90 degrees"><i class="fa fa-undo"></i> 向左旋转-->
+                                                            <!--</button>-->
+                                                            <!--</div>-->
+                                                            <!--<div class="btn-group">-->
+                                                            <!--<button class="btn" data-method="rotate" data-option="90" type="button"-->
+                                                            <!--title="Rotate 90 degrees"><i class="fa fa-repeat"></i> 向右旋转-->
+                                                            <!--</button>-->
+                                                            <!--</div>-->
+                                                            <!--</div>-->
+                                                            <div class="col-md-3">
+                                                                <button class="btn btn-success btn-block avatar-save"
+                                                                        type="submit"><i
+                                                                            class="fa fa-save"></i> 保存修改
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+                                <!-- END SIDEBAR USERPIC -->
+                                <!-- SIDEBAR USER TITLE -->
+                                <div class="profile-usertitle">
+                                    <div class="profile-usertitle-name"> ID: <%= user_info.Nickname %> </div>
+                                    <div class="profile-usertitle-job"> 学校: <%= user_info.School %> </div>
+                                </div>
+                                <!-- END SIDEBAR USER TITLE -->
+                                <!-- SIDEBAR BUTTONS -->
+                                <!--<div class="profile-userbuttons">-->
+                                <!--<button type="button" class="btn btn-circle green btn-sm">Follow</button>-->
+                                <!--<button type="button" class="btn btn-circle red btn-sm">Message</button>-->
+                                <!--</div>-->
+                                <!-- END SIDEBAR BUTTONS -->
+                                <!-- SIDEBAR MENU -->
+                                <div class="profile-usermenu">
+                                    <ul class="nav">
+                                        <li style="font-size: 18px; color: #93a3b5; padding: 10px 15px;">
+                                            <i class="fa fa-clock-o"></i> 注册时间: <%= user_info.createdAt.toLocaleString() %>
+                                        </li>
+                                        <!--<li style="font-size: 18px; color: #93a3b5; padding: 10px 15px;">-->
+                                        <!--<i class="fa fa-clock-o"></i> 简介-->
+                                        <!--</li>-->
+                                        <!--<li style="font-size: 18px; color: #93a3b5; padding: 10px 15px;">-->
+                                        <!--<i class="fa fa-clock-o"></i> Overview-->
+                                        <!--</li>-->
+                                    </ul>
+                                </div>
+                                <!-- END MENU -->
+                            </div>
+                            <!-- END PORTLET MAIN -->
+                            <!-- PORTLET MAIN -->
+                            <div class="portlet light bordered">
+                                <!-- STAT -->
+                                <div class="row list-separated profile-stat">
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="uppercase profile-stat-title"> <%= user_info.Participate.length %> </div>
+                                        <div class="uppercase profile-stat-text"> 参与</div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="uppercase profile-stat-title"> <%= user_info.Follow.length %> </div>
+                                        <div class="uppercase profile-stat-text"> 关注</div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-6">
+                                        <div class="uppercase profile-stat-title"> <%= user_info.Like.length %> </div>
+                                        <div class="uppercase profile-stat-text"> 人气</div>
+                                    </div>
+                                </div>
+                                <!-- END STAT -->
+                                <div>
+                                    <h4 class="profile-desc-title">简介</h4>
+                                    <span class="profile-desc-text"> <%= user_info.Description %> </span>
+                                    <!--<div class="margin-top-20 profile-desc-link">-->
+                                    <!--<i class="fa fa-globe"></i>-->
+                                    <!--<a href="http://www.keenthemes.com">www.keenthemes.com</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="margin-top-20 profile-desc-link">-->
+                                    <!--<i class="fa fa-twitter"></i>-->
+                                    <!--<a href="http://www.twitter.com/keenthemes/">@keenthemes</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="margin-top-20 profile-desc-link">-->
+                                    <!--<i class="fa fa-facebook"></i>-->
+                                    <!--<a href="http://www.facebook.com/keenthemes/">keenthemes</a>-->
+                                    <!--</div>-->
                                 </div>
                             </div>
+                            <!-- END PORTLET MAIN -->
                         </div>
-                        <div class="modal fade" id="avatar-modal" aria-hidden="true"
-                             aria-labelledby="avatar-modal-label" role="dialog"
-                             tabindex="-1">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <form class="avatar-form" action="/upload_icon" enctype="multipart/form-data"
-                                          method="post">
-                                        <div class="modal-header">
-                                            <button class="close" data-dismiss="modal" type="button">&times;</button>
-                                            <h4 class="modal-title" id="avatar-modal-label">修改头像</h4>
+                        <!-- END BEGIN PROFILE SIDEBAR -->
+                        <!-- BEGIN PROFILE CONTENT -->
+                        <div class="profile-content">
+                            <div class="row">
+                                <% if (user_info.Participate.length == 0) { %>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="portlet light portlet-fit ">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class=" icon-layers font-green"></i>
+                                                <span class="caption-subject font-green bold uppercase"> 你还没有参加过任何活动哦</span>
+                                            </div>
                                         </div>
-                                        <div class="modal-body">
-                                            <div class="avatar-body">
-                                                <div class="avatar-upload">
-                                                    <input class="avatar-src" name="avatar_src" type="hidden">
-                                                    <input class="avatar-data" name="avatar_data" type="hidden">
-                                                    <input class="have-file" name="have_file" value="false"
-                                                           id="have_file" type="hidden">
-                                                    <label for="avatarInput">图片上传</label>
-                                                    <input class="avatar-input" id="avatarInput" name="avatar_file"
-                                                           type="file"></div>
+                                        <div class="portlet-body">
+                                            <div class="mt-element-overlay">
                                                 <div class="row">
-                                                    <div class="col-md-9">
-                                                        <div class="avatar-wrapper"></div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="avatar-preview preview-lg"></div>
-                                                        <div class="avatar-preview preview-md"></div>
-                                                        <div class="avatar-preview preview-sm"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="row avatar-btns">
-                                                    <!--<div class="col-md-9">-->
-                                                    <!--<div class="btn-group">-->
-                                                    <!--<button class="btn" data-method="rotate" data-option="-90" type="button"-->
-                                                    <!--title="Rotate -90 degrees"><i class="fa fa-undo"></i> 向左旋转-->
-                                                    <!--</button>-->
-                                                    <!--</div>-->
-                                                    <!--<div class="btn-group">-->
-                                                    <!--<button class="btn" data-method="rotate" data-option="90" type="button"-->
-                                                    <!--title="Rotate 90 degrees"><i class="fa fa-repeat"></i> 向右旋转-->
-                                                    <!--</button>-->
-                                                    <!--</div>-->
-                                                    <!--</div>-->
-                                                    <div class="col-md-3">
-                                                        <button class="btn btn-success btn-block avatar-save"
-                                                                type="submit"><i
-                                                                    class="fa fa-save"></i> 保存修改
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
-                        <!-- END SIDEBAR USERPIC -->
-                        <!-- SIDEBAR USER TITLE -->
-                        <div class="profile-usertitle">
-                            <div class="profile-usertitle-name"> ID: <%= user_info.Nickname %> </div>
-                            <div class="profile-usertitle-job"> 学校: <%= user_info.School %> </div>
-                        </div>
-                        <!-- END SIDEBAR USER TITLE -->
-                        <!-- SIDEBAR BUTTONS -->
-                        <!--<div class="profile-userbuttons">-->
-                        <!--<button type="button" class="btn btn-circle green btn-sm">Follow</button>-->
-                        <!--<button type="button" class="btn btn-circle red btn-sm">Message</button>-->
-                        <!--</div>-->
-                        <!-- END SIDEBAR BUTTONS -->
-                        <!-- SIDEBAR MENU -->
-                        <div class="profile-usermenu">
-                            <ul class="nav">
-                                <li style="font-size: 18px; color: #93a3b5; padding: 10px 15px;">
-                                    <i class="fa fa-clock-o"></i> 注册时间: <%= user_info.createdAt.toLocaleString() %>
-                                </li>
-                                <!--<li style="font-size: 18px; color: #93a3b5; padding: 10px 15px;">-->
-                                <!--<i class="fa fa-clock-o"></i> 简介-->
-                                <!--</li>-->
-                                <!--<li style="font-size: 18px; color: #93a3b5; padding: 10px 15px;">-->
-                                <!--<i class="fa fa-clock-o"></i> Overview-->
-                                <!--</li>-->
-                            </ul>
-                        </div>
-                        <!-- END MENU -->
-                    </div>
-                    <!-- END PORTLET MAIN -->
-                    <!-- PORTLET MAIN -->
-                    <div class="portlet light bordered">
-                        <!-- STAT -->
-                        <div class="row list-separated profile-stat">
-                            <div class="col-md-4 col-sm-4 col-xs-6">
-                                <div class="uppercase profile-stat-title"> <%= user_info.Participate.length %> </div>
-                                <div class="uppercase profile-stat-text"> 参与</div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-6">
-                                <div class="uppercase profile-stat-title"> <%= user_info.Follow.length %> </div>
-                                <div class="uppercase profile-stat-text"> 关注</div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-6">
-                                <div class="uppercase profile-stat-title"> <%= user_info.Like.length %> </div>
-                                <div class="uppercase profile-stat-text"> 人气</div>
-                            </div>
-                        </div>
-                        <!-- END STAT -->
-                        <div>
-                            <h4 class="profile-desc-title">简介</h4>
-                            <span class="profile-desc-text"> <%= user_info.Description %> </span>
-                            <!--<div class="margin-top-20 profile-desc-link">-->
-                            <!--<i class="fa fa-globe"></i>-->
-                            <!--<a href="http://www.keenthemes.com">www.keenthemes.com</a>-->
-                            <!--</div>-->
-                            <!--<div class="margin-top-20 profile-desc-link">-->
-                            <!--<i class="fa fa-twitter"></i>-->
-                            <!--<a href="http://www.twitter.com/keenthemes/">@keenthemes</a>-->
-                            <!--</div>-->
-                            <!--<div class="margin-top-20 profile-desc-link">-->
-                            <!--<i class="fa fa-facebook"></i>-->
-                            <!--<a href="http://www.facebook.com/keenthemes/">keenthemes</a>-->
-                            <!--</div>-->
-                        </div>
-                    </div>
-                    <!-- END PORTLET MAIN -->
-                </div>
-                <!-- END BEGIN PROFILE SIDEBAR -->
-                <!-- BEGIN PROFILE CONTENT -->
-                <div class="profile-content">
-                    <div class="row">
-                        <% if (user_info.Participate.length == 0) { %>
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                            <div class="portlet light portlet-fit ">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class=" icon-layers font-green"></i>
-                                        <span class="caption-subject font-green bold uppercase"> 你还没有参加过任何活动哦</span>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <div class="mt-element-overlay">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="mt-overlay-5">
-                                                    <img src="http://image.funnyard.com/default-icon.jpg"/>
-                                                    <div class="mt-overlay">
-                                                        <!--<h2>趣往</h2>-->
-                                                        <p>
-                                                            <a class="mt-info uppercase btn default btn-outline"
-                                                               href="/">快来寻找你喜欢的活动吧</a>
-                                                        </p>
+                                                    <div class="col-md-12">
+                                                        <div class="mt-overlay-5">
+                                                            <img src="http://image.funnyard.com/default-icon.jpg"/>
+                                                            <div class="mt-overlay">
+                                                                <!--<h2>趣往</h2>-->
+                                                                <p>
+                                                                    <a class="mt-info uppercase btn default btn-outline"
+                                                                       href="/">快来寻找你喜欢的活动吧</a>
+                                                                </p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <% } %>
-                        <% for (var index = 0; index < user_info.Participate.length; index++) { %>
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                            <div class="portlet light portlet-fit ">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class=" icon-layers font-green"></i>
-                                        <span class="caption-subject font-red bold uppercase"><%= user_info.Participate[index].HoldTime.toLocaleString() %>
-                                            开始</span>
-                                        <div class="caption-desc font-grey-cascade"><%= user_info.Participate[index].Location %></div>
-                                        <span></span>
-                                    </div>
-                                </div>
-                                <div class="portlet-body">
-                                    <div class="mt-element-overlay">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="mt-overlay-5">
-                                                    <% if (user_info.Participate[index].Poster) { %>
-                                                    <img src="<%= user_info.Participate[index].Poster %>"/>
-                                                    <% } else { %>
-                                                    <img src="http://image.funnyard.com/default-icon.jpg"/>
-                                                    <% } %>
-                                                    <div class="mt-overlay">
-                                                        <h2><%= user_info.Participate[index].Theme %></h2>
-                                                        <p>
-                                                            <a class="mt-info uppercase btn default btn-outline"
-                                                               href="/ac/<%= user_info.Participate[index].ActivityID %>">活动详情</a>
-                                                        </p>
+                                <% } %>
+                                <% for (var index = 0; index < user_info.Participate.length; index++) { %>
+                                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                    <div class="portlet light portlet-fit ">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class=" icon-layers font-green"></i>
+                                                <span class="caption-subject font-red bold uppercase"><%= user_info.Participate[index].HoldTime.toLocaleString() %>
+                                                    开始</span>
+                                                <div class="caption-desc font-grey-cascade"><%= user_info.Participate[index].Location %></div>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="mt-element-overlay">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="mt-overlay-5">
+                                                            <% if (user_info.Participate[index].Poster) { %>
+                                                            <img src="<%= user_info.Participate[index].Poster %>"/>
+                                                            <% } else { %>
+                                                            <img src="http://image.funnyard.com/default-icon.jpg"/>
+                                                            <% } %>
+                                                            <div class="mt-overlay">
+                                                                <h2><%= user_info.Participate[index].Theme %></h2>
+                                                                <p>
+                                                                    <a class="mt-info uppercase btn default btn-outline"
+                                                                       href="/ac/<%= user_info.Participate[index].ActivityID %>">活动详情</a>
+                                                                </p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <% } %>
                             </div>
                         </div>
-                        <% } %>
+                        <!-- END PROFILE CONTENT -->
                     </div>
                 </div>
-                <!-- END PROFILE CONTENT -->
             </div>
         </div>
-        <!-- END PAGE BASE CONTENT -->
     </div>
     <!-- END CONTENT BODY -->
 </div>

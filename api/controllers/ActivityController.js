@@ -185,10 +185,14 @@ module.exports = {
   remove: function (req, res) {
     //删除之后要通知所有参与活动的用户
     var aid = req.param("aid");
+    Activity.findOne({ActivityID: aid}).exec(function (err, record) {
+      
+    });
     Activity.destory({ActivityID: aid}).exec(function (err) {
       if (err) {
         return res.serverError(err);
       }
+      //
       return res.send("success");
     });
   }

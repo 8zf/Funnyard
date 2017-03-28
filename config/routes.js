@@ -53,6 +53,7 @@ module.exports.routes = {
   'post /remove_activity': 'ActivityController.remove',
   'get /ac/:aid': 'ActivityController.show',
   'get /activities': 'ActivityController.showAll',
+  'post /activity/remove/': 'ActivityController.remove',
   'get /ac_preview/:aid': 'ActivityController.preview',
   'get /participate': 'ParticipateController.participate',
   'get /quit': 'ParticipateController.quit',
@@ -62,6 +63,7 @@ module.exports.routes = {
   /********* SPACE/CONSOLE *********/
   'get /user_space': 'UserController.toSpace',
   'get /publisher_space': 'PublisherController.toSpace',
+  'get /console': 'PublisherController.toConsole',
 
   /********* UEditor *********/
   'get /ueditor/qiniu': 'PublishController.getQiniu',

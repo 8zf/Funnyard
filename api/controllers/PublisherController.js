@@ -44,8 +44,7 @@ module.exports = {
         console.log('注册码无效');
         return res.send('注册码无效');
       }
-      if (records1[0].IsUsable == 0)
-      {
+      if (records1[0].IsUsable == 0) {
         console.log('注册码已被使用');
         return res.send('注册码已被使用');
       }
@@ -62,8 +61,7 @@ module.exports = {
           if (err) {
             return res.send(err);
           }
-          if (records3.length == 0)
-          {
+          if (records3.length == 0) {
             console.log('验证码错误');
             return res.send("验证码错误");
           }
@@ -82,7 +80,10 @@ module.exports = {
               if (err) {
                 return res.send(err);
               }
-              PublisherCode.update({Code: publisher_code}, {IsUsable: 0, PublisherID: new_record.PublisherID}).exec(function (err, record5) {
+              PublisherCode.update({Code: publisher_code}, {
+                IsUsable: 0,
+                PublisherID: new_record.PublisherID
+              }).exec(function (err, record5) {
                 if (err) {
                   //回滚？
                   console.log("修改注册码出错");
@@ -109,6 +110,35 @@ module.exports = {
         });
       });
     });
+  },
+
+  toConsole: function (req, res) {
+    var pub_id = req.session.userid;
+    Publisher.findOne({PublisherID: pub_id})
+      .populate("Publish")
+      .exec(function (err, publisher) {
+        if (err) {
+          return res.serverError(err);
+        }
+        for(var activity of publisher.Publish) {
+          var t_now = new Date().getTime();
+          var t_ac_s = activity.HoldTime.getTime();
+          var t_ac_e = activity.EndTime.getTime();
+          if (t_now < t_ac_s) {
+            activity.State = "NOT_STARTED_YET";
+            activity.status = "未开始"
+          }
+          else if (t_now <= t_ac_e) {
+            activity.State = "ING";
+            activity.status = "正在进行"
+          }
+          else {
+            activity.State = "ENDED";
+            activity.status = "已结束"
+          }
+        }
+        return res.view('publisher/console', {publisher: publisher});
+      });
   }
 
   // getProfile: function (req, res) {
