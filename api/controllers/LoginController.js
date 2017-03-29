@@ -78,6 +78,7 @@ module.exports = {
         req.session.userid = result[0].PublisherID;
         req.session.role = "publisher";
         req.session.department = result[0].Department;
+        req.session.phone = result[0].PhoneNum;
         req.session.nickname = result[0].Nickname;
         req.session.icon = result[0].Icon;
         req.session.info = result[0];

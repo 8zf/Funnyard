@@ -1,6 +1,14 @@
 <!--按照创建时间排序-->
 <!--正在进行的green-seagreen，未开始blue，结束grey-salt-->
 <!--功能：全屏，收起，删除活动-->
+<style>
+    .popover-title {
+        color: #0f0f0f;
+    }
+    .popover-content .btn-group .btn-success {
+        margin-right: 20px;
+    }
+</style>
 <div class="page-content-wrapper">
     <div class="page-head">
         <div class="container">
@@ -36,9 +44,9 @@
                                     <!--<a href="#portlet-config" data-toggle="modal" class="config"> </a>-->
                                 </div>
                                 <div class="actions">
-                                    <a href="javascript:;" class="btn btn-sm btn-default delete-ac" style="color: white;">
+                                    <button class="btn btn-sm btn-default delete-ac" data-toggle="confirmation" data-singleton="true" style="color: white;" title="操作不可撤回，确认删除活动吗？">
                                         <input type="hidden" class="ac-id" value="<%= activity.ActivityID %>">
-                                        <i class="fa fa-close"></i> 删除 </a>
+                                        <i class="fa fa-close" style= "color: white;"></i> 删除 </button>
                                 </div>
                                 <span class="caption" style="font-size: 13px; padding-top: 14px;">
                                     &nbsp(<%= activity.status %>)
@@ -62,24 +70,30 @@
 </div>
 
 <script>
-    $(".delete-ac").click(function (e) {
-//      console.log(this.childNodes);
-      var result;
-      for (node of this.childNodes) {
-        if (node.className == "ac-id") {
-          $.ajax({
-            url: '/activity/remove',
-            type: 'POST',
-            data: {},
-            success: function (result,status,xhr) {
-              
-            },
-            error: function (xhr,status,error) {
-              
-            }
-          });
-        }
+  $('.delete-ac').on('confirmed.bs.confirmation', function () {
+    console.log("confirm");
+    var result;
+    for (node of this.childNodes) {
+      if (node.className == "ac-id") {
+        $.ajax({
+          url: '/activity/remove',
+          type: 'POST',
+          data: {
+            aid: node.value
+          },
+          success: function (result,status,xhr) {
+            toastr.success("删除成功");
+            console.log("result");
+            console.log(result);
+            location.reload(true);
+          },
+          error: function (xhr,status,error) {
+            toastr.warning("删除失败");
+            console.log("error");
+            console.log(error);
+          }
+        });
       }
-
-    });
+    }
+  });
 </script>

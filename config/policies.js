@@ -39,7 +39,7 @@ module.exports.policies = {
     // '*': ['sessionAuth']
   },
   PublisherController: {
-    // 'publish': ['isPublisher']
+    '*': ['isPublisher']
   },
   PublishController: {
     '*': ['isPublisher']

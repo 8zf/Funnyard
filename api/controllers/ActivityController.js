@@ -185,16 +185,41 @@ module.exports = {
   remove: function (req, res) {
     //删除之后要通知所有参与活动的用户
     var aid = req.param("aid");
-    Activity.findOne({ActivityID: aid}).exec(function (err, record) {
-      
-    });
-    Activity.destory({ActivityID: aid}).exec(function (err) {
+    if (aid == "") {
+      return res.serverError("no aid parameter");
+    }
+    console.log(aid);
+    Activity.findOne({ActivityID: aid})
+      .populate("Participant")
+      .exec(function (err, activity) {
       if (err) {
         return res.serverError(err);
       }
-      //
-      return res.send("success");
+      if (!activity) {
+        return res.serverError("无法找到该活动");
+      }
+      var participants = activity.Participant;
+      // console.log(participants);
+      // 删除活动
+      Activity.destroy({ActivityID: aid}).exec(function (err ,deleted_ac) {
+        if (err) {
+          return res.serverError(err);
+        }
+        // console.log(deleted_ac);
+        for (var participant of participants) {
+          //发送短信
+          sails.log("发送短信提醒活动被取消: " + participant.PhoneNum);
+          SMSService.sendSMS({params: {"nickname": participant.Nickname, "a_name": deleted_ac[0].Theme}, rec_num: participant.PhoneNum, template_code: 'SMS_59060041'}, function (response) {
+            if (response.error_response) {
+              sails.log.error("提醒用户活动取消失败");
+              sails.log.error(response);
+            }
+          });
+        }
+        return res.send("success");
+      });
     });
+
   }
 };
 
