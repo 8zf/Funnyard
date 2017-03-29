@@ -1,0 +1,351 @@
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper">
+  <!-- BEGIN CONTENT BODY -->
+  <!-- BEGIN PAGE HEAD-->
+  <!-- END PAGE HEAD-->
+  <!-- BEGIN PAGE CONTENT BODY -->
+  <div class="page-content">
+    <div class="container">
+      <!-- BEGIN PAGE BREADCRUMBS -->
+      <!-- END PAGE BREADCRUMBS -->
+      <!-- BEGIN PAGE CONTENT INNER -->
+      <div class="page-content-inner">
+        <div class="search-page search-content-4">
+          <!--<div class="search-bar bordered">-->
+            <!--<div class="row">-->
+              <!--<div class="col-lg-8">-->
+                <!--<div class="input-group">-->
+                  <!--<input type="text" class="form-control" placeholder="Search for...">-->
+                  <!--<span class="input-group-btn">-->
+                    <!--<button class="btn green-soft uppercase bold" type="button">Search</button>-->
+                  <!--</span>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="col-lg-4 extra-buttons">-->
+                <!--<button class="btn grey-steel uppercase bold" type="button">Reset Search</button>-->
+                <!--<button class="btn grey-cararra font-blue" type="button">Advanced Search</button>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+          <div class="search-table table-responsive">
+            <table class="table table-bordered table-striped table-condensed">
+              <thead class="bg-blue">
+              <tr>
+                <th>
+                  <a href="javascript:;">状态</a>
+                </th>
+                <th>
+                  <a href="javascript:;">主题</a>
+                </th>
+                <th>
+                  <a href="javascript:;">发布者</a>
+                </th>
+                <th>
+                  <a href="javascript:;">发布时间</a>
+                </th>
+                <th>
+                  <a href="javascript:;">参与人数</a>
+                </th>
+                <!--<th>-->
+                  <!--<a href="javascript:;">封面</a>-->
+                <!--</th>-->
+                <!--<th>-->
+                <!--<a href="javascript:;">Download</a>-->
+                <!--</th>-->
+              </tr>
+              </thead>
+              <tbody>
+              <% function getStatus(ac) {
+                var t_now = new Date().getTime();
+                if (t_now < ac.HoldTime.getTime()) {
+                  return "报名中";
+                }
+                else if (t_now <= ac.EndTime.getTime()) {
+                  return "进行中"
+                }
+                else {
+                  return "已结束";
+                }
+              } %>
+              <% for (activity of activities) { %>
+              <tr style="height: 200px;">
+                <td class="table-status">
+                  <%= getStatus(activity) %>
+                </td>
+                <td class="table-title">
+                  <h3>
+                    <a href="ac/<%= activity.ActivityID %>"><%= activity.Theme%></a>
+                  </h3>
+                </td>
+                <td>
+                    <%= activity.Owner %>
+                </td>
+                <td>
+                  <span><%= activity.createdAt.toLocaleString() %></span>
+                </td>
+                <td class="table-date font-blue">
+                  <span class="font-grey-cascade">已有<%= activity.Participant %>人参加</span>
+                </td>
+                <!--<td class="table-desc">-->
+                  <!--<img class="img-responsive" src="<%= activity.Poster %>">-->
+                <!--</td>-->
+                <!--<td class="table-download">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-doc font-green-soft"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+              </tr>
+              <% } %>
+              <!--<tr>-->
+                <!--<td class="table-status">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-arrow-right font-blue"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+                <!--<td class="table-date font-blue">-->
+                  <!--<a href="javascript:;">October 17, 2015</a>-->
+                <!--</td>-->
+                <!--<td class="table-title">-->
+                  <!--<h3>-->
+                    <!--<a href="javascript:;">Metronic Admin Reborn</a>-->
+                  <!--</h3>-->
+                  <!--<p>Last Activity:-->
+                    <!--<a href="javascript:;">Bob Robson</a> - -->
+                    <!--<span class="font-grey-cascade">25 mins ago</span>-->
+                  <!--</p>-->
+                <!--</td>-->
+                <!--<td class="table-desc"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy sead euismod dolore tincidunt ut laoreet dolore dolor sit amet</td>-->
+                <!--<td class="table-download">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-doc font-green-soft"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="table-status">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-arrow-right font-blue"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+                <!--<td class="table-date font-blue">-->
+                  <!--<a href="javascript:;">October 17, 2015</a>-->
+                <!--</td>-->
+                <!--<td class="table-title">-->
+                  <!--<h3>-->
+                    <!--<a href="javascript:;">Lorem ipsum dolor</a>-->
+                  <!--</h3>-->
+                  <!--<p>Last Activity:-->
+                    <!--<a href="javascript:;">Bob Robson</a> - -->
+                    <!--<span class="font-grey-cascade">25 mins ago</span>-->
+                  <!--</p>-->
+                <!--</td>-->
+                <!--<td class="table-desc"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy sead euismod dolore tincidunt ut laoreet dolore dolor sit amet</td>-->
+                <!--<td class="table-download">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-doc font-green-soft"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="table-status">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-check font-grey"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+                <!--<td class="table-date font-blue">-->
+                  <!--<a href="javascript:;">October 15, 2015</a>-->
+                <!--</td>-->
+                <!--<td class="table-title">-->
+                  <!--<h3>-->
+                    <!--<a href="javascript:;">Typi non habent</a>-->
+                  <!--</h3>-->
+                  <!--<p>Last Activity:-->
+                    <!--<a href="javascript:;">Bob Robson</a> - -->
+                    <!--<span class="font-grey-cascade">25 mins ago</span>-->
+                  <!--</p>-->
+                <!--</td>-->
+                <!--<td class="table-desc"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy sead euismod dolore tincidunt ut laoreet dolore dolor sit amet</td>-->
+                <!--<td class="table-download">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-doc font-green-soft"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="table-status">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-arrow-right font-blue"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+                <!--<td class="table-date font-blue">-->
+                  <!--<a href="javascript:;">October 12, 2015</a>-->
+                <!--</td>-->
+                <!--<td class="table-title">-->
+                  <!--<h3>-->
+                    <!--<a href="javascript:;">Metronic Admin Search Result</a>-->
+                  <!--</h3>-->
+                  <!--<p>Last Activity:-->
+                    <!--<a href="javascript:;">Bob Robson</a> - -->
+                    <!--<span class="font-grey-cascade">25 mins ago</span>-->
+                  <!--</p>-->
+                <!--</td>-->
+                <!--<td class="table-desc"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy sead euismod dolore tincidunt ut laoreet dolore dolor sit amet</td>-->
+                <!--<td class="table-download">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-doc font-green-soft"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="table-status">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-arrow-right font-blue"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+                <!--<td class="table-date font-blue">-->
+                  <!--<a href="javascript:;">October 11, 2015</a>-->
+                <!--</td>-->
+                <!--<td class="table-title">-->
+                  <!--<h3>-->
+                    <!--<a href="javascript:;">Mirum est notare</a>-->
+                  <!--</h3>-->
+                  <!--<p>Last Activity:-->
+                    <!--<a href="javascript:;">Bob Robson</a> - -->
+                    <!--<span class="font-grey-cascade">25 mins ago</span>-->
+                  <!--</p>-->
+                <!--</td>-->
+                <!--<td class="table-desc"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy sead euismod dolore tincidunt ut laoreet dolore dolor sit amet</td>-->
+                <!--<td class="table-download">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-doc font-green-soft"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="table-status">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-check font-grey"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+                <!--<td class="table-date font-blue">-->
+                  <!--<a href="javascript:;">October 9, 2015</a>-->
+                <!--</td>-->
+                <!--<td class="table-title">-->
+                  <!--<h3>-->
+                    <!--<a href="javascript:;">Metronic Admin Reborn</a>-->
+                  <!--</h3>-->
+                  <!--<p>Last Activity:-->
+                    <!--<a href="javascript:;">Bob Robson</a> - -->
+                    <!--<span class="font-grey-cascade">25 mins ago</span>-->
+                  <!--</p>-->
+                <!--</td>-->
+                <!--<td class="table-desc"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy sead euismod dolore tincidunt ut laoreet dolore dolor sit amet</td>-->
+                <!--<td class="table-download">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-doc font-green-soft"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="table-status">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-check font-grey"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+                <!--<td class="table-date font-blue">-->
+                  <!--<a href="javascript:;">October 9, 2015</a>-->
+                <!--</td>-->
+                <!--<td class="table-title">-->
+                  <!--<h3>-->
+                    <!--<a href="javascript:;">Metronic Admin Reborn</a>-->
+                  <!--</h3>-->
+                  <!--<p>Last Activity:-->
+                    <!--<a href="javascript:;">Bob Robson</a> - -->
+                    <!--<span class="font-grey-cascade">25 mins ago</span>-->
+                  <!--</p>-->
+                <!--</td>-->
+                <!--<td class="table-desc"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy sead euismod dolore tincidunt ut laoreet dolore dolor sit amet</td>-->
+                <!--<td class="table-download">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-doc font-green-soft"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="table-status">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-arrow-right font-blue"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+                <!--<td class="table-date font-blue">-->
+                  <!--<a href="javascript:;">October 6, 2015</a>-->
+                <!--</td>-->
+                <!--<td class="table-title">-->
+                  <!--<h3>-->
+                    <!--<a href="javascript:;">Metronic Admin Reborn Progress</a>-->
+                  <!--</h3>-->
+                  <!--<p>Last Activity:-->
+                    <!--<a href="javascript:;">Bob Robson</a> - -->
+                    <!--<span class="font-grey-cascade">25 mins ago</span>-->
+                  <!--</p>-->
+                <!--</td>-->
+                <!--<td class="table-desc"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy sead euismod dolore tincidunt ut laoreet dolore dolor sit amet</td>-->
+                <!--<td class="table-download">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-doc font-green-soft"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td class="table-status">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-arrow-right font-blue"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+                <!--<td class="table-date font-blue">-->
+                  <!--<a href="javascript:;">October 3, 2015</a>-->
+                <!--</td>-->
+                <!--<td class="table-title">-->
+                  <!--<h3>-->
+                    <!--<a href="javascript:;">Metronic Search Page 5</a>-->
+                  <!--</h3>-->
+                  <!--<p>Last Activity:-->
+                    <!--<a href="javascript:;">Bob Robson</a> - -->
+                    <!--<span class="font-grey-cascade">25 mins ago</span>-->
+                  <!--</p>-->
+                <!--</td>-->
+                <!--<td class="table-desc"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy sead euismod dolore tincidunt ut laoreet dolore dolor sit amet</td>-->
+                <!--<td class="table-download">-->
+                  <!--<a href="javascript:;">-->
+                    <!--<i class="icon-doc font-green-soft"></i>-->
+                  <!--</a>-->
+                <!--</td>-->
+              <!--</tr>-->
+              </tbody>
+            </table>
+          </div>
+          <!--<div class="search-pagination pagination-rounded">-->
+            <!--<ul class="pagination">-->
+              <!--<li class="page-active">-->
+                <!--<a href="javascript:;"> 1 </a>-->
+              <!--</li>-->
+              <!--<li>-->
+                <!--<a href="javascript:;"> 2 </a>-->
+              <!--</li>-->
+              <!--<li>-->
+                <!--<a href="javascript:;"> 3 </a>-->
+              <!--</li>-->
+              <!--<li>-->
+                <!--<a href="javascript:;"> 4 </a>-->
+              <!--</li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        </div>
+      </div>
+      <!-- END PAGE CONTENT INNER -->
+    </div>
+  </div>
+  <!-- END PAGE CONTENT BODY -->
+  <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

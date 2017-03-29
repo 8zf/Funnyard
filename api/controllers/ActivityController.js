@@ -8,7 +8,6 @@
 const uuidV4 = require('uuid/v4');
 
 module.exports = {
-  // TODO
   add: function (req, res) {
     // var theme = req.param('theme');
     // var department = req.param('department');
@@ -38,7 +37,7 @@ module.exports = {
       LocationLat: req.param('locationlat'),
       Content: req.param('content')
     };
-    console.log(new_record);
+    // console.log(new_record);
     Activity.create(new_record).exec(function (err, record) {
       if (err) {
         console.log("创建活动失败");
@@ -174,11 +173,18 @@ module.exports = {
             'like': '%' + req.param('key') + '%'
           }
         }],
-    }).exec(function (err, records) {
+    })
+      .populate("Participant")
+      .populate("Owner")
+      .exec(function (err, activities) {
       if (err) {
         return res.serverError(err);
       }
-      return res.send(records);
+      for (activity of activities) {
+        activity.Participant = activity.Participant.length;
+        activity.Owner = activity.Owner.Nickname;
+      }
+      return res.view("activity/search",{activities: activities});
     })
   },
 

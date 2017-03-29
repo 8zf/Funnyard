@@ -22,7 +22,16 @@ module.exports = {
   },
 
   toSpace: function (req, res) {
-    return res.view("publisher/space");
+    Publisher.findOne({PublisherID: req.session.userid})
+      .populate("Publish")
+      .exec(function (err, publisher) {
+        if (err) {
+          return res.serverError(err);
+        }
+        return res.view("publisher/space", {
+          publisher: publisher
+        });
+      });
   },
 
   add: function (req, res) {

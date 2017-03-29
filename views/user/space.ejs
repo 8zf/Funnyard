@@ -96,7 +96,8 @@
                                 <div class="profile-usermenu">
                                     <ul class="nav">
                                         <li style="font-size: 18px; color: #93a3b5; padding: 10px 15px;">
-                                            <i class="fa fa-clock-o"></i> 注册时间: <%= user_info.createdAt.toLocaleString() %>
+                                            <i class="fa fa-clock-o"></i> <%= publisher.createdAt.toLocaleString() %>
+                                            <br/><span>已经来到趣往<%= parseInt((new Date().getTime()-publisher.createdAt.getTime())/(1000*3600*24)) %>天</span>
                                         </li>
                                         <!--<li style="font-size: 18px; color: #93a3b5; padding: 10px 15px;">-->
                                         <!--<i class="fa fa-clock-o"></i> 简介-->
