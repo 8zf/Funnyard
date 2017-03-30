@@ -44,9 +44,9 @@ module.exports.connections = {
     adapter: 'sails-mysql',
     host: '127.0.0.1',
     port: '2333',
-    user: 'funnyard_operator', //optional
-    password: 'excusememotherfucker', //optional
-    database: 'Funnyard' //optional
+    user: '你以为我会给你看？', //optional
+    password: '不存在的', //optional
+    database: '不存在的' //optional
   }
 
   /***************************************************************************
