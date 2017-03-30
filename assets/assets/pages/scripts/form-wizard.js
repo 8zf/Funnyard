@@ -262,38 +262,6 @@ var FormWizard = function () {
 
 }();
 
-// var map, zoom = 16, isexit = false;
-// //鼠标在地图上按下左键时添加一个点标记
-// function mouseup(point) {
-//   if (isexit == false) {
-//     marker = new TMarker(point);
-//     map.addOverLay(marker);
-// //                alert(point.getLng() + ', ' + point.getLat());
-//     markerTool.close();
-//     marker.enableEdit();
-//     isexit = true;
-//     var location = marker.getLngLat();
-// //      document.getElementById('content').value = content_;
-//     document.getElementById('locationlng').value = location.getLng();
-//     document.getElementById('locationlat').value = location.getLat();
-//   }
-//   else {
-//   }
-// }
-//
-// //初始化地图对象
-// map = new TMap("mapDiv");
-// //设置显示地图的中心点和级别
-// map.centerAndZoom(new TLngLat(121.4986695687, 31.2801283584), zoom);
-// //允许鼠标双击放大地图
-// map.enableHandleMouseScroll();
-//
-// //创建标注工具对象
-// var markerTool = new TMarkTool(map);
-// //注册标注的mouseup事件
-// TEvent.addListener(markerTool, "mouseup", mouseup);
-// $("#marker-btn").click(markerTool.open());
-
 var map = new BMap.Map("mapDiv");
 map.enableScrollWheelZoom();
 map.centerAndZoom("上海", 14);

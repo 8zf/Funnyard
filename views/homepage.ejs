@@ -99,14 +99,15 @@
   var map = new BMap.Map("container");
   var activities_markers = [];
   map.enableScrollWheelZoom();
-  map.centerAndZoom(new BMap.Point(121.225942, 31.295851), 21);
+//  map.centerAndZoom(new BMap.Point(121.225942, 31.295851), 21);
+  map.centerAndZoom(new BMap.Point(121.225942, 31.289066), 17);
   map.addEventListener("click", function (e) {
     console.log("点击位置：" + e.point.lng + ", " + e.point.lat);
   });
   if (navigator.geolocation) {
-    toastr.success("支持获取地理位置");
+    toastr.success("正在获取地理位置");
     navigator.geolocation.getCurrentPosition(function (position) {
-      toastr.success("来自网页的坐标" + position.coords.longitude + ',' + position.coords.latitude);
+//      toastr.success("来自网页的坐标" + position.coords.longitude + ',' + position.coords.latitude);
       var convertor = new BMap.Convertor();
       var origin_point = new BMap.Point(position.coords.longitude, position.coords.latitude);
       convertor.translate([origin_point], 1, 5, function (data) {
@@ -116,13 +117,13 @@
           var new_point = new BMap.Point(data.points[0].lng, data.points[0].lat);
 //          map.setCenter(data.points[0]);
           map.centerAndZoom(new_point, 21);
-          toastr.success("新坐标" + data.points[0].lng + ',' + data.points[0].lat);
+          toastr.success("您的坐标" + data.points[0].lng + ',' + data.points[0].lat);
         }
       });
     })
   }
   else {
-    toastr.warning("该浏览器不支持地理位置")
+    toastr.warning("该浏览器不支持地理位置，无法进行定位，请手动定位")
     var point = new BMap.Point(116.404, 39.915);
     map.centerAndZoom(point, 15);
   }
@@ -146,7 +147,7 @@
 //      console.log(activities);
     },
     error: function (xhr, status, error) {
-
+    	toastr.warning("获取活动信息失败");
     }
   });
 

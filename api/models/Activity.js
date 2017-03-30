@@ -61,8 +61,7 @@ module.exports = {
       required: true
     },
     Content: {
-      type: 'string',
-      size: 100000
+      type: 'text'
     },
     // PublisherID: {
     //   type: 'string'
