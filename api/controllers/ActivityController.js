@@ -55,6 +55,7 @@ module.exports = {
               return res.serverError(err + "无法创建发布者与活动的联系");
             }
             console.log("活动与发布者关联");
+            console.log(record.Keywords.split(","));
             record.Features.add(record.Keywords.split(","));
             record.save(function (err) {
               if (err) {
@@ -63,7 +64,7 @@ module.exports = {
               console.log("活动与分类关联");
               return res.redirect("/ac/" + new_record.ActivityID);
             });
-          })
+          });
         });
     });
   },

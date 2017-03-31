@@ -58,7 +58,7 @@ module.exports = {
         if (err) {
           return res.serverError(err);
         }
-        // console.log(uploadedFiles[0].filename);
+        console.log("文件上传到本地文件夹" + uploadedFiles[0].filename);
         // return res.send("see..");
         //调用uploadFile上传
         uploadFile(token, key, path.join(filedir, key), function (err, ret) {

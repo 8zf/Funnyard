@@ -244,17 +244,12 @@ var FormWizard = function () {
         console.log("ready to submit");
         $("#content").val(ue.getContent());
         $("#poster").val($(".avatar-view img")[0].src);
-        if ($("#poster").val() != "http://image.funnyard.com/image/20170315/1489559469219vzLRLd") {
+        if ($("#poster").val() != "https://omwktgfmo.qnssl.com/image/20170315/1489559469219vzLRLd") {
           $("#submit_form").submit();
         }
         else {
-          toastr.warning("请上传活动封面", options)
+          toastr.warning("请上传封面", options);
         }
-      });
-
-      //apply validation on select2 dropdown value change, this only needed for chosen dropdown integration.
-      $('#country_list', form).change(function () {
-        form.validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
       });
     }
 
@@ -262,6 +257,7 @@ var FormWizard = function () {
 
 }();
 
+//地图
 var map = new BMap.Map("mapDiv");
 map.enableScrollWheelZoom();
 map.centerAndZoom("上海", 14);

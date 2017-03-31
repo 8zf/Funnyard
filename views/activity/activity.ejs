@@ -1,263 +1,275 @@
 <div class="page-content-wrapper">
-    <div class="page-content">
-        <div class="container">
-            <!-- BEGIN PAGE CONTENT INNER -->
-            <input type="hidden" id="aid" value="<%- activity.ActivityID %>">
-            <div class="page-content-inner">
-                <div class="blog-page blog-content-2">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <div class="blog-single-content bordered blog-container">
-                                <div class="blog-single-head">
-                                    <h1 class="blog-single-head-title"><%= activity.Theme %>
-                                        <% if (new Date().getTime() > activity.HoldTime.getTime()) { %>
-                                        (已停止报名)
-                                        <% } %>
-                                    </h1>
-                                    <div class="blog-single-head-date">
+  <div class="page-content">
+    <div class="container">
+      <!-- BEGIN PAGE CONTENT INNER -->
+      <input type="hidden" id="aid" value="<%- activity.ActivityID %>">
+      <div class="page-content-inner">
+        <div class="blog-page blog-content-2">
+          <div class="row">
+            <div class="col-lg-9">
+              <div class="blog-single-content bordered blog-container">
+                <div class="blog-single-head">
+                  <h1 class="blog-single-head-title"><%= activity.Theme %>
+                    <% if (new Date().getTime() > activity.HoldTime.getTime()) { %>
+                    (已停止报名)
+                    <% } %>
+                  </h1>
+                  <div class="blog-single-head-date">
                             <span style="color: #9aa5b2">
                                 开始时间：
                             </span>
-                                        <!--<i class="icon-calendar font-blue"></i>-->
-                                        <a href="javascript:;"><%= activity.HoldTime.toLocaleString() %></a>
-                                    </div>
-                                </div>
-                                <div class="blog-single-desc activity-content" id="activity_content">
-                                    <%- activity.Content %>
-                                </div>
-                                <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" id="join_quit" data-style="slide-up" data-spinner-color="#333">
+                    <!--<i class="icon-calendar font-blue"></i>-->
+                    <a href="javascript:;"><%= activity.HoldTime.toLocaleString() %></a>
+                  </div>
+                </div>
+                <div class="blog-single-desc activity-content" id="activity_content">
+                  <%- activity.Content %>
+                </div>
+                <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" id="join_quit" data-style="slide-up" data-spinner-color="#333">
                         <span class="ladda-label">
                             参加活动
                         </span>
-                                    <div class="ladda-progress" style="width: 0px;"></div>
-                                </button>
-                                <div style="float: right">
-                                    当前人数：<%= activity.NowNum %>/<%= activity.MaxNum %>
-                                </div>
-                                <div class="blog-comments">
-                                    <h3 class="sbold blog-comments-title">评论(<%= activity.Comment.length %>)</h3>
-                                    <div class="c-comment-list">
-                                        <% for (var i = activity.Comment.length-1; i >= 0; i--) { %>
-                                        <div class="media">
-                                            <div class="media-left">
-                                                <img class="media-object" alt=<%= activity.Comment[i].Nickname %>
-                                                src=<%= activity.Comment[i].Icon %>>
-                                            </div>
-                                            <div class="media-body">
-                                                <h4 class="media-heading">
-                                                    <span style="color: #337ab7; font-weight: 600;"><%= activity.Comment[i].Nickname %></span> |
-                                                    <span class="c-date"><%= activity.Comment[i].createdAt.toLocaleString() %></span>
-                                                </h4>
-                                                <%= activity.Comment[i].Content %>
-                                            </div>
-                                        </div>
-                                        <% } %>
-                                        <!--<div class="media">-->
-                                        <!--<div class="media-left">-->
-                                        <!--<a href="#">-->
-                                        <!--<img class="media-object" alt=""-->
-                                        <!--src="../assets/pages/img/avatars/team1.jpg">-->
-                                        <!--</a>-->
-                                        <!--</div>-->
-                                        <!--<div class="media-body">-->
-                                        <!--<h4 class="media-heading">-->
-                                        <!--<a href="#">Sean</a> on-->
-                                        <!--<span class="c-date">23 May 2015, 10:40AM</span>-->
-                                        <!--</h4>-->
-                                        <!--Cras sit amet nibh libero, in gravida nulla. Nulla vel-->
-                                        <!--metus scelerisque ante sollicitudin commodo. Cras purus-->
-                                        <!--odio, vestibulum in vulputate at, tempus viverra turpis.-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<div class="media">-->
-                                        <!--<div class="media-left">-->
-                                        <!--<a href="#">-->
-                                        <!--<img class="media-object" alt=""-->
-                                        <!--src="../assets/pages/img/avatars/team3.jpg">-->
-                                        <!--</a>-->
-                                        <!--</div>-->
-                                        <!--<div class="media-body">-->
-                                        <!--<h4 class="media-heading">-->
-                                        <!--<a href="#">Strong Strong</a> on-->
-                                        <!--<span class="c-date">21 May 2015, 11:40AM</span>-->
-                                        <!--</h4> Cras sit amet nibh libero, in gravida nulla. Nulla-->
-                                        <!--vel metus scelerisque ante sollicitudin commodo. Cras-->
-                                        <!--purus odio, vestibulum in vulputate at, tempus viverra-->
-                                        <!--turpis.-->
-                                        <!--<div class="media">-->
-                                        <!--<div class="media-left">-->
-                                        <!--<a href="#">-->
-                                        <!--<img class="media-object" alt=""-->
-                                        <!--src="../assets/pages/img/avatars/team4.jpg">-->
-                                        <!--</a>-->
-                                        <!--</div>-->
-                                        <!--<div class="media-body">-->
-                                        <!--<h4 class="media-heading">-->
-                                        <!--<a href="#">Emma Stone</a> on-->
-                                        <!--<span class="c-date">30 May 2015, 9:40PM</span>-->
-                                        <!--</h4> Cras sit amet nibh libero, in gravida-->
-                                        <!--nulla. Nulla vel metus scelerisque ante-->
-                                        <!--sollicitudin commodo. Cras purus odio,-->
-                                        <!--vestibulum in vulputate at, tempus viverra-->
-                                        <!--turpis.-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<div class="media">-->
-                                        <!--<div class="media-left">-->
-                                        <!--<a href="#">-->
-                                        <!--<img class="media-object" alt=""-->
-                                        <!--src="../assets/pages/img/avatars/team7.jpg">-->
-                                        <!--</a>-->
-                                        <!--</div>-->
-                                        <!--<div class="media-body">-->
-                                        <!--<h4 class="media-heading">-->
-                                        <!--<a href="#">Nick Nilson</a> on-->
-                                        <!--<span class="c-date">30 May 2015, 9:40PM</span>-->
-                                        <!--</h4> Cras sit amet nibh libero, in gravida nulla. Nulla-->
-                                        <!--vel metus scelerisque ante sollicitudin commodo. Cras-->
-                                        <!--purus odio, vestibulum in vulputate at, tempus viverra-->
-                                        <!--turpis.-->
-                                        <!--</div>-->
-                                        <!--</div>-->
-                                    </div>
-                                    <h3 class="sbold blog-comments-title">发布评论</h3>
-                                    <form action="#">
-                                        <div class="form-group">
-                                            <textarea rows="8" name="message" placeholder="输入您的评论" class="form-control c-square" id="comment_content"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" id="submit_comment" data-style="slide-right">
-                                                评论
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="blog-single-sidebar bordered blog-container">
-                                <div class="blog-single-sidebar-search">
-                                    <div class="input-icon right">
-                                        <i class="icon-magnifier"></i>
-                                        <input type="text" class="form-control"
-                                               placeholder="Search Blog"></div>
-                                </div>
-                                <div class="blog-single-sidebar-recent">
-                                    <h3 class="blog-sidebar-title uppercase">最近发布的活动</h3>
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:;">Metronic Admin Progress</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">New UI Features</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">Lorem Ipsum Dolore Amet</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">Userfull Pages Released</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="blog-single-sidebar-tags">
-                                    <h3 class="blog-sidebar-title uppercase">关键词</h3>
-                                    <ul class="blog-post-tags">
-                                        <% for (var i = 0; i < activity.Features.length; i++) { %>
-                                        <li class="uppercase">
-                                            <a href="javascript:;"><%= activity.Features[i].Name %></a>
-                                        </li>
-                                        <% } %>
-                                        <!--<li class="uppercase">-->
-                                        <!--<a href="javascript:;">Bootstrap</a>-->
-                                        <!--</li>-->
-                                        <!--<li class="uppercase">-->
-                                        <!--<a href="javascript:;">Sass</a>-->
-                                        <!--</li>-->
-                                        <!--<li class="uppercase">-->
-                                        <!--<a href="javascript:;">HTML</a>-->
-                                        <!--</li>-->
-                                        <!--<li class="uppercase">-->
-                                        <!--<a href="javascript:;">CSS</a>-->
-                                        <!--</li>-->
-                                        <!--<li class="uppercase">-->
-                                        <!--<a href="javascript:;">Gulp</a>-->
-                                        <!--</li>-->
-                                        <!--<li class="uppercase">-->
-                                        <!--<a href="javascript:;">Framework</a>-->
-                                        <!--</li>-->
-                                        <!--<li class="uppercase">-->
-                                        <!--<a href="javascript:;">Admin Theme</a>-->
-                                        <!--</li>-->
-                                        <!--<li class="uppercase">-->
-                                        <!--<a href="javascript:;">UI Features</a>-->
-                                        <!--</li>-->
-                                    </ul>
-                                </div>
-                                <div class="blog-single-sidebar-links">
-                                    <h3 class="blog-sidebar-title uppercase">其他链接</h3>
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:;">Lorem Ipsum </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">Dolore Amet</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">Metronic Database</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">UI Features</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:;">Advanced Forms</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <!--<div class="blog-single-sidebar-ui">-->
-                                <!--<h3 class="blog-sidebar-title uppercase">UI Examples</h3>-->
-                                <!--<div class="row ui-margin">-->
-                                <!--<div class="col-xs-4 ui-padding">-->
-                                <!--<a href="javascript:;">-->
-                                <!--<img src="../assets/pages/img/background/1.jpg"/>-->
-                                <!--</a>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-4 ui-padding">-->
-                                <!--<a href="javascript:;">-->
-                                <!--<img src="../assets/pages/img/background/37.jpg"/>-->
-                                <!--</a>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-4 ui-padding">-->
-                                <!--<a href="javascript:;">-->
-                                <!--<img src="../assets/pages/img/background/57.jpg"/>-->
-                                <!--</a>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-4 ui-padding">-->
-                                <!--<a href="javascript:;">-->
-                                <!--<img src="../assets/pages/img/background/53.jpg"/>-->
-                                <!--</a>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-4 ui-padding">-->
-                                <!--<a href="javascript:;">-->
-                                <!--<img src="../assets/pages/img/background/59.jpg"/>-->
-                                <!--</a>-->
-                                <!--</div>-->
-                                <!--<div class="col-xs-4 ui-padding">-->
-                                <!--<a href="javascript:;">-->
-                                <!--<img src="../assets/pages/img/background/42.jpg"/>-->
-                                <!--</a>-->
-                                <!--</div>-->
-                                <!--</div>-->
-                                <!--</div>-->
-                            </div>
-                        </div>
-                    </div>
+                  <div class="ladda-progress" style="width: 0px;"></div>
+                </button>
+                <div style="float: right">
+                  当前人数：<%= activity.NowNum %>/<%= activity.MaxNum %>
                 </div>
+                <div class="blog-comments">
+                  <h3 class="sbold blog-comments-title">评论(<%= activity.Comment.length %>)</h3>
+                  <div class="c-comment-list">
+                    <% if (activity.Comment.length == 0) { %>
+                    <div class="media">
+                      <div class="media-left">
+                      </div>
+                      <div class="media-body">
+                        <h4 class="media-heading">
+
+                        </h4>
+                        暂无评论:)
+                      </div>
+                    </div>
+                    <% } else {%>
+                    <% for (var i = activity.Comment.length - 1; i >= 0; i--) { %>
+                    <div class="media">
+                      <div class="media-left">
+                        <img class="media-object" alt=<%= activity.Comment[i].Nickname %>
+                        src=<%= activity.Comment[i].Icon %>>
+                      </div>
+                      <div class="media-body">
+                        <h4 class="media-heading">
+                          <span style="color: #337ab7; font-weight: 600;"><%= activity.Comment[i].Nickname %></span> |
+                          <span class="c-date"><%= activity.Comment[i].createdAt.toLocaleString() %></span>
+                        </h4>
+                        <%= activity.Comment[i].Content %>
+                      </div>
+                    </div>
+                    <% }} %>
+                    <!--<div class="media">-->
+                    <!--<div class="media-left">-->
+                    <!--<a href="#">-->
+                    <!--<img class="media-object" alt=""-->
+                    <!--src="../assets/pages/img/avatars/team1.jpg">-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--<div class="media-body">-->
+                    <!--<h4 class="media-heading">-->
+                    <!--<a href="#">Sean</a> on-->
+                    <!--<span class="c-date">23 May 2015, 10:40AM</span>-->
+                    <!--</h4>-->
+                    <!--Cras sit amet nibh libero, in gravida nulla. Nulla vel-->
+                    <!--metus scelerisque ante sollicitudin commodo. Cras purus-->
+                    <!--odio, vestibulum in vulputate at, tempus viverra turpis.-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="media">-->
+                    <!--<div class="media-left">-->
+                    <!--<a href="#">-->
+                    <!--<img class="media-object" alt=""-->
+                    <!--src="../assets/pages/img/avatars/team3.jpg">-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--<div class="media-body">-->
+                    <!--<h4 class="media-heading">-->
+                    <!--<a href="#">Strong Strong</a> on-->
+                    <!--<span class="c-date">21 May 2015, 11:40AM</span>-->
+                    <!--</h4> Cras sit amet nibh libero, in gravida nulla. Nulla-->
+                    <!--vel metus scelerisque ante sollicitudin commodo. Cras-->
+                    <!--purus odio, vestibulum in vulputate at, tempus viverra-->
+                    <!--turpis.-->
+                    <!--<div class="media">-->
+                    <!--<div class="media-left">-->
+                    <!--<a href="#">-->
+                    <!--<img class="media-object" alt=""-->
+                    <!--src="../assets/pages/img/avatars/team4.jpg">-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--<div class="media-body">-->
+                    <!--<h4 class="media-heading">-->
+                    <!--<a href="#">Emma Stone</a> on-->
+                    <!--<span class="c-date">30 May 2015, 9:40PM</span>-->
+                    <!--</h4> Cras sit amet nibh libero, in gravida-->
+                    <!--nulla. Nulla vel metus scelerisque ante-->
+                    <!--sollicitudin commodo. Cras purus odio,-->
+                    <!--vestibulum in vulputate at, tempus viverra-->
+                    <!--turpis.-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="media">-->
+                    <!--<div class="media-left">-->
+                    <!--<a href="#">-->
+                    <!--<img class="media-object" alt=""-->
+                    <!--src="../assets/pages/img/avatars/team7.jpg">-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--<div class="media-body">-->
+                    <!--<h4 class="media-heading">-->
+                    <!--<a href="#">Nick Nilson</a> on-->
+                    <!--<span class="c-date">30 May 2015, 9:40PM</span>-->
+                    <!--</h4> Cras sit amet nibh libero, in gravida nulla. Nulla-->
+                    <!--vel metus scelerisque ante sollicitudin commodo. Cras-->
+                    <!--purus odio, vestibulum in vulputate at, tempus viverra-->
+                    <!--turpis.-->
+                    <!--</div>-->
+                    <!--</div>-->
+                  </div>
+                  <h3 class="sbold blog-comments-title">发布评论</h3>
+                  <form action="#">
+                    <div class="form-group">
+                      <textarea rows="8" name="message" placeholder="输入您的评论" class="form-control c-square" id="comment_content"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <button type="button" class="btn blue mt-ladda-btn ladda-button btn-outline" id="submit_comment" data-style="slide-right">
+                        评论
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
-            <!-- END PAGE CONTENT INNER -->
+            <div class="col-lg-3">
+              <div class="blog-single-sidebar bordered blog-container">
+                <div class="blog-single-sidebar-search">
+                  <div class="input-icon right">
+                    <i class="icon-magnifier"></i>
+                    <input type="text" class="form-control"
+                           placeholder="Search Blog"></div>
+                </div>
+                <div class="blog-single-sidebar-recent">
+                  <h3 class="blog-sidebar-title uppercase">最近发布的活动</h3>
+                  <ul>
+                    <li>
+                      <a href="javascript:;">Metronic Admin Progress</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">New UI Features</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">Lorem Ipsum Dolore Amet</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">Userfull Pages Released</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="blog-single-sidebar-tags">
+                  <h3 class="blog-sidebar-title uppercase">关键词</h3>
+                  <ul class="blog-post-tags">
+                    <% for (var i = 0; i < activity.Features.length; i++) { %>
+                    <li class="uppercase">
+                      <a href="javascript:;"><%= activity.Features[i].Name %></a>
+                    </li>
+                    <% } %>
+                    <!--<li class="uppercase">-->
+                    <!--<a href="javascript:;">Bootstrap</a>-->
+                    <!--</li>-->
+                    <!--<li class="uppercase">-->
+                    <!--<a href="javascript:;">Sass</a>-->
+                    <!--</li>-->
+                    <!--<li class="uppercase">-->
+                    <!--<a href="javascript:;">HTML</a>-->
+                    <!--</li>-->
+                    <!--<li class="uppercase">-->
+                    <!--<a href="javascript:;">CSS</a>-->
+                    <!--</li>-->
+                    <!--<li class="uppercase">-->
+                    <!--<a href="javascript:;">Gulp</a>-->
+                    <!--</li>-->
+                    <!--<li class="uppercase">-->
+                    <!--<a href="javascript:;">Framework</a>-->
+                    <!--</li>-->
+                    <!--<li class="uppercase">-->
+                    <!--<a href="javascript:;">Admin Theme</a>-->
+                    <!--</li>-->
+                    <!--<li class="uppercase">-->
+                    <!--<a href="javascript:;">UI Features</a>-->
+                    <!--</li>-->
+                  </ul>
+                </div>
+                <div class="blog-single-sidebar-links">
+                  <h3 class="blog-sidebar-title uppercase">其他链接</h3>
+                  <ul>
+                    <li>
+                      <a href="javascript:;">Lorem Ipsum </a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">Dolore Amet</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">Metronic Database</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">UI Features</a>
+                    </li>
+                    <li>
+                      <a href="javascript:;">Advanced Forms</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--<div class="blog-single-sidebar-ui">-->
+                <!--<h3 class="blog-sidebar-title uppercase">UI Examples</h3>-->
+                <!--<div class="row ui-margin">-->
+                <!--<div class="col-xs-4 ui-padding">-->
+                <!--<a href="javascript:;">-->
+                <!--<img src="../assets/pages/img/background/1.jpg"/>-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-xs-4 ui-padding">-->
+                <!--<a href="javascript:;">-->
+                <!--<img src="../assets/pages/img/background/37.jpg"/>-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-xs-4 ui-padding">-->
+                <!--<a href="javascript:;">-->
+                <!--<img src="../assets/pages/img/background/57.jpg"/>-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-xs-4 ui-padding">-->
+                <!--<a href="javascript:;">-->
+                <!--<img src="../assets/pages/img/background/53.jpg"/>-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-xs-4 ui-padding">-->
+                <!--<a href="javascript:;">-->
+                <!--<img src="../assets/pages/img/background/59.jpg"/>-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--<div class="col-xs-4 ui-padding">-->
+                <!--<a href="javascript:;">-->
+                <!--<img src="../assets/pages/img/background/42.jpg"/>-->
+                <!--</a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <!-- END PAGE CONTENT INNER -->
     </div>
+  </div>
 </div>
 
 
@@ -347,7 +359,6 @@
   });
 
 
-
   $("#submit_comment").click(function (e) {
     if ($("#comment_content").val() == "") {
       toastr.warning("请输入评论", options);
@@ -355,7 +366,7 @@
     }
     l2.start();
     $.ajax({
-      url:'/add_comment',
+      url: '/add_comment',
       type: 'post',
       data: {
         aid: aid,
