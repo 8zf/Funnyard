@@ -147,6 +147,13 @@
     map.centerAndZoom(point, 15);
   }
 
+  function getFullFormat(num) {
+    if (num < 10) {
+    	return "0" + num.toString();
+    }
+    else return num.toString();
+  }
+
   //获取所有活动
   $.ajax({
     url: "/get_activities",
@@ -171,7 +178,7 @@
           maxWidth: "none"
         });
         labels.push(label);
-
+        var t = new Date(activities[i].HoldTime);
         marker.seq = i;
         activities_markers.push(marker);
         //为每个marker添加点击事件
@@ -189,7 +196,8 @@
           "<img src='" + activities[i].Poster + "' style='width: 140px;'>",
           "</div>",
           "<div class='portlet-body col-md-6'>",
-          activities[i].HoldTime.toLocaleString(),
+//          activities[i].HoldTime.toLocaleString(),
+          t.getFullYear() + "年" + t.getMonth() + "月" + getFullFormat(t.getDate()) + "日 " + getFullFormat(t.getHours()) + ":" + getFullFormat(t.getMinutes()) + ":" + getFullFormat(t.getSeconds()),
           "<br/>",
           "于",
           "<br/>",
