@@ -1,9 +1,12 @@
-<script type="text/javascript" src="//omwkklawt.qnssl.com/RichMarker_min.js"></script>
-<script type="text/javascript"
-        src="//api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
-<script type="text/javascript"
-        src="//api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/library/InfoBox/1.2/src/InfoBox.js"></script>
+<script type="text/javascript" src="//api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+<script type="text/javascript" src="//api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
 
+<style>
+  .infoBox {
+    width: 300px;
+  }
+</style>
 
 <div class="page-content-wrapper">
   <!-- BEGIN CONTENT BODY -->
@@ -102,12 +105,14 @@
     $("#container .anchorBL").hide();
   });
   var activities_markers = [];
+  var info_boxes = [];
+  var labels = [];
   map.enableScrollWheelZoom();
   //  map.centerAndZoom(new BMap.Point(121.225942, 31.295851), 21);
   map.centerAndZoom(new BMap.Point(121.225942, 31.289066), 17);
-  map.addEventListener("click", function (e) {
-    console.log("点击位置：" + e.point.lng + ", " + e.point.lat);
-  });
+  //  map.addEventListener("click", function (e) {
+  //    console.log("点击位置：" + e.point.lng + ", " + e.point.lat);
+  //  });
   if (navigator.geolocation) {
     toastr.success("正在获取地理位置");
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -115,8 +120,20 @@
       var origin_point = new BMap.Point(position.coords.longitude, position.coords.latitude);
       convertor.translate([origin_point], 1, 5, function (data) {
         if (data.status === 0) {
-          var marker = new BMap.Marker(data.points[0]);
+          var icon = new BMap.Icon("https://omwktgfmo.qnssl.com/star.gif?imageView2/0/w/30", new BMap.Size(30, 30));
+          var marker = new BMap.Marker(data.points[0], {icon: icon});
+          var label = new BMap.Label("你在这里", {offset: new BMap.Size(-15, -35)});
+          label.setStyle({
+            color: "black",
+            fontSize: "16px",
+            height: "25px",
+            lineHeight: "20px",
+            fontFamily: "微软雅黑",
+            border: "1px solid rgb(0, 0, 0)",
+            maxWidth: "none"
+          });
           map.addOverlay(marker);
+          marker.setLabel(label);
           var new_point = new BMap.Point(data.points[0].lng, data.points[0].lat);
           map.centerAndZoom(new_point, 21);
           toastr.success("您的坐标" + data.points[0].lng + ',' + data.points[0].lat);
@@ -130,16 +147,81 @@
     map.centerAndZoom(point, 15);
   }
 
-  //获取活动
+  //获取所有活动
   $.ajax({
     url: "/get_activities",
     method: "GET",
     success: function (activities, status, xhr) {
-    	//为每一个活动添加一个marker
-      for (i in activities) {
+      //为每一个活动添加一个marker
+      for (var i = 0; i < activities.length; i++) {
         var temp = new BMap.Point(parseFloat(activities[i].LocationLng), parseFloat(activities[i].LocationLat));
-        var marker = new BMap.Marker(temp);
+        var icon = new BMap.Icon("https://omwktgfmo.qnssl.com/red-mark.gif?imageView2/0/w/30", new BMap.Size(30, 30));
+        var marker = new BMap.Marker(temp, {icon: icon});
+        var label = new BMap.Label(activities[i].Theme, {
+          position: temp,
+          offset: new BMap.Size(12, -20)
+        });
+        label.setStyle({
+          color: "black",
+          fontSize: "16px",
+          height: "25px",
+          lineHeight: "20px",
+          fontFamily: "微软雅黑",
+          border: "1px solid rgb(0, 0, 0)",
+          maxWidth: "none"
+        });
+        labels.push(label);
+
+        marker.seq = i;
         activities_markers.push(marker);
+        //为每个marker添加点击事件
+        var popout_window_html = [
+          "<!-- BEGIN Portlet PORTLET-->",
+          "<div class='portlet mt-element-ribbon solid green portlet-fit' style='border-radius: 20px!important;'>",
+          "<div class='ribbon ribbon-right ribbon-clip ribbon-shadow " + activities[i].StateColor + " uppercase' style='right: -20px;'>",
+          "<div class='ribbon-sub ribbon-clip ribbon-right'></div> " + activities[i].State + " </div>",
+          "<div class='portlet-title'>",
+          "<div class='caption'>",
+          "<i class='fa fa-star'></i><a href='/ac/" + activities[i].ActivityID + "' style='color: white'>" + activities[i].Theme + "</a></div>",
+          "</div>",
+          "<div class='row' style='color: white'>",
+          "<div class='portlet-body col-md-6' >",
+          "<img src='" + activities[i].Poster + "' style='width: 140px;'>",
+          "</div>",
+          "<div class='portlet-body col-md-6'>",
+          activities[i].HoldTime.toLocaleString(),
+          "<br/>",
+          "于",
+          "<br/>",
+          activities[i].Location,
+          "<br/>",
+          "已有" + activities[i].NowNum + "/" + activities[i].MaxNum + "人参加",
+          "</div>",
+          "</div>",
+          "<img src='https://omwktgfmo.qnssl.com/btm_part.png' style='position: relative; top: 38px;left: 115px;width: 50px;'>",
+          "</div>",
+          "<!-- END GRID PORTLET-->"
+        ];
+        var infoBox = new BMapLib.InfoBox(map, popout_window_html.join(""), {
+          closeIconUrl: 'https://omwktgfmo.qnssl.com/close-green.png?imageView2/0/w/30',
+          closeIconMargin: '-20px',
+          enableAutoPan: true
+        });
+        info_boxes.push(infoBox);
+        marker.addEventListener("click", function (target) {
+//          console.log(target);
+          console.log(this.seq);
+          info_boxes[this.seq].open(this);
+        });
+        marker.addEventListener("mouseover", function (target) {
+          map.addOverlay(labels[this.seq]);
+//          console.log("mouse over at " + this.seq);
+//          console.log(labels[this.seq]);
+        });
+        marker.addEventListener("mouseout", function (target) {
+          map.removeOverlay(labels[this.seq]);
+//          console.log("mouse out at " + this.seq);
+        });
       }
       var markerClusterer = new BMapLib.MarkerClusterer(map, {
         markers: activities_markers,

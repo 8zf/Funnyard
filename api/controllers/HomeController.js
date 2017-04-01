@@ -27,14 +27,27 @@ module.exports = {
 
   getActivities: function (req, res) {
     Activity.find()
-      .exec(function (err, records) {
+      .exec(function (err, activities) {
         if (err) {
           return res.serverError(err);
         }
-        for (i in records) {
-          records[i].Content = "";
+        var t_now = new Date().getTime();
+        for (activity of activities) {
+          activity.Content = "";
+          if (t_now < activity.HoldTime.getTime()) {
+            activity.State = "未开始";
+            activity.StateColor = "ribbon-color-primary";
+          }
+          else if (t_now <= activity.EndTime.getTime()) {
+            activity.State = "进行中";
+            activity.StateColor = "ribbon-color-success";
+          }
+          else {
+            activity.State = "已结束";
+            activity.StateColor = "ribbon-color-default";
+          }
         }
-        return res.json(records);
+        return res.json(activities);
       });
   }
 

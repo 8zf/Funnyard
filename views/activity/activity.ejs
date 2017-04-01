@@ -150,27 +150,14 @@
             </div>
             <div class="col-lg-3">
               <div class="blog-single-sidebar bordered blog-container">
-                <div class="blog-single-sidebar-search">
-                  <div class="input-icon right">
-                    <i class="icon-magnifier"></i>
-                    <input type="text" class="form-control"
-                           placeholder="Search Blog"></div>
-                </div>
                 <div class="blog-single-sidebar-recent">
-                  <h3 class="blog-sidebar-title uppercase">最近发布的活动</h3>
+                  <h3 class="blog-sidebar-title uppercase">最新发布的活动</h3>
                   <ul>
+                    <%  for (ac of latest_activity) { %>
                     <li>
-                      <a href="javascript:;">Metronic Admin Progress</a>
+                      <a href="/ac/<%= ac.ActivityID%>"><%= ac.Theme %></a>
                     </li>
-                    <li>
-                      <a href="javascript:;">New UI Features</a>
-                    </li>
-                    <li>
-                      <a href="javascript:;">Lorem Ipsum Dolore Amet</a>
-                    </li>
-                    <li>
-                      <a href="javascript:;">Userfull Pages Released</a>
-                    </li>
+                    <% } %>
                   </ul>
                 </div>
                 <div class="blog-single-sidebar-tags">
@@ -207,26 +194,26 @@
                     <!--</li>-->
                   </ul>
                 </div>
-                <div class="blog-single-sidebar-links">
-                  <h3 class="blog-sidebar-title uppercase">其他链接</h3>
-                  <ul>
-                    <li>
-                      <a href="javascript:;">Lorem Ipsum </a>
-                    </li>
-                    <li>
-                      <a href="javascript:;">Dolore Amet</a>
-                    </li>
-                    <li>
-                      <a href="javascript:;">Metronic Database</a>
-                    </li>
-                    <li>
-                      <a href="javascript:;">UI Features</a>
-                    </li>
-                    <li>
-                      <a href="javascript:;">Advanced Forms</a>
-                    </li>
-                  </ul>
-                </div>
+                <!--<div class="blog-single-sidebar-links">-->
+                  <!--<h3 class="blog-sidebar-title uppercase">其他链接</h3>-->
+                  <!--<ul>-->
+                    <!--<li>-->
+                      <!--<a href="javascript:;">Lorem Ipsum </a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a href="javascript:;">Dolore Amet</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a href="javascript:;">Metronic Database</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a href="javascript:;">UI Features</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a href="javascript:;">Advanced Forms</a>-->
+                    <!--</li>-->
+                  <!--</ul>-->
+                <!--</div>-->
                 <!--<div class="blog-single-sidebar-ui">-->
                 <!--<h3 class="blog-sidebar-title uppercase">UI Examples</h3>-->
                 <!--<div class="row ui-margin">-->
