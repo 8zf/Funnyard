@@ -60,13 +60,13 @@ https站的首页会定位你的位置并显示附近的活动，也可以通过
 前端使用到的插件
 > Ueditor：进行活动内容的富文本编辑，结合后端七牛SDK将图片内容上传到CDN
 百度地图：调用后端API获得活动信息并在地图上显示活动并进行相关操作；使用浏览器获得的位置进行定位；发布活动时输入地点定位。
-> jQuery validate：用于网站各种表单的输入验证
-> bootstrap tagsinput：用于设置活动类型
-> bootstrap wizard：用于发布活动的流程控制
-> ladda：动态按钮
-> toastr：简洁的网页提醒
-> cropper：图片的导入与裁剪编辑，结合后端接口上传到CDN。
-> cubeportfolio：活动的分类，筛选和预览
+- jQuery validate：用于网站各种表单的输入验证
+- bootstrap tagsinput：用于设置活动类型
+- bootstrap wizard：用于发布活动的流程控制
+- ladda：动态按钮
+- toastr：简洁的网页提醒
+- cropper：图片的导入与裁剪编辑，结合后端接口上传到CDN。
+- cubeportfolio：活动的分类，筛选和预览
 
 ## 后端
 ### 开发语言
