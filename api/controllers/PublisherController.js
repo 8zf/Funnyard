@@ -45,34 +45,34 @@ module.exports = {
     //检查注册码是否可用
     //手机号码是否已注册
     //验证码是否正确
-    PublisherCode.find({Code: publisher_code}).exec(function (err, records1) {
+    PublisherCode.find({Code: publisher_code}).exec(function (err, records1) { //1
       if (err) {
-        return res.send(err);
+        return res.send(err);// 2
       }
       if (records1.length == 0) {
         console.log('注册码无效');
-        return res.send('注册码无效');
+        return res.send('注册码无效'); //3
       }
       if (records1[0].IsUsable == 0) {
         console.log('注册码已被使用');
-        return res.send('注册码已被使用');
+        return res.send('注册码已被使用'); // 4
       }
       //注册码正确
-      Publisher.find({PhoneNum: phone_num}).exec(function (err, records2) {
+      Publisher.find({PhoneNum: phone_num}).exec(function (err, records2) { // 5
         if (err) {
-          return res.send(err)
+          return res.send(err) // 6
         }
         if (records2.length > 0) {
           console.log('手机号码已被注册');
-          return res.send("手机号码已被注册");
+          return res.send("手机号码已被注册"); //7
         }
-        VerifyPhone.find({PhoneNum: phone_num}).exec(function (err, records3) {
+        VerifyPhone.find({PhoneNum: phone_num}).exec(function (err, records3) { // 8
           if (err) {
-            return res.send(err);
+            return res.send(err); // 9
           }
           if (records3.length == 0) {
             console.log('验证码错误');
-            return res.send("验证码错误");
+            return res.send("验证码错误"); // 10
           }
           if (records3[0].VerifyCode == verify_code && (new Date().getTime()) < parseInt(records3[0].ExpireAt)) {
             console.log('正确，可以录入，将注册码改为已使用');
@@ -81,15 +81,15 @@ module.exports = {
               PublisherID: uuidV4(),
               Email: email,
               Nickname: userid,
-              PassWd: EncryptionService.genSHA1(password),
+              PassWd: EncryptionService.genSHA1(password), // 11
               Department: name,
               PhoneNum: phone_num
             };
-            Publisher.create(new_record).exec(function (err, record4) {
+            Publisher.create(new_record).exec(function (err, record4) { // 12
               if (err) {
-                return res.send(err);
+                return res.send(err); // 13
               }
-              PublisherCode.update({Code: publisher_code}, {
+              PublisherCode.update({Code: publisher_code}, { // 14
                 IsUsable: 0,
                 PublisherID: new_record.PublisherID
               }).exec(function (err, record5) {
@@ -97,23 +97,23 @@ module.exports = {
                   //回滚？
                   console.log("修改注册码出错");
                   console.log(err);
-                  Publisher.destroy(record4).exec(function (err, record) {
+                  Publisher.destroy(record4).exec(function (err, record) { // 17
                     if (err) {
                       console.log('回滚失败');
-                      return res.send("回滚失败");
+                      return res.send("回滚失败"); // 18
                     }
                     console.log('操作回滚成功，注册失败');
-                    return res.send("操作回滚成功，注册失败");
+                    return res.send("操作回滚成功，注册失败"); // 19
                   });
                 }
                 //注册成功，重定向
-                return res.redirect('/login');
+                return res.redirect('/login'); // 20
               });
             });
           }
           else {
             console.log('验证码错误');
-            return res.send("验证码错误");
+            return res.send("验证码错误"); // 21
           }
 
         });

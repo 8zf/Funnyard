@@ -13,9 +13,9 @@ function listQiniu(params, callback) {
   var start = params['start'];
   var limit = params['limit'];
 
-  qiniu.rsf.listPrefix(bucketname, prefix, null, 1000, function(err, ret) {
+  qiniu.rsf.listPrefix(bucketname, prefix, null, 1000, null, function (err, ret, res) {
     if (err) {
-      return callback(err);
+      return callback(err, ret);
     } else {
       var list = [];
       for (var i = start, j = start + limit; i < j; i++) {
@@ -23,7 +23,6 @@ function listQiniu(params, callback) {
         if (!item) {
           break;
         }
-        console.log(item);
         var url = options['qiniuBucketUrl'] + item.key;
         list.push({
           'url': url,
@@ -51,7 +50,7 @@ function fileToQiniu(params, callback) {
   var filePath = params['filePath'];
   var fileName = params['fileName'];
 
-  qiniu.io.putFile(uptoken, key, filePath, extra, function(err, ret) {
+  qiniu.io.putFile(uptoken, key, filePath, extra, function (err, ret) {
     if (err) {
       return callback(err);
     } else {
@@ -74,7 +73,7 @@ function dataToQiniu(params, callback) {
   var key = params['key'];
   var data = params['data'];
 
-  qiniu.io.put(uptoken, key, data, extra, function(err, ret) {
+  qiniu.io.put(uptoken, key, data, extra, function (err, ret) {
     if (err) {
       return callback(err);
     } else {

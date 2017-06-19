@@ -21,7 +21,7 @@ module.exports = {
     // var locationlng = req.param('locationlng');
     // var locationlat = req.param('locationlat');
     // var content = req.param('content');
-    
+
     var new_record = {
       ActivityID: uuidV4(),
       Theme: req.param('theme'),
@@ -68,7 +68,7 @@ module.exports = {
         });
     });
   },
-  
+
   show: function (req, res) {
     // console.log(req.allParams());
     // console.log("twice?");
@@ -101,10 +101,10 @@ module.exports = {
               latest_activity: recent_activities
             });
           });
-        
+
       });
   },
-  
+
   showAll: function (req, res) {
     Activity.find()
       .populate("Features")
@@ -149,7 +149,7 @@ module.exports = {
         })
       });
   },
-  
+
   preview: function (req, res) {
     Activity.findOne({ActivityID: req.param('aid')})
       .populate("Owner")
@@ -166,7 +166,7 @@ module.exports = {
         });
       });
   },
-  
+
   search: function (req, res) {
     console.log(req.param('key'));
     Activity.find({
@@ -200,10 +200,11 @@ module.exports = {
         return res.view("activity/search", {activities: activities});
       })
   },
-  
+
   remove: function (req, res) {
     //删除之后要通知所有参与活动的用户
     var aid = req.param("aid");
+    console.log(aid);
     if (aid == "") {
       return res.serverError("no aid parameter");
     }
@@ -238,7 +239,7 @@ module.exports = {
           return res.send("success");
         });
       });
-    
+
   }
 };
 

@@ -2,7 +2,7 @@
   "name": "funnyard",
   "private": true,
   "version": "0.0.0",
-  "description": "a Sails application",
+  "description": "基于地理位置的大学身生信息聚合平台",
   "keywords": [],
   "dependencies": {
     "alidayu-node": "^1.0.3",
@@ -34,6 +34,7 @@
     "sails-mongo": "^0.12.1",
     "sails-mysql": "^0.11.5",
     "skipper": "^0.8.0",
+    "supertest": "^3.0.0",
     "ueditor": "^1.2.0",
     "uuid": "^3.0.1"
   },
@@ -47,5 +48,8 @@
     "url": "git://github.com/zhangfeng/funnyard.git"
   },
   "author": "zhangfeng",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "supertest": "^3.0.0"
+  }
 }

@@ -76,7 +76,7 @@
     for (node of this.childNodes) {
       if (node.className == "ac-id") {
         $.ajax({
-          url: '/activity/remove',
+          url: '/remove_activity',
           type: 'POST',
           data: {
             aid: node.value

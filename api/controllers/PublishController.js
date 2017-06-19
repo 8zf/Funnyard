@@ -24,7 +24,6 @@ module.exports = {
     var params = req.query;
 
     var action = params['action'];
-    console.log(action);
     if (action == 'config') {
       res.send(ueditor_options.ueditorConfig);
     }
@@ -38,16 +37,16 @@ module.exports = {
         limit: size
       };
 
-      storeqiniuStoreServioce.listQiniu(storeParams, function (err, ret) {
-        res.send(ret);
-        return next();
+      qiniuStoreService.listQiniu(storeParams, function (err, ret) {
+        return res.send(ret);
+        // return next();
       });
 
     } else {
-      res.send();
+      return res.send();
     }
 
-    return next();
+    // return next();
   },
 
   postQiniu: function (req, res, next) {
@@ -90,21 +89,25 @@ module.exports = {
       });
     }
     else if (action == 'uploadscrawl') {
+      console.log('action=uploadscrawl');
       //这里不能用
       var data = params['upfile'];
       if (!data) {
-        res.send();
-        return next();
+        return res.send();
+        // return next();
       }
 
+      console.log("have file");
       storeParams = {
         key: key,
         data: new Buffer(data, 'base64')
       };
 
-      storeqiniuStoreServioce.dataToQiniu(storeParams, function (err, ret) {
-        res.send(ret);
-        return next();
+      qiniuStoreService.dataToQiniu(storeParams, function (err, ret) {
+        console.log("data uploaded");
+        console.log(ret);
+        return res.send(ret);
+        // return next();
       })
     }
   },
