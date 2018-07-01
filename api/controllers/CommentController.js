@@ -8,7 +8,7 @@
 module.exports = {
   //手动增加用户的评论数
   //policy: isuser
-	add: function (req, res) {
+  add: function (req, res) {
     //req.session.uid
     //req.aid
     //req.content
@@ -43,3 +43,4 @@ module.exports = {
   }
 };
 
+var x =1;

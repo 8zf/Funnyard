@@ -38,6 +38,7 @@ module.exports = {
     //截取头像的属性值
     var crop_data = eval('(' + req.param('avatar_data') + ')');
     var width = crop_data.width;
+    let x = 1;
     var height = crop_data.height;
     var x_offset = crop_data.x;
     var y_offset = crop_data.y;
@@ -125,7 +126,7 @@ module.exports = {
   },
 
   uploadCover: function (req, res) {
-//截取头像的属性值
+    //截取头像的属性值
     var crop_data = eval('(' + req.param('avatar_data') + ')');
     var width = crop_data.width;
     var height = crop_data.height;

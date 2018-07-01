@@ -20,6 +20,7 @@ module.exports = {
     var type = req.param("type");
     var target = {};
     var this_ = this;
+    console.log(type);
     if (type == "user") {
       target = User;
     }
@@ -29,6 +30,7 @@ module.exports = {
     //确认手机号是否被注册
     target.find({PhoneNum: rec_num}).exec(function (err, records) {
       if (err) {
+        console.log('error finding with phone number');
         return res.send(err);
       }
       if (records.length > 0) {

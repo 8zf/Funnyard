@@ -157,7 +157,6 @@ module.exports = {
   // getPublishedActivities: function (req, res) {
   //
   // }
-
   // publish: function (req, res) {
   //   return res.view('publisher/publish');
   // },
